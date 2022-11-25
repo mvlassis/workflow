@@ -1,0 +1,13 @@
+#!/bin/env bash
+
+focus=$(xdotool getwindowfocus getwindowname | grep -c "GNU Emacs")
+	if [[ "$focus" -gt "0" ]]; then
+	      xdotool windowminimize $(xdotool getactivewindow)
+	else
+	    instance=$(wmctrl -l | grep -c "GNU Emacs")
+	    if [[ "$instance" -gt "0" ]]; then
+		wmctrl -a "GNU Emacs"
+	    else
+		emacs -mm -bg black
+	    fi
+	fi

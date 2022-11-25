@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# getip4 - get your public IPv4 address
+# Author: Manos Vlassis
+
+curl ipv4.icanhazip.com

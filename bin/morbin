@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# morbin - Use optimus-manager to switch to hybrid mode
+
+optimus-manager --switch hybrid --no-confirm
+
+

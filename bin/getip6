@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# getip6 - get your public IPv6 address
+# Author: Manos Vlassis
+
+curl ipv6.icanhazip.com
