@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+man -t $1 > manpage.pdf | xdg-open manpage.pdf
