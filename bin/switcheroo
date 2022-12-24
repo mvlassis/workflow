@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# NAME
+# switcheroo - Toggle caps lock and left ctrl
+# DESCRIPTION
+# Toggle between swapping caps lock with left ctrl
+
+options=$(setxkbmap -query | grep -c "swapcaps")
+if [[ options -gt "0" ]]; then
+    setxkbmap -option -option grp:alt_shift_toggle
+else
+    setxkbmap -option ctrl:swapcaps -option grp:alt_shift_toggle
+fi
