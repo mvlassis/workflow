@@ -4,6 +4,7 @@
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+source /usr/share/blesh/ble.sh # Enable auto-completion
 
 # Aliases
 # Easier Navigation
@@ -18,7 +19,8 @@ alias ....="cd ../../.."
 # Finds unused packages (orhans) and removes them
 alias clean='pacman -Qtdq | sudo pacman -Rns -'
 alias duck='ddgr -j'
-alias emacs='emacs -nw'
+#alias emacs='emacs -nw'
+alias emacs='emacsclient -t'
 alias open='xdg-open'
 alias update='sudo pacman -Syu'
 alias wiki='ddgr -j \!w'
@@ -44,3 +46,6 @@ fi # RACECAR_ALIASES
 if [ -f /home/manos/Documents/Github/racecar-mvlassis/scripts/racecar_tool.sh ]; then # RACECAR_ALIASES
 . /home/manos/Documents/Github/racecar-mvlassis/scripts/racecar_tool.sh # RACECAR_ALIASES
 fi # RACECAR_ALIASES
+
+eval "$(zoxide init bash)"
+[[ ${BLE_VERSION-} ]] && ble-attach

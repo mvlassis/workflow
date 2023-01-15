@@ -2,10 +2,17 @@
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# bash
+# bash configuration file
 if [ ! -L "${HOME}/.bashrc" ]; then
-    ln -sv ${BASEDIR}/.bashrc ~/.bashrc
+    ln -sv ${BASEDIR}/bashrc ~/.bashrc
 fi    
+
+# emacs configuration file
+if [ -d "${HOME}/.emacs.d" ]; then
+    if [ ! -L "${HOME}/.emacs.d/init.el" ]; then
+	ln -sv "${BASEDIR}/init.el" "${HOME}/.emacs.d/init.el"
+    fi    
+fi
 
 # scripts
 # Create directory ~/.bin if it doesn't exit, then place all scripts there
