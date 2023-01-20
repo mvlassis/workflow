@@ -1,9 +1,9 @@
 #! /usr/bin/env bash
 instance=$(wmctrl -l | grep -c "GNU Emacs")
 if [[ "$instance" -gt 0 ]]; then
-    emacsclient -n $1
+    emacsclient -n "$1"
 else
-    emacsclient -nc $1
+    emacsclient -nc "$1"
 fi
 
 

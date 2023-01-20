@@ -13,6 +13,7 @@
 (setq c-default-style "linux"
       c-basic-offset 4)
 (add-to-list 'auto-mode-alist '("\\.cu$" . c-mode)) ; Recognize .cu files as .c files
+(add-to-list 'auto-mode-alist '("bashrc\\'" . sh-mode))
 (setq python-indent-guess-indent-offset-verbose nil)
 (setq vc-follow-symlinks t) ; Don't prompt me when opening symlinks under version control
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -28,16 +29,15 @@
 ;; (save-place-mode 1)
 
 ;; Global shortcuts
+(global-set-key (kbd "C-α")  'beginning-of-line)
+(global-set-key (kbd "C-ε")  'end-of-line)
+(global-set-key (kbd "C-κ") 'kill-line)
 (global-set-key (kbd "C-M-,") 'beginning-of-buffer) ; Move to the beginning of the buffer
 (global-set-key (kbd "C-M-.") 'end-of-buffer) ; Move to the end of the buffer
 (global-set-key (kbd "<C-return>") (lambda ()
 		  (interactive)
                   (end-of-line)
                   (newline-and-indent)))
-;; (global-set-key (kbd "C-m") (lambda ()
-;; 		  (interactive)
-;;                   (end-of-line)
-;;                   (newline-and-indent)))
 (global-set-key (kbd "M-n") (lambda () (interactive) (next-line 5)))
 (global-set-key (kbd "M-p") (lambda () (interactive) (previous-line 5)))
 
@@ -94,7 +94,12 @@
   (global-anzu-mode +1)
 )
 (use-package flycheck)
-(use-package flyspell)
+(use-package flyspell
+  :config
+  (setq ispell-dictionary "en_US,el_GR")
+  (ispell-set-spellchecker-params)
+  (ispell-hunspell-add-multi-dic "en_US,el_GR")
+)
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
 (use-package company

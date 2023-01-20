@@ -5,6 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 source /usr/share/blesh/ble.sh # Enable auto-completion
+source /opt/anaconda/etc/profile.d/conda.sh
 
 # Aliases
 # Easier Navigation
@@ -30,7 +31,6 @@ alias yeet='sudo pacman -Rns'
 alias ll='la -l'
 alias ls='ls --color=auto'
 alias la='ls -aA'
-alias lsd="ls -lF | grep '^d'"
 PS1="\[\e[1;33m\][\w] \[\e[m\]"
 
 # Exports
