@@ -31,6 +31,10 @@
 ;; Global shortcuts
 (global-set-key (kbd "C-α")  'beginning-of-line)
 (global-set-key (kbd "C-ε")  'end-of-line)
+(global-set-key (kbd "M-φ")  'forward-word)
+(global-set-key (kbd "M-β")  'backward-word)
+(global-set-key (kbd "C-ν")  'next-line)
+(global-set-key (kbd "C-π")  'previous-line)
 (global-set-key (kbd "C-κ") 'kill-line)
 (global-set-key (kbd "C-M-,") 'beginning-of-buffer) ; Move to the beginning of the buffer
 (global-set-key (kbd "C-M-.") 'end-of-buffer) ; Move to the end of the buffer

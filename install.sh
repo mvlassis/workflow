@@ -4,7 +4,14 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # bash configuration file
 if [ ! -L "${HOME}/.bashrc" ]; then
-    ln -sv ${BASEDIR}/bashrc ~/.bashrc
+    rm "${HOME}/.bashrc"
+    ln -sv "${BASEDIR}/bashrc" ~/.bashrc
+fi
+
+# zsh configuration file
+if [ ! -L "${HOME}/.zshrc" ]; then
+    rm "${HOME}/.zshrc"
+    ln -sv "${BASEDIR}/zshrc" ~/.zshrc
 fi    
 
 # emacs configuration file
