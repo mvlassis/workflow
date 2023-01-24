@@ -16,6 +16,7 @@ autoconf
 automake
 base
 bash-completion
+bc
 bind
 bison
 blinken
@@ -28,6 +29,7 @@ cervisia
 chromium
 cmake
 cmatrix
+cuda-tools
 dialog
 discord
 discover
@@ -52,13 +54,18 @@ gimp
 git
 github-cli
 gnome-keyring
+gnu-netcat
 gparted
 grantlee-editor
 grub
 gwenview
 htop
+hunspell-el
+hunspell-en_us
 inkscape
+intellij-idea-community-edition
 itinerary
+java11-openjfx
 jdk11-openjdk
 jre17-openjdk
 juk
@@ -168,6 +175,7 @@ libreoffice-fresh
 linux
 linux-firmware
 lokalize
+lsd
 m4
 make
 man-pages
@@ -182,6 +190,7 @@ nano
 ncdu
 neofetch
 networkmanager
+nltk-data
 nmap
 nodejs
 noto-fonts-emoji
@@ -226,9 +235,12 @@ polkit-kde-agent
 powerdevil
 poxml
 print-manager
+pyright
+python-nltk
 python-pyserial
 python-pyswip
 python-seaborn
+python-tensorflow-cuda
 qbittorrent
 reflector
 rmlint
@@ -236,11 +248,13 @@ rocs
 sddm-kcm
 sdl2_image
 sdl2_ttf
+seahorse
 shotcut
 signal-desktop
 signon-kwallet-extension
 skanlite
 spectacle
+sqlmap
 steam
 step
 strace
@@ -283,6 +297,7 @@ torbrowser-launcher
 traceroute
 tree
 ttf-dejavu
+ttf-hack-nerd
 ttf-liberation
 ttf-opensans
 unrar
@@ -345,3 +360,9 @@ xorg-xwud
 yakuake
 yt-dlp
 zanshin
+zoxide
+zsh
+zsh-autosuggestions
+zsh-completions
+zsh-syntax-highlighting
+zsh-theme-powerlevel10k

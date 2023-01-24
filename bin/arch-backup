@@ -1,0 +1,4 @@
+#! /usr/bin/env bash
+
+/bin/sh -c '/usr/bin/pacman -Qqen > /home/manos/Documents/Github/workflow/pkglist.txt'
+/bin/sh -c '/usr/bin/pacman -Qqem > /home/manos/Documents/Github/workflow/pkglist-AUR.txt'

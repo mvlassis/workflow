@@ -1,4 +1,6 @@
+anaconda
 aseprite
+blesh-git
 checkra1n-cli
 ddgr
 downgrade
@@ -6,6 +8,7 @@ eclipse-java
 freetube-bin
 gti
 heroic-games-launcher-bin
+javafx-scenebuilder
 kipi-plugins
 libreoffice-extension-orthos-greek-english-dictionary
 noto-color-emoji-fontconfig
@@ -16,13 +19,16 @@ otf-cm-unicode
 otf-gfs
 paru
 postman-bin
-proftpd
+python-spotdl
 realvnc-vnc-viewer
 rpi-imager
+skypeforlinux-stable-bin
+slippi-launcher
 spotify
 systemd-kcm
 tdrop
 teams
+teamviewer
 visual-studio-code-bin
 woeusb
 wttr
