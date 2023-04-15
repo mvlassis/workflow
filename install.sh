@@ -17,7 +17,15 @@ fi
 # emacs configuration file
 if [ -d "${HOME}/.emacs.d" ]; then
     if [ ! -L "${HOME}/.emacs.d/init.el" ]; then
-	ln -sv "${BASEDIR}/init.el" "${HOME}/.emacs.d/init.el"
+		ln -sv "${BASEDIR}/init.el" "${HOME}/.emacs.d/init.el"
+    fi    
+fi
+
+# i3 configuration file
+if [ -d "${HOME}/.config/i3" ]; then
+    if [ ! -L "${HOME}/.config/i3" ]; then
+		ln -sv "${BASEDIR}/i3-config" "${HOME}/.config/i3/config"
+		cp "${BASEDIR}/i3lock-solarized.sh" "${HOME}/.config/i3/i3lock-solarized.sh"
     fi    
 fi
 
