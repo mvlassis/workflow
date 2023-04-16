@@ -75,6 +75,7 @@ inkscape
 itinerary
 java11-openjfx
 jdk11-openjdk
+jq
 jre17-openjdk
 juk
 jupyter-notebook
@@ -219,6 +220,7 @@ openmp
 openssl-1.1
 os-prober
 otf-fira-mono
+otf-font-awesome
 oxygen
 oxygen-icons
 p7zip
@@ -255,6 +257,7 @@ print-manager
 pyright
 python-flask
 python-flask-cors
+python-i3ipc
 python-nltk
 python-pycryptodome
 python-pyserial
@@ -324,6 +327,7 @@ ttf-dejavu
 ttf-hack-nerd
 ttf-liberation
 ttf-opensans
+udiskie
 unrar
 vim
 virtualbox

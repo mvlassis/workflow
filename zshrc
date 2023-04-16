@@ -52,6 +52,8 @@ export EDITOR="emacsclient -t"
 bindkey "^[[3~" delete-char
 unsetopt beep
 #unsetopt prompt_cr prompt_sp
+export RANGER_LOAD_DEFAULT_RC=FALSE
+
 
 # Files to source
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh

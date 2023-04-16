@@ -2,7 +2,9 @@ anaconda
 apache-flink
 arduino-ide-bin
 aseprite
+autotiling
 blesh-git
+brightness-controller-git
 checkra1n-cli
 downgrade
 fastfetch
