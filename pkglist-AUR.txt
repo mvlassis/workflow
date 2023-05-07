@@ -5,8 +5,10 @@ aseprite
 autotiling
 blesh-git
 brightness-controller-git
+burpsuite
 checkra1n-cli
 downgrade
+etcher-bin
 fastfetch
 freetube-bin
 gti
@@ -27,6 +29,7 @@ otf-cm-unicode
 otf-gfs
 paru
 postman-bin
+pulseaudio-ctl
 python-pyautogui
 realvnc-vnc-viewer
 rpi-imager
@@ -38,6 +41,7 @@ systemd-kcm
 tdrop
 teams
 teamviewer
+unetbootin
 visual-studio-code-bin
 woeusb
 wttr

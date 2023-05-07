@@ -23,7 +23,7 @@
 
 ;; Customization
 ;; Custom font and font size
-(set-face-attribute 'default nil :font "Fira Mono" :height 120)
+(set-face-attribute 'default nil :font "Fira Mono:style=Regular" :height 120)
 
 (setq inhibit-startup-message t) ; Disable the startup screen when opening Emacs
 (setq column-number-mode t) ; Display the current column of the cursor
@@ -54,17 +54,73 @@
 ;; Minor modes
 (global-display-line-numbers-mode 1) ; Enable line numbers
 ;; Disable the default minor modes for beginners
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+;; (menu-bar-mode -1)
+;; (tool-bar-mode -1)
+;; (scroll-bar-mode -1)
+;; Alternative ways to disable the above modes (but faster startup)
+(push '(menu-bar-lines . 0) default-frame-alist)
+(push '(tool-bar-lines . 0) default-frame-alist)
+(push '(vertical-scroll-bars . nil) default-frame-alist)
 (tooltip-mode -1)
+(xclip-mode 1) ; Enables easy copy/pasting in the terminal
+
 ;; (recentf-mode 1)
 ;; (save-place-mode 1)
 
 
 ;; Global shortcuts
+(defun shift-text (distance)
+  (if (use-region-p)
+      (let ((mark (mark)))
+        (save-excursion
+          (indent-rigidly (region-beginning)
+                          (region-end)
+                          distance)
+          (push-mark mark t t)
+          (setq deactivate-mark nil)))
+    (indent-rigidly (line-beginning-position)
+                    (line-end-position)
+                    distance)))
+
+(defun shift-right (count)
+  (interactive "p")
+  (shift-text count))
+
+(defun shift-left (count)
+  (interactive "p")
+  (shift-text (- count)))
+
 ;; Simple functions that replace the delete-word and backward-delete-word
 ;; but simply do not copy to the clipboard
+
+(defun delete-line (&optional arg)
+  (interactive "P")
+  ;; taken from kill-line
+  (delete-region (point)
+                 ;; It is better to move point to the other end of the kill
+                 ;; before killing.  That way, in a read-only buffer, point
+                 ;; moves across the text that is copied to the kill ring.
+                 ;; The choice has no effect on undo now that undo records
+                 ;; the value of point from before the command was run.
+                 (progn
+                   (if arg
+                       (forward-visible-line (prefix-numeric-value arg))
+                     (if (eobp)
+                         (signal 'end-of-buffer nil))
+                     (let ((end
+                            (save-excursion
+                              (end-of-visible-line) (point))))
+                       (if (or (save-excursion
+                                 ;; If trailing whitespace is visible,
+                                 ;; don't treat it as nothing.
+                                 (unless show-trailing-whitespace
+                                   (skip-chars-forward " \t" end))
+                                 (= (point) end))
+                               (and kill-whole-line (bolp)))
+                           (forward-visible-line 1)
+                         (goto-char end))))
+                   (point))))
+
 (defun delete-word (arg)
   "Delete characters forward until encountering the end of a word.
 With argument ARG, do this that many times."
@@ -83,25 +139,17 @@ With argument ARG, do this that many times."
 		  (interactive)
                   (end-of-line)
                   (newline-and-indent)))
+(global-set-key (kbd "M-<f5>") (lambda ()
+		  (interactive)
+                  (end-of-line)
+                  (newline-and-indent)))
 (global-set-key (kbd "M-d") 'delete-word)
 (global-set-key (kbd "M-DEL") 'backward-delete-word)
+(global-set-key (kbd "C-k") 'delete-line)
+(global-set-key (kbd "M-k") 'kill-line)
 (global-set-key (kbd "<C-backspace>") 'backward-delete-word)
 (global-set-key (kbd "M-n") (lambda () (interactive) (next-line 5)))
 (global-set-key (kbd "M-p") (lambda () (interactive) (previous-line 5)))
-
-;; Shortcuts for Greek
-(global-set-key (kbd "C-α") 'beginning-of-line)
-(global-set-key (kbd "C-ε") 'end-of-line)
-(global-set-key (kbd "M-φ") 'forward-word)
-(global-set-key (kbd "M-β") 'backward-word)
-(global-set-key (kbd "M-δ") 'delete-word)
-(global-set-key (kbd "C-φ") 'forward-char)
-(global-set-key (kbd "C-β") 'backward-char)
-(global-set-key (kbd "C-ν") 'next-line)
-(global-set-key (kbd "C-π") 'previous-line)
-(global-set-key (kbd "C-κ") 'kill-line)
-(global-set-key (kbd "M-ν") (lambda () (interactive) (next-line 5)))
-(global-set-key (kbd "M-π") (lambda () (interactive) (previous-line 5)))
 
 
 ;; Use 'package for package management
@@ -203,6 +251,23 @@ With argument ARG, do this that many times."
      (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 	 )
 (use-package xclip)
+
+(use-package rainbow-mode
+  :config
+  (define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
+	(lambda () (rainbow-mode 1)))
+  (my-global-rainbow-mode 1))
+  ;; (add-hook 'find-file-hook (lambda () rainbow-mode 1)))
+
+;; Mode to make all shortcuts work on greek layout
+(use-package reverse-im
+  :ensure t
+  :custom
+  (reverse-im-input-methods '("greek"))
+  :config
+  (reverse-im-mode t))
+
+(use-package esup)
 
 ;; (use-package keycast
 ;;   :config

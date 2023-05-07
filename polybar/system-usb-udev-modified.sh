@@ -18,7 +18,8 @@ usb_print() {
         counter=$((counter + 1))
 
         # output="$output$space#1 $unmounted"
-		output="${output}${space} ${unmounted}"
+		# Uses primary color
+		output="${output}${space}%{F#F0C674}%{F-} ${unmounted}"
     done
 
     for mounted in $(echo "$devices" | jq -r '.blockdevices[] | select(.fstype != null) | select(.rm == true) | select(.mountpoint != null) | .name'); do
@@ -33,7 +34,7 @@ usb_print() {
         counter=$((counter + 1))
 
         # output="${output}${space}#2 $mounted"
-		output="${output}${space} ${mounted}"
+		output="${output}${space}%{F#F0C674}%{F-} ${mounted}"
     done
 
     echo "$output"
@@ -84,7 +85,7 @@ case "$1" in
         while true; do
             usb_print
 
-            sleep 15 &
+            sleep 8 &
             wait
         done
         ;;
