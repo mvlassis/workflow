@@ -21,6 +21,7 @@
 (setq x-select-enable-clipboard t)
 ;;(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+
 ;; Customization
 ;; Custom font and font size
 (set-face-attribute 'default nil :font "Fira Mono:style=Regular" :height 120)
@@ -63,6 +64,9 @@
 (push '(vertical-scroll-bars . nil) default-frame-alist)
 (tooltip-mode -1)
 (xclip-mode 1) ; Enables easy copy/pasting in the terminal
+(electric-pair-mode)
+(global-auto-revert-mode 1)
+(setq global-auto-revert-non-file-buffers t)
 
 ;; (recentf-mode 1)
 ;; (save-place-mode 1)
@@ -133,6 +137,7 @@ With argument ARG, do this that many times."
   (delete-word (- arg)))
 
 (global-unset-key (kbd "C-S-v"))
+(global-unset-key (kbd "M-l"))
 (global-set-key (kbd "C-M-,") 'beginning-of-buffer) ; Move to the beginning of the buffer
 (global-set-key (kbd "C-M-.") 'end-of-buffer) ; Move to the end of the buffer
 (global-set-key (kbd "<C-return>") (lambda ()
@@ -194,36 +199,67 @@ With argument ARG, do this that many times."
 
 (use-package doom-modeline
   :config
-  (setq doom-modeline-height 25)
-  (setq doom-modeline-icon nil)
+  (setq doom-modeline-icon t)
+  ;; (setq doom-modeline-height 26)  
   (setq doom-modeline-buffer-name t)
+  ;; (setq doom-modeline-highlight-modified-buffer-name t)
   (setq doom-modeline-time-icon t)
   (setq doom-modeline-indent-info nil)
-  (setq doom-modeline-battery t)
+  (setq doom-modeline-battery nil)
   (setq doom-modeline-buffer-modification-icon nil)
   :ensure t
   :init (doom-modeline-mode 1))
 
 (use-package all-the-icons)
+(use-package helm-core)
+(use-package helm
+  ;; :bind
+  ;; ((:map helm-map 
+  ;;               ([tab] . helm-execute-if-single-persistent-action)
+  ;;               ))
+  :config
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
+  (global-set-key (kbd "C-x r b") 'helm-bookmarks)
+  )
+
+(defun double-flash-mode-line ()
+ "Flash the modeline"
+ (let ((flash-sec (/ 1.0 20)))
+   (invert-face 'mode-line)
+   (run-with-timer flash-sec nil #'invert-face 'mode-line)
+   (run-with-timer (* 2 flash-sec) nil #'invert-face 'mode-line)
+   (run-with-timer (* 3 flash-sec) nil #'invert-face 'mode-line)))
+
+(defun helm-execute-if-single-persistent-action (&optional attr split-onewindow)
+ "Execute persistent action if the candidate list is less than 2"
+ (interactive)
+ (with-helm-alive-p
+   (if (> (helm-get-candidate-number) 2)
+	   ()
+       ;; (double-flash-mode-line)
+     (helm-execute-persistent-action)
+     )))
 
 (use-package markdown-mode)
+(use-package rust-mode)
 (use-package math-preview)
+(use-package flycheck)
 (use-package lsp-mode
   :config
+  (define-key lsp-mode-map (kbd "M-l") lsp-command-map)
   (setq lsp-signature-render-documentation nil))
 (use-package lsp-ui)
 ;; (use-package lsp-java
 ;;   :config
 ;;   (add-hook 'java-mode-hook 'lsp))
 (use-package lsp-pyright
-  :config
-  (setq lsp-pyright-use-library-code-for-types nil)
   :ensure t
   :hook (python-mode . (lambda ()
-			 (setq tab-width 4)
-			 (setq python-indent-offset 4)
-			 (require 'lsp-pyright)
-			 (lsp))))
+						 (setq tab-width 4)
+                         (require 'lsp-pyright)
+                         (lsp))))  ; or lsp-deferred
+0
 (use-package auto-package-update)
 (use-package which-key
   :config
@@ -233,7 +269,7 @@ With argument ARG, do this that many times."
   :config
   (global-anzu-mode 1)
 )
-(use-package flycheck)
+
 (use-package flyspell
   :config
   (setq ispell-dictionary "en_US,el_GR")
@@ -269,7 +305,4 @@ With argument ARG, do this that many times."
 
 (use-package esup)
 
-;; (use-package keycast
-;;   :config
-;;   (keycast-mode)
-;; )
+

@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
-instance=$(wmctrl -l | grep -c "GNU Emacs")
+instance=$(wmctrl -l | grep -c "GNU Emacs at")
 if [[ "$instance" -gt 0 ]]; then
     emacsclient -n "$1"
 else

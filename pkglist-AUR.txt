@@ -18,7 +18,6 @@ i3-volume
 i3blocks-contrib
 i3lock-color
 javafx-scenebuilder
-kipi-plugins
 kwin-bismuth
 libreoffice-extension-orthos-greek-english-dictionary
 noto-color-emoji-fontconfig
@@ -27,7 +26,6 @@ ookla-speedtest-bin
 optimus-manager
 otf-cm-unicode
 otf-gfs
-paru
 postman-bin
 pulseaudio-ctl
 python-pyautogui
@@ -44,6 +42,6 @@ teamviewer
 unetbootin
 visual-studio-code-bin
 woeusb
-wttr
 x2goclient
+yay
 zsh-autocomplete-git

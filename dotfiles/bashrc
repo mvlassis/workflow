@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 source /usr/share/blesh/ble.sh # Enable auto-completion
-source /opt/anaconda/etc/profile.d/conda.sh
+# source /opt/anaconda/etc/profile.d/conda.sh  # commented out by conda initialize
 
 # Aliases
 # Easier Navigation
@@ -49,3 +49,19 @@ fi # RACECAR_ALIASES
 
 eval "$(zoxide init bash)"
 [[ ${BLE_VERSION-} ]] && ble-attach
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/manos/.mambaforce/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/manos/.mambaforce/etc/profile.d/conda.sh" ]; then
+        . "/home/manos/.mambaforce/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/manos/.mambaforce/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+

@@ -14,7 +14,11 @@ eval "$(zoxide init zsh)" # Add zoxide
 
 # Append .bin to path
 path+=("${HOME}/.bin")
+path+=("${HOME}/.local/bin")
 export PATH
+
+export SPOTIPY_CLIENT_ID=2c3af1c2720d48449c8134e5d86078e9
+export SPOTIPY_CLIENT_SECRET=c96d4cf1ee5e42debb6bf39f38b25185
 
 # Aliases
 # Easier Navigation
@@ -64,7 +68,7 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-source /opt/anaconda/etc/profile.d/conda.sh
+# source /opt/anaconda/etc/profile.d/conda.sh  # commented out by conda initialize
 
 bindkey -M emacs '^P' up-line-or-history
 bindkey -M emacs '^N' down-line-or-history
@@ -72,3 +76,23 @@ bindkey -M emacs '^N' down-line-or-history
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/manos/.mambaforce/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/manos/.mambaforce/etc/profile.d/conda.sh" ]; then
+        . "/home/manos/.mambaforce/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/manos/.mambaforce/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+if [ -f "/home/manos/.mambaforce/etc/profile.d/mamba.sh" ]; then
+    . "/home/manos/.mambaforce/etc/profile.d/mamba.sh"
+fi
+# <<< conda initialize <<<
+
