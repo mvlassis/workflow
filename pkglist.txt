@@ -32,7 +32,6 @@ chromium
 cmake
 cmatrix
 copyq
-cuda-tools
 ddgr
 dialog
 discord
@@ -251,17 +250,14 @@ powerdevil
 poxml
 print-manager
 pyright
-python-build
 python-flask
 python-flask-cors
 python-i3ipc
-python-installer
 python-nltk
 python-pycryptodome
 python-pyserial
 python-pyswip
 python-seaborn
-python-tensorflow-cuda
 qbittorrent
 qt5-imageformats
 ranger
@@ -270,6 +266,7 @@ reflector
 rmlint
 rocs
 rofi
+rust-analyzer
 rustup
 scrot
 sddm-kcm

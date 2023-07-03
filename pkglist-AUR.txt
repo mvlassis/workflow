@@ -26,6 +26,7 @@ ookla-speedtest-bin
 optimus-manager
 otf-cm-unicode
 otf-gfs
+palera1n
 postman-bin
 pulseaudio-ctl
 python-pyautogui

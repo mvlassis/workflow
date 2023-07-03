@@ -199,7 +199,7 @@ With argument ARG, do this that many times."
 
 (use-package doom-modeline
   :config
-  (setq doom-modeline-icon t)
+  (setq doom-modeline-icon nil)
   ;; (setq doom-modeline-height 26)  
   (setq doom-modeline-buffer-name t)
   ;; (setq doom-modeline-highlight-modified-buffer-name t)
@@ -213,10 +213,10 @@ With argument ARG, do this that many times."
 (use-package all-the-icons)
 (use-package helm-core)
 (use-package helm
-  ;; :bind
-  ;; ((:map helm-map 
-  ;;               ([tab] . helm-execute-if-single-persistent-action)
-  ;;               ))
+  :bind
+  ((:map helm-map 
+                ([tab] . helm-execute-if-single-persistent-action)
+                ))
   :config
   (global-set-key (kbd "M-x") 'helm-M-x)
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
@@ -253,19 +253,20 @@ With argument ARG, do this that many times."
 ;; (use-package lsp-java
 ;;   :config
 ;;   (add-hook 'java-mode-hook 'lsp))
-(use-package lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-						 (setq tab-width 4)
-                         (require 'lsp-pyright)
-                         (lsp))))  ; or lsp-deferred
-0
+;; (use-package lsp-pyright
+;;   :ensure t
+;;   :hook (python-mode . (lambda ()
+;; 						 (setq tab-width 4)
+;;                          (require 'lsp-pyright)
+;;                          (lsp))))  ; or lsp-deferred
+
 (use-package auto-package-update)
 (use-package which-key
   :config
   (which-key-mode)
-  )
-(use-package anzu ;; Simple mode to show total matches when searching
+)
+;; Simple mode to show total matches when searching
+(use-package anzu 
   :config
   (global-anzu-mode 1)
 )
@@ -304,5 +305,13 @@ With argument ARG, do this that many times."
   (reverse-im-mode t))
 
 (use-package esup)
+(use-package restart-emacs)
 
+;; (use-package dap-mode)
 
+(use-package rustic
+  :ensure t
+  :config
+  (require 'lsp-rust)
+  (setq lsp-rust-analyzer-completion-add-call-parenthesis nil))
+  
