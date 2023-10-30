@@ -93,7 +93,9 @@ fi
 unset __mamba_setup
 # <<< mamba initialize <<<
 
-fastfetch
+if command -v fastfetch > /dev/null 2>&1; then
+    fastfetch
+fi
 
 eval "$(zoxide init bash)"
 [[ ${BLE_VERSION-} ]] && ble-attach

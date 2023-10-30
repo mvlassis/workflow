@@ -6,20 +6,16 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 read -p "Do you want to symlink .bashrc? This may delete your existing .bashrc file [y/n]: " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-	if [ ! -L "${HOME}/.bashrc" ]; then
-		rm "${HOME}/.bashrc"
-		ln -sv "${BASEDIR}/dotfiles/bashrc" ~/.bashrc
-	fi
+	rm "${HOME}/.bashrc"
+	ln -sv "${BASEDIR}/dotfiles/bashrc" ~/.bashrc
 fi
 
 # zsh configuration file
 read -p "Do you want to symlink .zshrc? This may delete your existing .zshrc file [y/n]: " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-	if [ ! -L "${HOME}/.zshrc" ]; then
-		rm "${HOME}/.zshrc"
-		ln -sv "${BASEDIR}/dotfiles/zshrc" ~/.zshrc
-	fi
+	rm "${HOME}/.zshrc"
+	ln -sv "${BASEDIR}/dotfiles/zshrc" ~/.zshrc
 fi
 
 # Emacs configuration file
@@ -27,9 +23,7 @@ read -p "Do you want to symlink init.el? This may delete your existing init.el f
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	if [ -d "${HOME}/.emacs.d" ]; then
-		if [ ! -L "${HOME}/.emacs.d/init.el" ]; then
-			ln -sv "${BASEDIR}/dotfiles/init.el" "${HOME}/.emacs.d/init.el"
-		fi    
+		ln -sv "${BASEDIR}/dotfiles/init.el" "${HOME}/.emacs.d/init.el"
 	fi
 fi
 
@@ -38,10 +32,8 @@ read -p "Do you want to symlink i3's config? This will delete your existing conf
 echo 
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	if [ -d "${HOME}/.config/i3" ]; then
-		if [ ! -L "${HOME}/.config/i3/config" ]; then
-			ln -sv "${BASEDIR}/i3/config" "${HOME}/.config/i3/config"
-			cp "${BASEDIR}/i3/i3lock-solarized.sh" "${HOME}/.config/i3/i3lock-solarized.sh"
-		fi    
+		ln -sv "${BASEDIR}/i3/config" "${HOME}/.config/i3/config"
+		cp "${BASEDIR}/i3/i3lock-solarized.sh" "${HOME}/.config/i3/i3lock-solarized.sh"
 	fi
 fi
 
@@ -50,11 +42,9 @@ read -p "Do you want to symlink Polybar's config.ini? This may delete your exist
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	if [ -d "${HOME}/.config/polybar" ]; then
-		if [ ! -L "${HOME}/.config/polybar/config.ini" ]; then
-			ln -sv "${BASEDIR}/polybar/config.ini" "${HOME}/.config/polybar/config.ini"
-			cp "${BASEDIR}/polybar/"*.sh "${HOME}/.config/polybar/"
-			cp "${BASEDIR}/polybar/rofi-power-menu" "${HOME}/.config/polybar/"		
-		fi    
+		ln -sv "${BASEDIR}/polybar/config.ini" "${HOME}/.config/polybar/config.ini"
+		cp "${BASEDIR}/polybar/"*.sh "${HOME}/.config/polybar/"
+		cp "${BASEDIR}/polybar/rofi-power-menu" "${HOME}/.config/polybar/"		
 	fi
 fi
 
