@@ -12,6 +12,7 @@
   ad-do-it)
 ;; Make the mouse a bit better on the terminal
 (add-hook 'tty-setup-hook (lambda () (xterm-mouse-mode)))
+(define-coding-system-alias 'UTF-8 'utf-8)
 ;; Make the alias a bit shorter
 (defalias 'yes-or-no-p 'y-or-n-p)
 ;; Raise the frame when emacsclient is called
@@ -19,12 +20,13 @@
 ;; Make resizing smoother
 (setq frame-resize-pixelwise t)
 (setq x-select-enable-clipboard t)
+(add-to-list 'exec-path "/usr/bin/vendor_perl/") ; Add this to the emacs path for biber
 ;;(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 
 ;; Customization
 ;; Custom font and font size
-(set-face-attribute 'default nil :font "Fira Mono:style=Regular" :height 120)
+(set-face-attribute 'default nil :font "Fira Mono:style=Regular" :height 130)
 
 (setq inhibit-startup-message t) ; Disable the startup screen when opening Emacs
 (setq column-number-mode t) ; Display the current column of the cursor
@@ -48,6 +50,7 @@
 
 ; Org Mode
 (add-hook 'org-mode-hook 'toggle-truncate-lines)
+(require 'org-mouse)
 (setq org-display-custom-times t)
 (setq org-time-stamp-custom-formats 
       '("<%d %b %A>" . "<%d %b %H:%M>"))
@@ -138,6 +141,8 @@ With argument ARG, do this that many times."
 
 (global-unset-key (kbd "C-S-v"))
 (global-unset-key (kbd "M-l"))
+(global-set-key (kbd "M-k") 'previous-buffer)
+(global-set-key (kbd "M-l") 'next-buffer)
 (global-set-key (kbd "C-M-,") 'beginning-of-buffer) ; Move to the beginning of the buffer
 (global-set-key (kbd "C-M-.") 'end-of-buffer) ; Move to the end of the buffer
 (global-set-key (kbd "<C-return>") (lambda ()
@@ -253,12 +258,12 @@ With argument ARG, do this that many times."
 ;; (use-package lsp-java
 ;;   :config
 ;;   (add-hook 'java-mode-hook 'lsp))
-;; (use-package lsp-pyright
-;;   :ensure t
-;;   :hook (python-mode . (lambda ()
-;; 						 (setq tab-width 4)
-;;                          (require 'lsp-pyright)
-;;                          (lsp))))  ; or lsp-deferred
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+						 (setq tab-width 4)
+                         (require 'lsp-pyright)
+                         (lsp))))  ; or lsp-deferred
 
 (use-package auto-package-update)
 (use-package which-key
@@ -289,6 +294,7 @@ With argument ARG, do this that many times."
 	 )
 (use-package xclip)
 
+;; Shows colors of hex codes
 (use-package rainbow-mode
   :config
   (define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
@@ -309,9 +315,30 @@ With argument ARG, do this that many times."
 
 ;; (use-package dap-mode)
 
+;; (use-package elpy
+;;   :ensure t
+;;   :init
+;;   (elpy-enable))
+
 (use-package rustic
   :ensure t
   :config
   (require 'lsp-rust)
   (setq lsp-rust-analyzer-completion-add-call-parenthesis nil))
-  
+
+(use-package rainbow-delimiters
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+(use-package tex-mode
+  :ensure auctex
+  :config
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil)
+  (setq-default TeX-PDF-mode t)
+  (setq-default TeX-engine 'luatex)
+  (setq TeX-view-program-selection
+		'((output-pdf "Okular")))
+  (setq bibtex-dialect 'biblatex)
+  )
+

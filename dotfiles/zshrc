@@ -44,6 +44,7 @@ alias open='xdg-open'
 alias update='sudo pacman -Syu'
 alias wiki='ddgr -j \!w'
 alias yeet='sudo pacman -Rns'
+alias mm='micromamba'
 
 # ls shortcuts
 alias ll='la -l'
@@ -68,7 +69,6 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-# source /opt/anaconda/etc/profile.d/conda.sh  # commented out by conda initialize
 
 bindkey -M emacs '^P' up-line-or-history
 bindkey -M emacs '^N' down-line-or-history
@@ -77,22 +77,16 @@ bindkey -M emacs '^N' down-line-or-history
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/manos/.mambaforce/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba init' !!
+export MAMBA_EXE='/usr/bin/micromamba';
+export MAMBA_ROOT_PREFIX='/home/manos/.micromamba';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
 if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
+    eval "$__mamba_setup"
 else
-    if [ -f "/home/manos/.mambaforce/etc/profile.d/conda.sh" ]; then
-        . "/home/manos/.mambaforce/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/manos/.mambaforce/bin:$PATH"
-    fi
+    alias micromamba="$MAMBA_EXE"  # Fallback on help from mamba activate
 fi
-unset __conda_setup
-
-if [ -f "/home/manos/.mambaforce/etc/profile.d/mamba.sh" ]; then
-    . "/home/manos/.mambaforce/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<
-
+unset __mamba_setup
+# <<< mamba initialize <<<
+micromamba activate base
