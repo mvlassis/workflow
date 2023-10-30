@@ -47,6 +47,7 @@ WHITE='\033[0;37m'
 BOLD='\033[1m'
 RESET='\033[0m'
 
+COMMAND_EXIT_CODE=0
 exitstatus()
 {
     if [[ $COMMAND_EXIT_CODE == 0 ]]; then
@@ -55,7 +56,6 @@ exitstatus()
 		echo -e "${RED}>${RESET} "
     fi
 }
-
 
 rightprompt()
 {
