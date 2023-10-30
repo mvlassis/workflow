@@ -4,7 +4,9 @@
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-source /usr/share/blesh/ble.sh # Enable auto-completion
+if [[ $HOSTNAME == "arch" ]]; then
+	source /usr/share/blesh/ble.sh # Enable auto-completion
+fi
 
 # Aliases
 # Easier Navigation
@@ -75,13 +77,12 @@ export LANG=en_US.UTF-8
 export EDITOR="emacsclient -t"
 
 # >>> mamba initialize >>>
-export MAMBA_EXE='/usr/bin/micromamba';
 if [[ $HOSTNAME == "arch" ]]; then
-	export MAMBA_ROOT_PREFIX='/home/manos/.micromamba'
+	export MAMBA_EXE='/usr/bin/micromamba';
 else
-	
+	export MAMBA_EXE="/home/manos/.local/bin/micromamba";
 fi
-
+export MAMBA_ROOT_PREFIX='/home/manos/.micromamba'
 __mamba_setup="$("$MAMBA_EXE" shell hook --shell bash --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__mamba_setup"
@@ -95,5 +96,7 @@ if command -v fastfetch > /dev/null 2>&1; then
 	fastfetch
 fi
 
-eval "$(zoxide init bash)"
+if [[ $HOSTNAME == "arch" ]]; then
+	eval "$(zoxide init bash)"
+fi
 [[ ${BLE_VERSION-} ]] && ble-attach
