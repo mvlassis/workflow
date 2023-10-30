@@ -5,9 +5,7 @@ SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 echo $SCRIPT_DIR
 
 # Move one level up
-cd ..
-
-echo $PWD
+cd "$SCRIPT_DIR/.."
 
 # Check if there are untracked changes
 if [[ -n $(git status -s) ]]; then
