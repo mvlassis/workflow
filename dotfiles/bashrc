@@ -6,6 +6,8 @@
 [[ $- != *i* ]] && return
 if [[ $HOSTNAME == "arch" ]]; then
 	source /usr/share/blesh/ble.sh # Enable auto-completion
+	# Source bash-preexec if it exists
+	[[ -f /usr/share/bash-preexec/bash-preexec.sh ]] && source /usr/share/bash-preexec/bash-preexec.sh
 fi
 
 # Aliases
@@ -48,6 +50,7 @@ BOLD='\033[1m'
 RESET='\033[0m'
 
 COMMAND_EXIT_CODE=0
+start_time=$(date +%s.%3N)
 exitstatus()
 {
     if [[ $COMMAND_EXIT_CODE == 0 ]]; then
@@ -59,17 +62,25 @@ exitstatus()
 
 rightprompt()
 {
-    printf "%*s" $COLUMNS "[$COMMAND_EXIT_CODE]"
+    printf "%*s" $COLUMNS "${elapsed_time}s [$COMMAND_EXIT_CODE]"
+}
+
+preexec()
+{
+	start_time=$(date +%s.%3N)
 }
 
 PROMPT_COMMAND="make_prompt"
 make_prompt() {
+	end_time=$(date +%s.%3N)
+	elapsed_time=$(echo "scale=3; $end_time - $start_time" | bc | awk '{printf "%.3f", $0}')
 	COMMAND_EXIT_CODE="$?"
 	if [[ -n $SSH_CLIENT ]]; then
-		local top_line="${GREEN}${BOLD}\u${RESET}@${MAGENTA}${BOLD}\h${RESET}: ${YELLOW}${BOLD}\w${RESET}"
+		local hostname_color=${MAGENTA}
 	else
-		local top_line="${GREEN}${BOLD}\u${RESET}@${BLUE}${BOLD}\h${RESET}: ${YELLOW}${BOLD}\w${RESET}"
+		local hostname_color=${BLUE}
 	fi
+	local top_line="${GREEN}${BOLD}\u${RESET}@${hostname_color}${BOLD}\h${RESET}: ${YELLOW}${BOLD}\w${RESET}"
 	PS1="\n\001$(tput sc)\$(rightprompt)$(tput rc)\002${top_line}\n\$(exitstatus)"
 }
 
