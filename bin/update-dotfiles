@@ -10,7 +10,7 @@ cd ..
 # Check if there are untracked changes
 if [[ -n $(git status -s) ]]; then
     # Add all changes in the current directory
-    git add .
+    git add . > /dev/null
 
     # Commit changes
     git commit -m "Auto commit at $(date)"
