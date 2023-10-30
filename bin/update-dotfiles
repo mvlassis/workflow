@@ -7,6 +7,8 @@ echo $SCRIPT_DIR
 # Move one level up
 cd ..
 
+echo $PWD
+
 # Check if there are untracked changes
 if [[ -n $(git status -s) ]]; then
     # Add all changes in the current directory
