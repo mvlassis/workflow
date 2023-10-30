@@ -2,7 +2,6 @@
 
 # Get the script's directory (following symlinks)
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
-echo $SCRIPT_DIR
 
 # Move one level up
 cd "$SCRIPT_DIR/.."
