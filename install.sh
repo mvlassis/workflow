@@ -3,7 +3,8 @@
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Bash configuration file
-read -p "Do you want to symlink .bashrc? This may delete your existing .bashrc file"
+read -p "Do you want to symlink .bashrc? This may delete your existing .bashrc file [y/n]: " -n 1 -r
+echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	if [ ! -L "${HOME}/.bashrc" ]; then
 		rm "${HOME}/.bashrc"
@@ -12,7 +13,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # zsh configuration file
-read -p "Do you want to symlink .zshrc? This may delete your existing .zshrc file"
+read -p "Do you want to symlink .zshrc? This may delete your existing .zshrc file [y/n]: " -n 1 -r
+echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	if [ ! -L "${HOME}/.zshrc" ]; then
 		rm "${HOME}/.zshrc"
@@ -21,7 +23,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # Emacs configuration file
-read -p "Do you want to symlink init.el? This may delete your existing init.el file"
+read -p "Do you want to symlink init.el? This may delete your existing init.el file [y/n]: " -n 1 -r
+echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	if [ -d "${HOME}/.emacs.d" ]; then
 		if [ ! -L "${HOME}/.emacs.d/init.el" ]; then
@@ -31,7 +34,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # i3 configuration file
-read -p "Do you want to symlink i3's config? This will delete your existing config file"
+read -p "Do you want to symlink i3's config? This will delete your existing config file [y/n]: " -n 1 -r
+echo 
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	if [ -d "${HOME}/.config/i3" ]; then
 		if [ ! -L "${HOME}/.config/i3/config" ]; then
@@ -42,7 +46,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # Polybar configuration file
-read -p "Do you want to symlink Polybar's config.ini? This may delete your existing config.ini file"
+read -p "Do you want to symlink Polybar's config.ini? This may delete your existing config.ini file [y/n]: " -n 1 -r
+echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	if [ -d "${HOME}/.config/polybar" ]; then
 		if [ ! -L "${HOME}/.config/polybar/config.ini" ]; then

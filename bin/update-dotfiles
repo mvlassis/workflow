@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# Get the script's directory (following symlinks)
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+echo $SCRIPT_DIR
+
+# Move one level up
+cd ..
+
+# Check if there are untracked changes
+if [[ -n $(git status -s) ]]; then
+    # Add all changes in the current directory
+    git add .
+
+    # Commit changes
+    git commit -m "Auto commit at $(date)"
+
+    # Push to the remote repository
+    git push
+fi
