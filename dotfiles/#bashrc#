@@ -75,13 +75,9 @@ export LANG=en_US.UTF-8
 export EDITOR="emacsclient -t"
 
 # >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba init' !!
 export MAMBA_EXE='/usr/bin/micromamba';
-if [[ $HOSTNAME == "arch" ]]; then
-	export MAMBA_ROOT_PREFIX='/home/manos/.micromamba'
-else
-	
-fi
-
+export MAMBA_ROOT_PREFIX='/home/manos/.micromamba';
 __mamba_setup="$("$MAMBA_EXE" shell hook --shell bash --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__mamba_setup"
@@ -94,6 +90,6 @@ unset __mamba_setup
 if command -v fastfetch > /dev/null 2>&1; then
 	fastfetch
 fi
-
+c
 eval "$(zoxide init bash)"
 [[ ${BLE_VERSION-} ]] && ble-attach
