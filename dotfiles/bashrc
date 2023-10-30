@@ -65,8 +65,12 @@ rightprompt()
 PROMPT_COMMAND="make_prompt"
 make_prompt() {
 	COMMAND_EXIT_CODE="$?"
-
-	PS1="\n\001$(tput sc)\$(rightprompt)$(tput rc)\002${GREEN}${BOLD}\u${RESET}${BOLD}@${BLUE}\h${RESET}: ${YELLOW}${BOLD}\w${RESET}\n\$(exitstatus)"
+	if [[ -n $SSH_CLIENT ]]; then
+		local top_line="${GREEN}${BOLD}\u${RESET}@${MAGENTA}${BOLD}\h${RESET}: ${YELLOW}${BOLD}\w${RESET}"
+	else
+		local top_line="${GREEN}${BOLD}\u${RESET}@${BLUE}${BOLD}\h${RESET}: ${YELLOW}${BOLD}\w${RESET}"
+	fi
+	PS1="\n\001$(tput sc)\$(rightprompt)$(tput rc)\002${top_line}\n\$(exitstatus)"
 }
 
 
