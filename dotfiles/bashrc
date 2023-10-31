@@ -1,3 +1,5 @@
+
+
 #
 # ~/.bashrc
 #
@@ -18,16 +20,15 @@ else
 		blesh=1
     fi
 fi    
-
-if [[ $blesh == 1 ]]; then
-	blehook PREEXEC+="preexec"
-fi
-
-# Source bash-preexec if it exists
-# [[ -f /usr/share/bash-preexec/bash-preexec.sh ]] && source /usr/share/bash-preexec/bash-preexec.sh && bash_preexec=1
+unset blesh_folder1
+unset blesh_folder2
 
 # Ignore consecutive identical commands and command that begin with space
 export HISTCONTROL=ignoreboth
+export PATH="$HOME/.bin:$HOME/.local/bin:$PATH"
+export CHROME_EXECUTABLE=chromium
+export LANG=en_US.UTF-8
+export EDITOR="emacsclient -t"
 
 # Aliases
 # Easier Navigation
@@ -68,11 +69,21 @@ WHITE='\033[0;37m'
 BOLD='\033[1m'
 RESET='\033[0m'
 
+# Creating the prompt
+if [[ $blesh == 1 ]]; then
+	blehook PREEXEC+="preexec"
+fi
 COMMAND_EXIT_CODE=0
-start_time=$(date +%s.%3N)
+start_time=${EPOCHREALTIME}
+preexec()
+{
+	start_time=${EPOCHREALTIME}
+}
+
+# Color the prompt depending on whether the last command exited successfully
 exitstatus()
 {
-    if [[ $COMMAND_EXIT_CODE == 0 ]]; then
+    if [[ ${COMMAND_EXIT_CODE} == 0 ]]; then
 		echo -e "${GREEN}>${RESET} "
     else
 		echo -e "${RED}>${RESET} "
@@ -88,31 +99,33 @@ rightprompt()
     fi
 }       
 
-preexec()
-{
-	start_time=$(date +%s.%3N)
-}
-
 PROMPT_COMMAND="make_prompt"
 make_prompt() {
+	# Get the exit code of the command executed and save it
 	COMMAND_EXIT_CODE="$?"
-	end_time=$(date +%s.%3N)
-	elapsed_time=$(echo "scale=3; $end_time - $start_time" | bc | awk '{printf "%.3f", $0}')
+
+	# Get the command's execution time if we have ble.sh
+	if [[ $blesh == 1 ]]; then
+		# end_time=${EPOCHREALTIME}
+		# elapsed_time=$(echo "scale=3; $end_time - $start_time" | bc | awk '{printf "%.3f", $0}')
+		if [[  ${_ble_exec_time_tot} -gt 0 ]]; then
+			elapsed_time=$(echo "scale=3; $_ble_exec_time_tot / 1000" | bc | awk '{printf "%.3f", $0}')
+		else
+			elapsed_time=0
+		fi
+	fi
+
+	# Change color when connected via ssh
 	if [[ -n $SSH_CLIENT ]]; then
 		local hostname_color=${MAGENTA}
 	else
 		local hostname_color=${BLUE}
 	fi
+	
 	local top_line="${GREEN}${BOLD}\u${RESET}@${hostname_color}${BOLD}\h${RESET}: ${YELLOW}${BOLD}\w${RESET}"
 	PS1="\n\001$(tput sc)\$(rightprompt)$(tput rc)\002${top_line}\n\$(exitstatus)"
 }
 
-
-# Exports
-export PATH="$HOME/.bin:$HOME/.local/bin:$PATH"
-export CHROME_EXECUTABLE=chromium
-export LANG=en_US.UTF-8
-export EDITOR="emacsclient -t"
 
 # >>> mamba initialize >>>
 if [[ $HOSTNAME == "arch" ]]; then

@@ -15,7 +15,6 @@ automake
 base
 base-devel
 bash-completion
-bash-preexec
 bc
 biber
 bind
