@@ -11,16 +11,20 @@ blesh_folder1="/usr/share/blesh"
 blesh_folder2="$HOME/.local/share/blesh"
 if [[ -d "${blesh_folder1}" ]]; then
     source "${blesh_folder1}/ble.sh"
+	blesh=1
 else
     if [[ -d "${blesh_folder2}" ]]; then
-	source "${blesh_folder2}/ble.sh"
+		source "${blesh_folder2}/ble.sh"
+		blesh=1
     fi
 fi    
 
-
+if [[ $blesh == 1 ]]; then
+	blehook PREEXEC+="preexec"
+fi
 
 # Source bash-preexec if it exists
-[[ -f /usr/share/bash-preexec/bash-preexec.sh ]] && source /usr/share/bash-preexec/bash-preexec.sh && bash_preexec=1
+# [[ -f /usr/share/bash-preexec/bash-preexec.sh ]] && source /usr/share/bash-preexec/bash-preexec.sh && bash_preexec=1
 
 # Ignore consecutive identical commands and command that begin with space
 export HISTCONTROL=ignoreboth
@@ -77,7 +81,7 @@ exitstatus()
 
 rightprompt()
 {
-    if [[ $bash_preexec == 1 ]]; then
+    if [[ $blesh == 1 ]]; then
 		printf "%*s" $COLUMNS "${elapsed_time}s [$COMMAND_EXIT_CODE]"
     else
 		printf "%*s" $COLUMNS "[$COMMAND_EXIT_CODE]"
