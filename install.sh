@@ -2,25 +2,41 @@
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# Clone and install ble.sh if it isn't already installed
+blesh_folder1="/usr/share/blesh" 
+blesh_folder2="$HOME/.local/share/blesh"
+if [[ ! -d "${blesh_folder1}" && ! -d "${blesh_folder2}" ]]; then
+    read -p  "ble.sh not detected! Do you want to install ble.sh in $HOME/.local/share/blesh? [y/n]: " -n 1 -r; echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+	echo "Downloading ble.sh..."
+	git clone --recursive https://github.com/akinomyoga/ble.sh.git
+	cd ble.sh
+	make install
+	echo "ble.sh successfully installed, cleaning..."
+	cd ..
+	rm -rf ble.sh
+    fi
+else
+    echo "ble.sh is already installed! Moving on..."
+fi   
+
+
 # Bash configuration file
-read -p "Do you want to symlink .bashrc? This may delete your existing .bashrc file [y/n]: " -n 1 -r
-echo
+read -p "Do you want to symlink .bashrc? This may delete your existing .bashrc file [y/n]: " -n 1 -r; echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	rm "${HOME}/.bashrc"
 	ln -sv "${BASEDIR}/dotfiles/bashrc" ~/.bashrc
 fi
 
 # zsh configuration file
-read -p "Do you want to symlink .zshrc? This may delete your existing .zshrc file [y/n]: " -n 1 -r
-echo
+read -p "Do you want to symlink .zshrc? This may delete your existing .zshrc file [y/n]: " -n 1 -r;
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	rm "${HOME}/.zshrc"
 	ln -sv "${BASEDIR}/dotfiles/zshrc" ~/.zshrc
 fi
 
 # Emacs configuration file
-read -p "Do you want to symlink init.el? This may delete your existing init.el file [y/n]: " -n 1 -r
-echo
+read -p "Do you want to symlink init.el? This may delete your existing init.el file [y/n]: " -n 1 -r; echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	if [ -d "${HOME}/.emacs.d" ]; then
 		ln -sv "${BASEDIR}/dotfiles/init.el" "${HOME}/.emacs.d/init.el"
@@ -38,8 +54,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # Polybar configuration file
-read -p "Do you want to symlink Polybar's config.ini? This may delete your existing config.ini file [y/n]: " -n 1 -r
-echo
+read -p "Do you want to symlink Polybar's config.ini? This may delete your existing config.ini file [y/n]: " -n 1 -r; echo;
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	if [ -d "${HOME}/.config/polybar" ]; then
 		ln -sv "${BASEDIR}/polybar/config.ini" "${HOME}/.config/polybar/config.ini"
