@@ -4,12 +4,25 @@
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-if [[ $HOSTNAME == "arch" ]]; then
-	source /usr/share/blesh/ble.sh # Enable auto-completion
-	# Source bash-preexec if it exists
-	[[ -f /usr/share/bash-preexec/bash-preexec.sh ]] && source /usr/share/bash-preexec/bash-preexec.sh && bash_preexec=1
-fi
 
+
+# Source ble.sh if it exists
+blesh_folder1="/usr/share/blesh" 
+blesh_folder2="$HOME/.local/share/blesh"
+if [[ -d "${blesh_folder1}" ]]; then
+    source "${blesh_folder1}/ble.sh"
+else
+    if [[ -d "${blesh_folder2}" ]]; then
+	source "${blesh_folder2}/ble.sh"
+    fi
+fi    
+
+
+
+# Source bash-preexec if it exists
+[[ -f /usr/share/bash-preexec/bash-preexec.sh ]] && source /usr/share/bash-preexec/bash-preexec.sh && bash_preexec=1
+
+# Ignore consecutive identical commands and command that begin with space
 export HISTCONTROL=ignoreboth
 
 # Aliases
