@@ -78,9 +78,9 @@ exitstatus()
 rightprompt()
 {
     if [[ $bash_preexec == 1 ]]; then
-	printf "%*s" $COLUMNS "${elapsed_time}s [$COMMAND_EXIT_CODE]"
+		printf "%*s" $COLUMNS "${elapsed_time}s [$COMMAND_EXIT_CODE]"
     else
-	printf "%*s" $COLUMNS "[$COMMAND_EXIT_CODE]"
+		printf "%*s" $COLUMNS "[$COMMAND_EXIT_CODE]"
     fi
 }       
 
@@ -91,9 +91,9 @@ preexec()
 
 PROMPT_COMMAND="make_prompt"
 make_prompt() {
+	COMMAND_EXIT_CODE="$?"
 	end_time=$(date +%s.%3N)
 	elapsed_time=$(echo "scale=3; $end_time - $start_time" | bc | awk '{printf "%.3f", $0}')
-	COMMAND_EXIT_CODE="$?"
 	if [[ -n $SSH_CLIENT ]]; then
 		local hostname_color=${MAGENTA}
 	else

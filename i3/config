@@ -207,7 +207,7 @@ mode "$emacs-mode" {
 ### Configuration added by me
 
 include $HOME/.config/i3/gruvbox.conf
-
+# default_border pixel 4
 
 ## Programs to auto start
 # Polybar for the status bar at the bottom
