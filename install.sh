@@ -77,3 +77,11 @@ do
       	ln -sv "${file}" "${HOME}/.bin/$(basename ${file})"
     fi
 done
+
+SYSTEMD_UNITS="${BASEDIR}/systemd/*"
+for file in ${SYSTEMD_UNITS}
+do
+    if [ ! -L "${HOME}/.config/systemd/user/$(basename ${file})" ]; then
+      	ln -sv "${file}" "${HOME}/.config/systemd/user/$(basename ${file})"
+    fi
+done
