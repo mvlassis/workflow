@@ -12,7 +12,6 @@ hardinfo
 heroic-games-launcher-bin
 i3-volume
 i3lock-color
-javafx-scenebuilder
 libreoffice-extension-orthos-greek-english-dictionary
 micromamba-bin
 noto-color-emoji-fontconfig
