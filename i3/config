@@ -221,8 +221,8 @@ exec_always  --no-startup-id $HOME/.config/polybar/launch.sh &
 exec --no-startup-id picom &
 exec --no-startup-id dunst &
 # Set default audio volume
-# exec_always --no-startup-id pulseaudio-ctl set 60
-exec --no-startup-id pamixer --set-volume 60
+exec --no-startup-id pamixer --set-volume 65
+
 exec --no-startup-id $HOME/.fehbg &
 
 bindsym $mod+b exec firefox
