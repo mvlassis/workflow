@@ -1,0 +1,10 @@
+bleopt exec_errexit_mark=
+# bleopt complete_auto_delay=300
+
+# ble-bind -m emacs -f 'M-C-?' 'kill-backward-eword'
+ble-bind -m emacs -f 'CSI 127 ; 3 u' 'kill-backword-eword'
+
+ble-face filename_directory='fg=blue,underline'
+ble-face command_function='fg=purple'
+
+

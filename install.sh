@@ -28,8 +28,15 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	ln -sv "${BASEDIR}/dotfiles/bashrc" ~/.bashrc
 fi
 
+# blesh configuration file
+read -p "Do you want to symlink .blerc? This may delete your existing .blerc file [y/n]: " -n 1 -r; echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+	rm "${HOME}/.blerc"
+	ln -sv "${BASEDIR}/dotfiles/blerc" ~/.blerc
+fi
+
 # zsh configuration file
-read -p "Do you want to symlink .zshrc? This may delete your existing .zshrc file [y/n]: " -n 1 -r;
+read -p "Do you want to symlink .zshrc? This may delete your existing .zshrc file [y/n]: " -n 1 -r; echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	rm "${HOME}/.zshrc"
 	ln -sv "${BASEDIR}/dotfiles/zshrc" ~/.zshrc
