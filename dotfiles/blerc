@@ -1,11 +1,8 @@
 bleopt exec_errexit_mark=
 # bleopt complete_auto_delay=300
-bleopt term_modifyOtherKeys_passthrough_kitty_protocol=1
+# bleopt term_modifyOtherKeys_passthrough_kitty_protocol=1
 
-# ble-bind -f 'C-M-?' 'kill-backward-cword'
-# ble-bind -m emacs -f '\x1b\x7f' 'kill-backword-cword'
-# ble-bind -m emacs -f 'M-BS' 'kill-backword-cword'
-ble-bind --csi A up
+ble-bind -m 'emacs' -f 'M-DEL' 'kill-backward-cword'
 
 ble-face filename_directory='fg=blue,underline'
 ble-face command_function='fg=purple'
