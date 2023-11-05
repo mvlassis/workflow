@@ -12,11 +12,11 @@
 blesh_folder1="/usr/share/blesh" 
 blesh_folder2="$HOME/.local/share/blesh"
 if [[ -d "${blesh_folder1}" ]]; then
-    source "${blesh_folder1}/ble.sh"
+    source "${blesh_folder1}/ble.sh" --noattach
 	blesh=1
 else
     if [[ -d "${blesh_folder2}" ]]; then
-		source "${blesh_folder2}/ble.sh"
+		source "${blesh_folder2}/ble.sh" --noattach
 		blesh=1
     fi
 fi    
@@ -99,7 +99,7 @@ rightprompt()
     fi
 }       
 
-PROMPT_COMMAND="make_prompt"
+PROMPT_COMMAND="make_prompt; $PROMPT_COMMAND"
 make_prompt() {
 	# Get the exit code of the command executed and save it
 	COMMAND_EXIT_CODE="$?"
