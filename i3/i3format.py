@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # i3format.py
 # Use i3ipc to set the following layout on all workspaces:
 # One window on the left, then tabbed layout on the right

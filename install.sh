@@ -56,6 +56,8 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	if [ -d "${HOME}/.config/i3" ]; then
 		ln -sv "${BASEDIR}/i3/config" "${HOME}/.config/i3/config"
+		ln -sv "${BASEDIR}/i3/i3format.py" "${HOME}/.config/i3/i3format.py"
+		chmod +x "${BASEDIR}/i3/i3format.py"
 		cp "${BASEDIR}/i3/i3lock-solarized.sh" "${HOME}/.config/i3/i3lock-solarized.sh"
 	fi
 fi
