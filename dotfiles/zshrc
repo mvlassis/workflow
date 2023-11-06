@@ -1,14 +1,21 @@
-zstyle :compinstall filename '/home/manos/.zshrc'
-autoload -Uz promptinit
-promptinit
+#
+# ~/.zshrc
+#
 
-eval "$(zoxide init zsh)" # Add zoxide
+bindkey -M emacs '^P' up-line-or-history
+bindkey -M emacs '^N' down-line-or-history
+bindkey "^[[3~" delete-char
+unsetopt beep
+HISTFILE="${HOME}/.histfile"
+HISTSIZE=100
+SAVEHIST=500
+#unsetopt prompt_cr prompt_sp
 
+
+# Exports
 # Append .bin to path
-path+=("${HOME}/.bin")
-path+=("${HOME}/.local/bin")
-export PATH
-
+export PATH="$HOME/.bin:$HOME/.local/bin:$PATH"
+export EDITOR="emacsclient -t"
 export SPOTIPY_CLIENT_ID=2c3af1c2720d48449c8134e5d86078e9
 export SPOTIPY_CLIENT_SECRET=c96d4cf1ee5e42debb6bf39f38b25185
 
@@ -21,7 +28,6 @@ alias cf="cd ~/.config"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-
 
 # Shortcuts
 # Finds unused packages (orhans) and removes them
@@ -43,34 +49,22 @@ alias ll='la -l'
 alias ls='ls --color=auto'
 alias la='ls -aA'
 
-# Kitty specific alias
+# Change the ssh to the appropriate kitten when using kitty
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
-
-HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
-export EDITOR="emacsclient -t"
-bindkey "^[[3~" delete-char
-unsetopt beep
-#unsetopt prompt_cr prompt_sp
-export RANGER_LOAD_DEFAULT_RC=FALSE
 
 
 # Files to source
+# source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-bindkey -M emacs '^P' up-line-or-history
-bindkey -M emacs '^N' down-line-or-history
-
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # >>> mamba initialize >>>
-# !! Contents within this block are managed by 'mamba init' !!
-export MAMBA_EXE='/usr/bin/micromamba';
+if [[ $HOSTNAME == "arch" ]]; then
+	export MAMBA_EXE='/usr/bin/micromamba';
+else
+	export MAMBA_EXE="/home/manos/.local/bin/micromamba";
+fi
 export MAMBA_ROOT_PREFIX='/home/manos/.micromamba';
 __mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
 if [ $? -eq 0 ]; then
@@ -80,4 +74,7 @@ else
 fi
 unset __mamba_setup
 # <<< mamba initialize <<<
-micromamba activate base
+# micromamba activate base
+
+# Add zoxide
+eval "$(zoxide init zsh)"

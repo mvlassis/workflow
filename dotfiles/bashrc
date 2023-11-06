@@ -41,6 +41,7 @@ check_source "/usr/share/fzf/completion.bash"
 check_source "/usr/share/doc/fzf/examples/key-bindings.bash"
 check_source "/usr/share/doc/fzf/examples/completion.bash"
 
+
 # Ignore consecutive identical commands and command that begin with space
 export HISTCONTROL=ignoreboth
 export PATH="$HOME/.bin:$HOME/.local/bin:$PATH"
@@ -74,6 +75,9 @@ alias mm='micromamba'
 alias ll='la -l'
 alias ls='ls --color=auto'
 alias la='ls -aA'
+
+# Change the ssh to the appropriate kitten when using kitty
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
 
 # Text colors
@@ -167,7 +171,8 @@ unset __mamba_setup
 # fi
 
 # Get the weather if we are connected to the internet
-ping -q -c 1 google.com &>/dev/null && curl "wttr.in/?1nFq&lang=en"
+# ping -q -W 1 -c 1 google.com &>/dev/null && curl "wttr.in/?1nFq&lang=en"
+curl --max-time 1 "wttr.in/?1nFq&lang=en" 2> /dev/null
 
 [[ ${BLE_VERSION-} ]] && ble-attach
 eval "$(zoxide init bash)"
