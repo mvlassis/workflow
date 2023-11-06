@@ -52,12 +52,13 @@ alias la='ls -aA'
 # Change the ssh to the appropriate kitten when using kitty
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
+## Prompt
+PS1=$'%B%F{blue}%n%b%f at %B%F{red}%M%b%f: %B%F{cyan}%~%b%f \n%# '  
 
 # Files to source
 # source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 
 # >>> mamba initialize >>>
 if [[ $HOSTNAME == "arch" ]]; then
