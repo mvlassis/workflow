@@ -162,10 +162,10 @@ fi
 unset __mamba_setup
 # <<< mamba initialize <<<
 
-if command -v fastfetch > /dev/null 2>&1; then
-	fastfetch
-fi
+# if command -v fastfetch > /dev/null 2>&1; then
+# 	time fastfetch
+# fi
+curl "wttr.in/?1nFq&lang=en"
 
 [[ ${BLE_VERSION-} ]] && ble-attach
-
 eval "$(zoxide init bash)"
