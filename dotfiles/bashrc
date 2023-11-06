@@ -31,10 +31,15 @@ fi
 unset blesh_folder1
 unset blesh_folder2
 
-# Source fzf to enable fuzzy searching
+check_source () {
+	[[ -f "$1" ]] && source "$1"
+}
 
-[[ -f "/usr/share/fzf/key-bindings.bash" ]] && source "/usr/share/fzf/key-bindings.bash"
-[[ -f "/usr/share/fzf/completion.bash" ]] && source "/usr/share/fzf/completion.bash"
+# Source fzf to enable fuzzy searching
+check_source "/usr/share/fzf/key-bindings.bash"
+check_source "/usr/share/fzf/completion.bash"
+check_source "/usr/share/doc/fzf/examples/key-bindings.bash"
+check_source "/usr/share/doc/fzf/examples/completion.bash"
 
 # Ignore consecutive identical commands and command that begin with space
 export HISTCONTROL=ignoreboth
