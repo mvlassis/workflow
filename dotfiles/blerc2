@@ -1,4 +1,5 @@
 # bleopt complete_auto_complete=
+bleopt highlight_syntax=
 bleopt exec_errexit_mark=
 # bleopt complete_auto_delay=300
 

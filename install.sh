@@ -33,6 +33,7 @@ read -p "Do you want to symlink .blerc? This may delete your existing .blerc fil
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	rm "${HOME}/.blerc"
 	ln -sv "${BASEDIR}/dotfiles/blerc" ~/.blerc
+	ln -sv "${BASEDIR}/dotfiles/blerc2" ~/.blerc2
 fi
 
 # zsh configuration file

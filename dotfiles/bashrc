@@ -7,15 +7,25 @@
 
 
 # Source ble.sh if it exists
+# Depending on the machine, load either the default configuration file
+# or a faster version of ble.sh
 blesh_folder1="/usr/share/blesh" 
 blesh_folder2="$HOME/.local/share/blesh"
 if [[ -d "${blesh_folder1}" ]]; then
-    source "${blesh_folder1}/ble.sh" --noattach
+    if [[ $HOSTNAME == "arch" ]]; then
+	source "${blesh_folder1}/ble.sh" --noattach
+    else
+	source "${blesh_folder1}/ble.sh" --noattach "${HOME}/.blerc2"
+    fi
 	blesh=1
 else
     if [[ -d "${blesh_folder2}" ]]; then
+	    if [[ $HOSTNAME == "arch" ]]; then
 		source "${blesh_folder2}/ble.sh" --noattach
-		blesh=1
+	    else
+		source "${blesh_folder2}/ble.sh" --noattach --rcfile "${HOME}/.blerc2"
+	    fi
+	    blesh=1
     fi
 fi    
 unset blesh_folder1
@@ -146,7 +156,9 @@ if command -v fastfetch > /dev/null 2>&1; then
 	fastfetch
 fi
 
-if [[ $HOSTNAME == "arch" ]]; then
-	eval "$(zoxide init bash)"
-fi
+# if [[ $HOSTNAME == "arch" ]]; then
+#     eval "$(zoxide init bash)"
+# fi
+
 [[ ${BLE_VERSION-} ]] && ble-attach
+eval "$(zoxide init bash)"
