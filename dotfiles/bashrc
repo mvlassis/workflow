@@ -91,7 +91,8 @@ WHITE='\033[0;37m'
 BOLD='\033[1m'
 RESET='\033[0m'
 
-# Creating the prompt
+
+## Prompt
 if [[ $blesh == 1 ]]; then
 	blehook PREEXEC+="preexec"
 fi
@@ -106,9 +107,9 @@ preexec()
 exitstatus()
 {
     if [[ ${COMMAND_EXIT_CODE} == 0 ]]; then
-		echo -e "${GREEN}>${RESET} "
+		echo -e "${GREEN}${BOLD}>${RESET} "
     else
-		echo -e "${RED}>${RESET} "
+		echo -e "${RED}${BOLD}>${RESET} "
     fi
 }
 
@@ -146,7 +147,7 @@ make_prompt() {
 	
 	local top_line="${GREEN}${BOLD}\u${RESET}@${hostname_color}${BOLD}\h${RESET}: ${YELLOW}${BOLD}\w${RESET}"
 	echo
-	PS1="\001$(tput sc)\$(rightprompt)$(tput rc)\002${top_line}\n\$(exitstatus)"
+	PS1="┌─╴\001$(tput sc)\$(rightprompt)$(tput rc)\002${top_line}\n└─\$(exitstatus)"
 }
 
 
