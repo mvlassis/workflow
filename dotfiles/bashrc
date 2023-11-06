@@ -21,15 +21,20 @@ if [[ -d "${blesh_folder1}" ]]; then
 else
     if [[ -d "${blesh_folder2}" ]]; then
 	    if [[ $HOSTNAME == "arch" ]]; then
-		source "${blesh_folder2}/ble.sh" --noattach
+			source "${blesh_folder2}/ble.sh" --noattach
 	    else
-		source "${blesh_folder2}/ble.sh" --noattach --rcfile "${HOME}/.blerc2"
+			source "${blesh_folder2}/ble.sh" --noattach --rcfile "${HOME}/.blerc2"
 	    fi
 	    blesh=1
     fi
 fi    
 unset blesh_folder1
 unset blesh_folder2
+
+# Source fzf to enable fuzzy searching
+
+[[ -f "/usr/share/fzf/key-bindings.bash" ]] && source "/usr/share/fzf/key-bindings.bash"
+[[ -f "/usr/share/fzf/completion.bash" ]] && source "/usr/share/fzf/completion.bash"
 
 # Ignore consecutive identical commands and command that begin with space
 export HISTCONTROL=ignoreboth
@@ -156,9 +161,6 @@ if command -v fastfetch > /dev/null 2>&1; then
 	fastfetch
 fi
 
-# if [[ $HOSTNAME == "arch" ]]; then
-#     eval "$(zoxide init bash)"
-# fi
-
 [[ ${BLE_VERSION-} ]] && ble-attach
+
 eval "$(zoxide init bash)"
