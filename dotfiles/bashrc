@@ -144,8 +144,10 @@ make_prompt() {
 	else
 		local hostname_color=${BLUE}
 	fi
+
+	[[ -w "." ]] || padlock="[] "
 	
-	local top_line="${GREEN}${BOLD}\u${RESET}@${hostname_color}${BOLD}\h${RESET}: ${YELLOW}${BOLD}\w${RESET}"
+	local top_line="${GREEN}${BOLD}\u${RESET}@${hostname_color}${BOLD}\h${RESET}: ${YELLOW}${BOLD}${padlock}\w${RESET}"
 	echo
 	PS1="┌─╴\001$(tput sc)\$(rightprompt)$(tput rc)\002${top_line}\n└─\$(exitstatus)"
 }

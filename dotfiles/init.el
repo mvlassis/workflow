@@ -23,6 +23,11 @@
 (add-to-list 'exec-path "/usr/bin/vendor_perl/") ; Add this to the emacs path for biber
 ;;(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+;; Add recentf mode and a shortcut to open recent files
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+(global-set-key  (kbd "C-x C-r") 'recentf-open-files)
 
 ;; Customization
 ;; Custom font and font size
