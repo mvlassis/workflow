@@ -1,4 +1,7 @@
 # bleopt complete_auto_complete=
+
+# Don't redraw the new prompt every time after resizing
+bleopt canvas_winch_action=redraw-prev
 bleopt exec_errexit_mark=
 # bleopt complete_auto_delay=300
 
