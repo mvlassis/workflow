@@ -145,6 +145,8 @@ make_prompt() {
 		local hostname_color=${BLUE}
 	fi
 
+	# Add a padlock next to the working directory if it is read-only
+	padlock=""
 	[[ -w "." ]] || padlock="[] "
 	
 	local top_line="${GREEN}${BOLD}\u${RESET}@${hostname_color}${BOLD}\h${RESET}: ${YELLOW}${BOLD}${padlock}\w${RESET}"

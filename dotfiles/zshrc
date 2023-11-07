@@ -52,8 +52,16 @@ alias la='ls -aA'
 # Change the ssh to the appropriate kitten when using kitty
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
+
 ## Prompt
-PS1=$'%B%F{green}%n%b%f at %B%F{red}%M%b%f: %B%F{cyan}%~%b%f \n%# '  
+setopt PROMPT_SUBST
+precmd() {
+	# Add a padlock next to the working directory if it is read-only
+	padlock=""
+	[[ -w "." ]] || padlock="[] "
+	PS1=$'%B%F{green}%n%b%f at %B%F{red}%M%b%f: %B%F{cyan}${padlock}%~%b%f \n%# '
+}
+
 
 # Files to source
 # Simple function that sources a file only if it exists
