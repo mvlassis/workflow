@@ -55,13 +55,21 @@ alias la='ls -aA'
 
 ## Prompt
 setopt PROMPT_SUBST
+
+rightprompt()
+{
+	printf "%*s" $COLUMNS "hello!"
+}
+
 precmd() {
 	# Add a padlock next to the working directory if it is read-only
 	padlock=""
 	[[ -w "." ]] || padlock="[] "
+	_lineup=$'\e[1A'
+	_linedown=$'\e[1B'
 	PS1=$'%B%F{green}%n%b%f at %B%F{red}%M%b%f: %B%F{cyan}${padlock}%~%b%f \n%# '
+	RPS1='%{${_lineup}%}hello!%{${_linedown}%}'
 }
-
 
 # Files to source
 # Simple function that sources a file only if it exists

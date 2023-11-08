@@ -120,7 +120,7 @@ rightprompt()
     else
 		printf "%*s" $COLUMNS "[$COMMAND_EXIT_CODE]"
     fi
-}       
+}
 
 PROMPT_COMMAND="make_prompt; $PROMPT_COMMAND"
 make_prompt() {

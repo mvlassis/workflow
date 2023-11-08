@@ -57,6 +57,7 @@ ffmpegthumbs
 filelight
 firefox
 flex
+fmt
 gimp
 git
 github-cli
@@ -181,6 +182,7 @@ maven
 mbox-importer
 milou
 minikube
+mkvtoolnix-gui
 mono
 mtools
 nano
