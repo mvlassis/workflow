@@ -294,6 +294,7 @@ texlive-pictures
 texlive-pstricks
 texlive-publishers
 texstudio
+thunderbird
 tldr
 tmux
 torbrowser-launcher
