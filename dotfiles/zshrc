@@ -68,7 +68,7 @@ precmd() {
 	_lineup=$'\e[1A'
 	_linedown=$'\e[1B'
 	PS1=$'%B%F{green}%n%b%f at %B%F{red}%M%b%f: %B%F{cyan}${padlock}%~%b%f \n%# '
-	RPS1='%{${_lineup}%}hello!%{${_linedown}%}'
+	# RPS1='%{${_lineup}%}hello!%{${_linedown}%}'
 }
 
 # Files to source
