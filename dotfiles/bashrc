@@ -44,7 +44,7 @@ check_source "/usr/share/doc/fzf/examples/completion.bash"
 
 # Ignore consecutive identical commands and command that begin with space
 export HISTCONTROL=ignoreboth
-export PATH="$HOME/.bin:$HOME/.local/bin:/opt/flutter/bin:$PATH"
+export PATH="$HOME/.bin:$HOME/.local/bin:$PATH"
 export CHROME_EXECUTABLE=chromium
 export LANG=en_US.UTF-8
 export EDITOR="emacsclient -t"
