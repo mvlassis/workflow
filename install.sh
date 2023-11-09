@@ -46,6 +46,7 @@ fi
 # Emacs configuration file
 read -p "Do you want to symlink init.el? This may delete your existing init.el file [y/n]: " -n 1 -r; echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
+	[[ -e "${HOME}/.emacs.d/custom.el" ]] || touch "${HOME}/.emacs.d/custom.el"
 	if [ -d "${HOME}/.emacs.d" ]; then
 		ln -sv "${BASEDIR}/dotfiles/init.el" "${HOME}/.emacs.d/init.el"
 	fi
@@ -88,6 +89,8 @@ do
     fi
 done
 
+[[ -d "${HOME}/.config/systemd" ]] || mkdir "${HOME}/.config/systemd"
+[[ -d "${HOME}/.config/systemd/user"]] || mkdir "${HOME}/.config/systemd/user"
 SYSTEMD_UNITS="${BASEDIR}/systemd/*"
 for file in ${SYSTEMD_UNITS}
 do

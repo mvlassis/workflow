@@ -30,8 +30,9 @@
 (global-set-key  (kbd "C-x C-r") 'recentf-open-files)
 
 ;; Customization
-;; Custom font and font size
-(set-face-attribute 'default nil :font "Fira Mono:style=Regular" :height 130)
+;; Set custom font and font size if it exists in the system
+(when (member "Fira Mono:style=Regular" (font-family-list))
+  (set-face-attribute 'default nil :font "Fira Mono:style=Regular" :height 130))
 
 (setq inhibit-startup-message t) ; Disable the startup screen when opening Emacs
 (setq column-number-mode t) ; Display the current column of the cursor
@@ -71,7 +72,6 @@
 (push '(tool-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars . nil) default-frame-alist)
 (tooltip-mode -1)
-(xclip-mode 1) ; Enables easy copy/pasting in the terminal
 (electric-pair-mode)
 (global-auto-revert-mode 1)
 (setq global-auto-revert-non-file-buffers t)
@@ -178,13 +178,6 @@ With argument ARG, do this that many times."
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(use-package quelpa)
-;; (quelpa '(eat :fetcher git
-;;               :url "https://codeberg.org/akib/emacs-eat.git"
-;;               :files ("*.el" "dir"
-;;                       "*.info" "*.texi"
-;;                       "*.ti" ("e" "e/*")))):
-
 ;; Packages to load and configurations
 (use-package arduino-mode)
 (use-package ini-mode ;; mode for .ini files
@@ -205,7 +198,7 @@ With argument ARG, do this that many times."
 (use-package material-theme)
 (use-package gruvbox-theme)
 ;; Theme to load
-(load-theme 'gruvbox-dark-hard )
+(load-theme 'gruvbox-dark-hard)
 
 (use-package doom-modeline
   :config
@@ -297,7 +290,10 @@ With argument ARG, do this that many times."
   :config
      (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 	 )
-(use-package xclip)
+(use-package xclip
+  :config
+  (xclip-mode 1) ; Enables easy copy/pasting in the terminal
+)
 
 ;; Shows colors of hex codes
 (use-package rainbow-mode
