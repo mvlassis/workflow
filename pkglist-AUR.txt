@@ -8,6 +8,7 @@ burpsuite
 checkra1n-cli
 downgrade
 etcher-bin
+flutter
 freetube-bin
 hardinfo
 heroic-games-launcher-bin
