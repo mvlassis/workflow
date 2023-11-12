@@ -77,7 +77,8 @@
 (electric-pair-mode)
 (global-auto-revert-mode 1)
 (setq global-auto-revert-non-file-buffers t)
-
+(yas-reload-all) 
+(add-hook 'prog-mode-hook #'yas-minor-mode) ; For function templates
 ;; (recentf-mode 1)
 ;; (save-place-mode 1)
 
@@ -287,6 +288,9 @@ With argument ARG, do this that many times."
 (use-package company
   :config
   (global-company-mode)
+  (setq company-minimum-prefix-length 5
+		company-idle-delay 1) ;; Delay to display suggestions
+
 )
 (use-package yaml-mode
   :config
