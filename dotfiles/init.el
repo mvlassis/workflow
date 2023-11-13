@@ -247,6 +247,7 @@ With argument ARG, do this that many times."
      (helm-execute-persistent-action)
      )))
 
+(use-package bind-key)
 (use-package markdown-mode)
 (use-package rust-mode)
 (use-package math-preview)
@@ -254,6 +255,8 @@ With argument ARG, do this that many times."
 (use-package lsp-mode
   :config
   (define-key lsp-mode-map (kbd "M-l") lsp-command-map)
+  (with-eval-after-load 'lsp-mode
+	(unbind-key "M-n" lsp-mode-map))
   (setq lsp-signature-render-documentation nil))
 (use-package lsp-ui)
 ;; (use-package lsp-java
