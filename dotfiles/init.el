@@ -258,7 +258,11 @@ With argument ARG, do this that many times."
   (with-eval-after-load 'lsp-mode
 	(unbind-key "M-n" lsp-mode-map))
   (setq lsp-signature-render-documentation nil))
-(use-package lsp-ui)
+(use-package lsp-ui
+  :config
+  (setq lsp-ui-doc-delay 2)
+  (setq lsp-ui-doc-position "At point")
+  )
 ;; (use-package lsp-java
 ;;   :config
 ;;   (add-hook 'java-mode-hook 'lsp))
