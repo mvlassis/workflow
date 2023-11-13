@@ -36,6 +36,13 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	ln -sv "${BASEDIR}/dotfiles/blerc2" ~/.blerc2
 fi
 
+# Kitty configuration file
+read -p "Do you want to symlink kitty.conf? This may delete your existing kitty.conf file [y/n]: " -n 1 -r; echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+	rm "${HOME}/.config/kitty/kitty.conf"
+	ln -sv "${BASEDIR}/dotfiles/kitty.conf" "${HOME}/.config/kitty/kitty.conf"
+fi
+
 # zsh configuration file
 read -p "Do you want to symlink .zshrc? This may delete your existing .zshrc file [y/n]: " -n 1 -r; echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
@@ -89,12 +96,16 @@ do
     fi
 done
 
-[[ -d "${HOME}/.config/systemd" ]] || mkdir "${HOME}/.config/systemd"
-[[ -d "${HOME}/.config/systemd/user"]] || mkdir "${HOME}/.config/systemd/user"
-SYSTEMD_UNITS="${BASEDIR}/systemd/*"
-for file in ${SYSTEMD_UNITS}
-do
-    if [ ! -L "${HOME}/.config/systemd/user/$(basename ${file})" ]; then
-      	ln -sv "${file}" "${HOME}/.config/systemd/user/$(basename ${file})"
-    fi
-done
+read -p "Do you want to symlink the systemd units? [y/n]: " -n 1 -r; echo;
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+	[[ -d "${HOME}/.config/systemd" ]] || mkdir "${HOME}/.config/systemd"
+	[[ -d "${HOME}/.config/systemd/user" ]] || mkdir "${HOME}/.config/systemd/user"
+	SYSTEMD_UNITS="${BASEDIR}/systemd/*"
+	for file in ${SYSTEMD_UNITS}
+	do
+		if [ ! -L "${HOME}/.config/systemd/user/$(basename ${file})" ]; then
+      		ln -sv "${file}" "${HOME}/.config/systemd/user/$(basename ${file})"
+		fi
+	done
+fi
+
