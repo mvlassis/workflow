@@ -77,8 +77,8 @@
 (electric-pair-mode)
 (global-auto-revert-mode 1)
 (setq global-auto-revert-non-file-buffers t)
-(yas-reload-all) 
-(add-hook 'prog-mode-hook #'yas-minor-mode) ; For function templates
+;; (yas-reload-all) 
+;; (add-hook 'prog-mode-hook #'yas-minor-mode) ; For function templates
 ;; (recentf-mode 1)
 ;; (save-place-mode 1)
 
@@ -343,16 +343,15 @@ With argument ARG, do this that many times."
 (use-package rainbow-delimiters
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-(use-package tex-mode
-  :ensure auctex
-  :config
-  (setq TeX-auto-save t)
-  (setq TeX-parse-self t)
-  (setq-default TeX-master nil)
-  (setq-default TeX-PDF-mode t)
-  (setq-default TeX-engine 'luatex)
-  (setq TeX-view-program-selection
-		'((output-pdf "Okular")))
-  (setq bibtex-dialect 'biblatex)
-  )
-
+;; (use-package tex-mode
+;;   :ensure auctex
+;;   :config
+;;   (setq TeX-auto-save t)
+;;   (setq TeX-parse-self t)
+;;   (setq-default TeX-master nil)
+;;   (setq-default TeX-PDF-mode t)
+;;   (setq-default TeX-engine 'luatex)
+;;   (setq TeX-view-program-selection
+;; 		'((output-pdf "Okular")))
+;;   (setq bibtex-dialect ')
+;;   )
