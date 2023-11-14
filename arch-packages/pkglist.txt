@@ -9,7 +9,6 @@ arandr
 arduino-cli
 ark
 audacity
-audiocd-kio
 autoconf
 automake
 base
