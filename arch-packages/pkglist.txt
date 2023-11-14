@@ -78,6 +78,7 @@ inetutils
 inkscape
 iperf3
 itinerary
+java17-openjfx
 jdk11-openjdk
 jq
 jre17-openjdk
