@@ -12,6 +12,21 @@
   ad-do-it)
 ;; Make the mouse a bit better on the terminal
 (add-hook 'tty-setup-hook (lambda () (xterm-mouse-mode)))
+
+;; Turn off the touchpad when Emacs is in 
+(defun turn-off-mouse (&optional frame)
+  (interactive)
+  (shell-command "xinput --disable \"MSFT0001:00 06CB:CE2D Touchpad\""))
+
+(defun turn-on-mouse (&optional frame)
+  (interactive)
+  (shell-command "xinput --enable \"MSFT0001:00 06CB:CE2D Touchpad\""))
+
+(add-hook 'focus-in-hook #'turn-off-mouse)
+(add-hook 'focus-out-hook #'turn-on-mouse)
+(add-hook 'delete-frame-functions #'turn-on-mouse)
+
+MSFT0001:00 06CB:CE2D Touchpad
 (define-coding-system-alias 'UTF-8 'utf-8)
 ;; Make the alias a bit shorter
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -151,8 +166,8 @@ With argument ARG, do this that many times."
 (global-unset-key (kbd "M-l"))
 (global-set-key (kbd "M-k") 'previous-buffer)
 (global-set-key (kbd "M-l") 'next-buffer)
-(global-set-key (kbd "C-M-,") 'beginning-of-buffer) ; Move to the beginning of the buffer
-(global-set-key (kbd "C-M-.") 'end-of-buffer) ; Move to the end of the buffer
+(global-set-key (kbd "M-,") 'beginning-of-buffer) ; Move to the beginning of the buffer
+(global-set-key (kbd "M-.") 'end-of-buffer) ; Move to the end of the buffer
 (global-set-key (kbd "<C-return>") (lambda ()
 		  (interactive)
                   (end-of-line)
