@@ -26,7 +26,6 @@
 (add-hook 'focus-out-hook #'turn-on-mouse)
 (add-hook 'delete-frame-functions #'turn-on-mouse)
 
-MSFT0001:00 06CB:CE2D Touchpad
 (define-coding-system-alias 'UTF-8 'utf-8)
 ;; Make the alias a bit shorter
 (defalias 'yes-or-no-p 'y-or-n-p)
