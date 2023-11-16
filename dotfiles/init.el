@@ -98,6 +98,11 @@
 
 
 ;; Global shortcuts
+(defun revert-buffer-no-confirm ()
+    "Revert buffer without confirmation."
+    (interactive)
+    (revert-buffer :ignore-auto :noconfirm))
+
 (defun shift-text (distance)
   (if (use-region-p)
       (let ((mark (mark)))
