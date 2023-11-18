@@ -36,6 +36,7 @@
 (setq x-select-enable-clipboard t)
 (add-to-list 'exec-path "/usr/bin/vendor_perl/") ; Add this to the emacs path for biber
 ;;(add-to-list 'default-frame-alist '(fullscreen . maximized))
+(add-to-list 'warning-suppress-types '(undo discard-info)) ; Supress unnecessary warnings
 
 ;; Add recentf mode and a shortcut to open recent files
 (require 'recentf)
