@@ -1,4 +1,3 @@
-android-studio
 arduino-ide-bin
 aseprite
 autotiling
