@@ -77,7 +77,7 @@ alias wiki='ddgr -j \!w'
 alias yay='yay --nocleanmenu --nodiffmenu'
 alias yeet='sudo pacman -Rns'
 alias mm='micromamba'
-alias weather='curl --max-time 1.2 "wttr.in/?1Fq&lang=en" 2> /dev/null'
+alias weather='curl --max-time 5 "wttr.in/Athens,%20Greece?1Fq&lang=en" 2> /dev/null'
 
 # ls shortcuts
 alias ll='la -l'
