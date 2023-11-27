@@ -313,6 +313,7 @@ virtualbox
 volumeicon
 which
 wine
+wine-mono
 wireless_tools
 wireshark-qt
 wmctrl
