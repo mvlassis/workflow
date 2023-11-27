@@ -186,5 +186,6 @@ unset __mamba_setup
 # ping -q -W 1 -c 1 google.com &>/dev/null && curl "wttr.in/?1nFq&lang=en"
 curl --max-time 1.3 "wttr.in/Athens,%20Greece?1nFq&lang=en" 2> /dev/null
 
-[[ ${BLE_VERSION-} ]] && ble-attach
 eval "$(zoxide init bash)"
+[[ ${BLE_VERSION-} ]] && ble-attach
+
