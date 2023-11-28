@@ -189,6 +189,7 @@ With argument ARG, do this that many times."
 (global-set-key (kbd "M-p") (lambda () (interactive) (previous-line 5)))
 
 
+
 ;; Use 'package for package management
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
@@ -326,6 +327,11 @@ With argument ARG, do this that many times."
   :config
   (xclip-mode 1) ; Enables easy copy/pasting in the terminal
 )
+
+(use-package snap-indent
+  :hook (prog-mode . snap-indent-mode)
+  :custom ((snap-indent-format 'untabify)
+           (snap-indent-on-save t)))
 
 ;; Shows colors of hex codes
 (use-package rainbow-mode
