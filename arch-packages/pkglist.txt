@@ -219,6 +219,7 @@ pasystray
 patch
 pavucontrol
 pdfarranger
+perf
 picom
 pim-data-exporter
 pim-sieve-editor
