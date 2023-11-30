@@ -328,10 +328,10 @@ With argument ARG, do this that many times."
   (xclip-mode 1) ; Enables easy copy/pasting in the terminal
 )
 
-(use-package snap-indent
-  :hook (prog-mode . snap-indent-mode)
-  :custom ((snap-indent-format 'untabify)
-           (snap-indent-on-save t)))
+;; (use-package snap-indent
+;;   :hook (prog-mode . snap-indent-mode)
+;;   :custom ((snap-indent-format 'untabify)
+;;            (snap-indent-on-save t)))
 
 ;; Shows colors of hex codes
 (use-package rainbow-mode
