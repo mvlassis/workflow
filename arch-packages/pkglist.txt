@@ -163,7 +163,9 @@ kwayland-integration
 kwin
 kwrited
 layer-shell-qt
+lib32-libpulse
 lib32-nvidia-utils
+lib32-openal
 libgnome-keyring
 libkscreen
 libksysguard
