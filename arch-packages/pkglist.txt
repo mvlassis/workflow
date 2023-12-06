@@ -115,7 +115,7 @@ kdf
 kdialog
 keditbookmarks
 kfind
-kgamma5
+kgamma
 kget
 kgpg
 khelpcenter
