@@ -79,6 +79,7 @@
 (global-display-line-numbers-mode 1) ; Enable line numbers
 ; Dont shift the line numbers mode when moving after line 100 (or 1000)
 (setq display-line-numbers-width-start t)
+(setq display-line-numbers-grow-only t)
 ;; Disable the default minor modes for beginners
 ;; (menu-bar-mode -1)
 ;; (tool-bar-mode -1)
