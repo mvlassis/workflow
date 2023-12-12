@@ -213,6 +213,7 @@ With argument ARG, do this that many times."
   (setq vterm-max-scrollback 10000)
   :hook(vterm-mode . (lambda () (display-line-numbers-mode 0))))     
 (use-package ein) ; Jupyter notebook in Emacs
+(use-package evil)
 
 ;; Themes
 (use-package zenburn-theme)
