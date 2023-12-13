@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+pulseaudio-ctl up
+
+volume="$(pulseaudio-ctl | grep "Volume level" | awk -F: '{print $2}' | tr -d '[:space:]' | sed 's/%//' | sed 's/[^0-9]*//g')"
+volume="${volume:6:-2}" # Remove color codes
+
+dunstify -a "Volume" -h int:value:"$volume" -h string:x-dunst-stack-tag:volume -t 1000 \
+		 "Volume: ${volume}%"

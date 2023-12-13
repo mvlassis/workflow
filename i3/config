@@ -38,10 +38,10 @@ exec --no-startup-id nm-applet
 set $refresh_i3status killall -SIGUSR1 i3status
 
 # Use pulseaudio instead of pactl, it has an upper limit
-bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up
-bindsym XF86AudioLowerVolume exec --no-startup-id pulseaudio-ctl down
+bindsym XF86AudioRaiseVolume exec --no-startup-id "${HOME}/.bin/volumeup-notify"
+bindsym XF86AudioLowerVolume exec --no-startup-id "${HOME}/.bin/volumedown-notify"
 bindsym XF86AudioMute exec --no-startup-id pulseaudio-ctl mute
-bindsym XF86AudioMicMute exec --no-startup-id pulseaudio-ctl mute-input
+bindsym XF86AudioMicMute exec --no-startup-id "${HOME}/.bin/mute-unmute-notify"
 
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
