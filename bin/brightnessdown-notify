@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+brightness=$(brightnessctl -m set 5%- | grep -oP '[0-9]+(?=%)')
+
+dunstify -a "Brightness" -h int:value:"${brightness}" \
+		 -h string:x-dunst-stack-tag:brightness -t 1000 \
+		 "Brightness: ${brightness}%"

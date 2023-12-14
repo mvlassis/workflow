@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Toggles mute and sends a notification to dunst
+
 pulseaudio-ctl mute
 
 if pulseaudio-ctl | grep "Is sink muted" | grep -q "yes"; then

@@ -156,7 +156,6 @@ ksystemstats
 kteatime
 ktimer
 ktorrent
-kubectl
 kwallet-pam
 kwalletmanager
 kwave

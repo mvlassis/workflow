@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Raises volume and sends a notification to dunst
+
 pulseaudio-ctl up
 
 volume="$(pulseaudio-ctl | grep "Volume level" | awk -F: '{print $2}' | tr -d '[:space:]' | sed 's/%//' | sed 's/[^0-9]*//g')"
