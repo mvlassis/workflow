@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+pulseaudio-ctl mute
+
+if pulseaudio-ctl | grep "Is sink muted" | grep -q "yes"; then
+	dunstify -a "Volume" -h string:x-dunst-stack-tag:mute -t 1000 \
+			 "󰖁 Audio Muted"
+else
+	dunstify -a "Volume" -h string:x-dunst-stack-tag:mute -t 1000 \
+			 " Audio Unmuted"
+fi

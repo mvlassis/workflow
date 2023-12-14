@@ -36,6 +36,13 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	ln -sv "${BASEDIR}/dotfiles/blerc2" ~/.blerc2
 fi
 
+# Dunst configuration file
+read -p "Do you want to symlink dunstrc? This may delete your existing dunstrc file [y/n]: " -n 1 -r; echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+	rm "${HOME}/.config/dunstrc"
+	ln -sv "${BASEDIR}/dotfiles/dunstrc" "${HOME}/.config/dunstrc"
+fi
+
 # Kitty configuration file
 read -p "Do you want to symlink kitty.conf? This may delete your existing kitty.conf file [y/n]: " -n 1 -r; echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
