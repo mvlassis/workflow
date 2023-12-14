@@ -370,15 +370,15 @@ With argument ARG, do this that many times."
 (use-package rainbow-delimiters
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-;; (use-package tex-mode
-;;   :ensure auctex
-;;   :config
-;;   (setq TeX-auto-save t)
-;;   (setq TeX-parse-self t)
-;;   (setq-default TeX-master nil)
-;;   (setq-default TeX-PDF-mode t)
-;;   (setq-default TeX-engine 'luatex)
-;;   (setq TeX-view-program-selection
-;; 		'((output-pdf "Okular")))
-;;   (setq bibtex-dialect ')
-;;   )
+
+(use-package tex-mode
+  :ensure auctex
+  :config
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil)
+  (setq-default TeX-PDF-mode t)
+  (setq-default TeX-engine 'luatex)
+  (setq TeX-view-program-selection
+		'((output-pdf "Okular")))
+)
