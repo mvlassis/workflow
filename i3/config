@@ -259,3 +259,4 @@ mode "$system_mode" {
 
 bindsym $mod+End mode "$system_mode"
 bindsym F12 mode "$system_mode"
+bindsym XF86Calculator mode "$system_mode"
