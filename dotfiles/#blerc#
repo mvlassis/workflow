@@ -1,0 +1,13 @@
+XC# bleopt complete_auto_complete=
+
+# Don't redraw the new prompt every time after resizing
+bleopt canvas_winch_action=redraw-prev
+bleopt exec_errexit_mark=
+# bleopt complete_auto_delay=300
+
+ble-bind -m 'emacs' -f 'M-DEL' 'kill-backward-cword'
+
+ble-face filename_directory='fg=blue,underline'
+ble-face command_function='fg=purple'
+
+
