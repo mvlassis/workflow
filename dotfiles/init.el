@@ -45,7 +45,7 @@
 
 ;; Customization
 ;; Set custom font and font size if it exists in the system
-(when (member "Fira Mono:style=Regular" (font-family-list))
+(if (member "Fira Mono" (font-family-list))
   (set-face-attribute 'default nil :font "Fira Mono:style=Regular" :height 130))
 
 (setq inhibit-startup-message t) ; Disable the startup screen when opening Emacs
