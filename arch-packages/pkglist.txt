@@ -18,6 +18,7 @@ bc
 biber
 bind
 bison
+blisp
 bluedevil
 blueman
 breeze
