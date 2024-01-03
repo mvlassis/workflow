@@ -13,18 +13,18 @@
 ;; Make the mouse a bit better on the terminal
 (add-hook 'tty-setup-hook (lambda () (xterm-mouse-mode)))
 
-;; Turn off the touchpad when Emacs is in 
-(defun turn-off-mouse (&optional frame)
-  (interactive)
-  (shell-command "xinput --disable \"MSFT0001:00 06CB:CE2D Touchpad\""))
+;; ;; Turn off the touchpad when Emacs is in 
+;; (defun turn-off-mouse (&optional frame)
+;;   (interactive)
+;;   (shell-command "xinput --disable \"MSFT0001:00 06CB:CE2D Touchpad\""))
 
-(defun turn-on-mouse (&optional frame)
-  (interactive)
-  (shell-command "xinput --enable \"MSFT0001:00 06CB:CE2D Touchpad\""))
+;; (defun turn-on-mouse (&optional frame)
+;;   (interactive)
+;;   (shell-command "xinput --enable \"MSFT0001:00 06CB:CE2D Touchpad\""))
 
-(add-hook 'focus-in-hook #'turn-off-mouse)
-(add-hook 'focus-out-hook #'turn-on-mouse)
-(add-hook 'delete-frame-functions #'turn-on-mouse)
+;; (add-hook 'focus-in-hook #'turn-off-mouse)
+;; (add-hook 'focus-out-hook #'turn-on-mouse)
+;; (add-hook 'delete-frame-functions #'turn-on-mouse)
 
 (define-coding-system-alias 'UTF-8 'utf-8)
 ;; Make the alias a bit shorter
@@ -45,8 +45,10 @@
 
 ;; Customization
 ;; Set custom font and font size if it exists in the system
-(if (member "Fira Mono" (font-family-list))
-  (set-face-attribute 'default nil :font "Fira Mono:style=Regular" :height 130))
+(when (member "Fira Mono" (font-family-list))
+  (add-to-list 'default-frame-alist
+             '(font . "Fira Mono-16")))
+  ; (set-face-attribute 'default nil :font "Fira Mono:style=Regular" :height 130)
 
 (setq inhibit-startup-message t) ; Disable the startup screen when opening Emacs
 (setq column-number-mode t) ; Display the current column of the cursor
