@@ -176,6 +176,11 @@ else
     alias micromamba="$MAMBA_EXE"  # Fallback on help from mamba activate
 fi
 unset __mamba_setup
+
+if which micromamba >/dev/null; then
+    micromamba activate base
+fi
+
 # <<< mamba initialize <<<
 
 # if command -v fastfetch > /dev/null 2>&1; then
