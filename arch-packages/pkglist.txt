@@ -62,7 +62,6 @@ fmt
 gimp
 git
 github-cli
-gn
 gnome-keyring
 gnu-netcat
 gparted
