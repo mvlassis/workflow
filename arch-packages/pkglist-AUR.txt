@@ -1,6 +1,5 @@
 arduino-ide-bin
 aseprite
-autotiling
 blesh-git
 brightness-controller-git
 burpsuite
@@ -25,7 +24,6 @@ otf-gfs
 palera1n
 pulseaudio-ctl
 realvnc-vnc-viewer
-rpi-imager
 scc
 skypeforlinux-stable-bin
 slippi-launcher

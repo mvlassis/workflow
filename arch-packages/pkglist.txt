@@ -262,6 +262,7 @@ redis
 reflector
 rmlint
 rofi
+rpi-imager
 rust-analyzer
 rustup
 scrot
