@@ -33,6 +33,7 @@ tdrop
 teams
 teamviewer
 unetbootin
+viber
 visual-studio-code-bin
 woeusb
 x2goclient
