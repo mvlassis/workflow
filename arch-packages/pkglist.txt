@@ -260,6 +260,7 @@ qt5-imageformats
 ranger
 redis
 reflector
+rgbds
 rmlint
 rofi
 rpi-imager
