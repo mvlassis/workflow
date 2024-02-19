@@ -64,6 +64,7 @@ git
 github-cli
 gnome-keyring
 gnu-netcat
+godot
 gparted
 grantlee-editor
 graphviz
