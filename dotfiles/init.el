@@ -387,7 +387,7 @@ With argument ARG, do this that many times."
   :config
   (reverse-im-mode t))
 
-(use-package esup)
+;; (use-package esup)
 (use-package restart-emacs)
 
 (use-package dap-mode
