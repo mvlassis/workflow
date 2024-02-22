@@ -1,7 +1,5 @@
 ;; init.el
 
-(setq esup-child-profile-require-level 0)
-
 ;; Use "custom.el" to save internal configuration done by Emacs
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file)
@@ -304,7 +302,9 @@ With argument ARG, do this that many times."
   :mode (("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
 )
-(use-package rust-mode)
+(use-package rust-mode
+  :defer t
+)
 (use-package math-preview)
 (use-package flycheck)
 (use-package lsp-mode
@@ -354,7 +354,9 @@ With argument ARG, do this that many times."
 		company-idle-delay 1) ;; Delay to display suggestions
 
   )
-(use-package yaml)
+(use-package yaml
+  :defer t
+)
 (use-package yaml-mode
   :config
      (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
@@ -385,9 +387,7 @@ With argument ARG, do this that many times."
   :config
   (reverse-im-mode t))
 
-(use-package esup ; Startup profiler
-  :config
-)
+(use-package esup)
 (use-package restart-emacs)
 
 (use-package dap-mode
@@ -431,7 +431,9 @@ With argument ARG, do this that many times."
   :defer t
   :hook (prog-mode . yas-minor-mode))
 
-(use-package treemacs)
+(use-package treemacs
+  :defer t
+)
 (use-package ace-window)
 (use-package pfuture)
 (use-package hydra)
