@@ -105,8 +105,6 @@
 (electric-pair-mode)
 (global-auto-revert-mode 1)
 (setq global-auto-revert-non-file-buffers t)
-;; (yas-reload-all) 
-;; (add-hook 'prog-mode-hook #'yas-minor-mode) ; For function templates
 ;; (recentf-mode 1)
 ;; (save-place-mode 1)
 
@@ -387,9 +385,14 @@ With argument ARG, do this that many times."
 
 (use-package rustic
   :ensure t
-  :config
-  (require 'lsp-rust)
-  (setq lsp-rust-analyzer-completion-add-call-parenthesis nil))
+  :defer t
+  ;; :config
+  ;; (require 'lsp-rust)
+  ;; (setq lsp-rust-analyzer-completion-add-call-parenthesis nil)
+  :hook (rustic-mode . (lambda ()
+                         (require 'lsp-rust)
+                         (setq lsp-rust-analyzer-completion-add-call-parenthesis nil)))
+)
 
 (use-package rainbow-delimiters
   :config
@@ -406,6 +409,11 @@ With argument ARG, do this that many times."
   (setq TeX-view-program-selection
 		'((output-pdf "Okular")))
 )
+
+(use-package yasnippet
+  :ensure t
+  :defer t
+  :hook (prog-mode . yas-minor-mode))
 
 (use-package treemacs)
 (use-package ace-window)
