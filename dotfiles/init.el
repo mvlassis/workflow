@@ -301,6 +301,8 @@ With argument ARG, do this that many times."
 (use-package bind-key)
 (use-package markdown-mode
   :defer t
+  :mode (("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
 )
 (use-package rust-mode)
 (use-package math-preview)
