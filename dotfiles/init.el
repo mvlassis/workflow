@@ -1,8 +1,16 @@
 ;; init.el
 
+(setq esup-child-profile-require-level 0)
+
 ;; Use "custom.el" to save internal configuration done by Emacs
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file)
+
+;; Theme to load
+(load-theme 'dracula)
+
+(when (find-font (font-spec :name "Fira Mono"))
+  (set-face-attribute 'default nil :font "Fira Mono:style=Regular" :height 130))
 
 ;; Important configuration
 ;; Copy when right-clicking an active region
@@ -10,6 +18,7 @@
   (when (region-active-p)
     (copy-region-as-kill (region-beginning) (region-end)))
   ad-do-it)
+
 ;; Make the mouse a bit better on the terminal
 (add-hook 'tty-setup-hook (lambda () (xterm-mouse-mode)))
 
@@ -45,16 +54,12 @@
 
 ;; Customization
 ;; Set custom font and font size if it exists in the system
+;; (defun set-font-if-exists (frame)
+;;   (select-frame frame)
+;;   (when (find-font (font-spec :name "Fira Mono"))
+;;     (set-face-attribute 'default nil :font "Fira Mono:style=Regular" :height 130)))
 
-(defun set-font-if-exists (frame)
-  (select-frame frame)
-  (when (find-font (font-spec :name "Fira Mono"))
-    (set-face-attribute 'default nil :font "Fira Mono:style=Regular" :height 130)))
-
-(add-hook 'after-make-frame-functions 'set-font-if-exists)
-
-;; (when (find-font (font-spec :name "Fira Mono"))
-;;   (set-face-attribute 'default nil :font "Fira Mono:style=Regular" :height 130))
+;; (add-hook 'after-make-frame-functions 'set-font-if-exists)
 
 (setq inhibit-startup-message t) ; Disable the startup screen when opening Emacs
 (setq column-number-mode t) ; Display the current column of the cursor
@@ -210,8 +215,18 @@ With argument ARG, do this that many times."
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+(use-package benchmark-init
+  :ensure t
+  :config
+  ;; To disable collection of benchmark data after init is done.
+  (add-hook 'after-init-hook 'benchmark-init/deactivate))
+
 ;; Packages to load and configurations
-(use-package arduino-mode)
+(use-package arduino-mode
+  :ensure t
+  :mode ("\\.ino\\'" . arduino-mode)
+)
+
 (use-package ini-mode ;; mode for .ini files
   :config
   (add-to-list 'auto-mode-alist '("\\.ini\\'" . ini-mode)))
@@ -230,8 +245,6 @@ With argument ARG, do this that many times."
 (use-package monokai-theme)
 (use-package material-theme)
 (use-package gruvbox-theme)
-;; Theme to load
-(load-theme 'gruvbox-dark-hard)
 
 (use-package doom-modeline
   :config
@@ -328,7 +341,8 @@ With argument ARG, do this that many times."
   (setq company-minimum-prefix-length 5
 		company-idle-delay 1) ;; Delay to display suggestions
 
-)
+  )
+(use-package yaml)
 (use-package yaml-mode
   :config
      (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
@@ -359,10 +373,12 @@ With argument ARG, do this that many times."
   :config
   (reverse-im-mode t))
 
-(use-package esup)
+(use-package esup ; Startup profiler
+  :config
+)
 (use-package restart-emacs)
 
-;; (use-package dap-mode)
+(use-package dap-mode)
 
 ;; (use-package elpy
 ;;   :ensure t
@@ -390,3 +406,18 @@ With argument ARG, do this that many times."
   (setq TeX-view-program-selection
 		'((output-pdf "Okular")))
 )
+
+(use-package treemacs)
+(use-package ace-window)
+(use-package pfuture)
+(use-package hydra)
+(use-package cfrs)
+
+(defun efs/display-startup-time ()
+  (message "Emacs loaded in %s with %d garbage collections."
+           (format "%.2f seconds"
+                   (float-time
+                   (time-subtract after-init-time before-init-time)))
+           gcs-done))
+
+(add-hook 'emacs-startup-hook #'efs/display-startup-time)
