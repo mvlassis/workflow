@@ -234,15 +234,25 @@ With argument ARG, do this that many times."
   (setq vterm-max-scrollback 10000)
   :hook(vterm-mode . (lambda () (display-line-numbers-mode 0))))     
 (use-package ein) ; Jupyter notebook in Emacs
-(use-package evil)
+(use-package evil
+  :defer t
+)
 
 ;; Themes
-(use-package zenburn-theme)
+(use-package zenburn-theme
+  :defer t
+)
 (use-package dracula-theme)
-(use-package kaolin-themes)
-(use-package monokai-theme)
+(use-package kaolin-themes
+  :defer t
+)
+(use-package monokai-theme
+  :defer t
+)
 (use-package material-theme)
-(use-package gruvbox-theme)
+(use-package gruvbox-theme
+  :defer t
+)
 
 (use-package doom-modeline
   :config
@@ -289,7 +299,9 @@ With argument ARG, do this that many times."
      )))
 
 (use-package bind-key)
-(use-package markdown-mode)
+(use-package markdown-mode
+  :defer t
+)
 (use-package rust-mode)
 (use-package math-preview)
 (use-package flycheck)
@@ -376,7 +388,9 @@ With argument ARG, do this that many times."
 )
 (use-package restart-emacs)
 
-(use-package dap-mode)
+(use-package dap-mode
+  :defer t
+)
 
 ;; (use-package elpy
 ;;   :ensure t
