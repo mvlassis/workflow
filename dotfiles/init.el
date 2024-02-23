@@ -4,6 +4,8 @@
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file)
 
+(setq use-package-compute-statistics t)
+
 ;; Theme to load
 (load-theme 'dracula)
 
@@ -33,6 +35,8 @@
 ;; (add-hook 'focus-out-hook #'turn-on-mouse)
 ;; (add-hook 'delete-frame-functions #'turn-on-mouse)
 
+(setq gc-cons-threshold (* 50 1000 1000)) ; Force less garbage collections to improve startup time
+
 (define-coding-system-alias 'UTF-8 'utf-8)
 ;; Make the alias a bit shorter
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -45,6 +49,13 @@
 ;;(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; Add recentf mode and a shortcut to open recent files
+(defun my-recentf-cleanup-silently ()
+  (let ((inhibit-message t))
+    (recentf-cleanup)))
+
+;; Replace the default recentf cleanup with the silent version
+(setq recentf-auto-cleanup 'my-recentf-cleanup-silently)
+
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
@@ -309,20 +320,21 @@ With argument ARG, do this that many times."
 (use-package math-preview)
 (use-package flycheck)
 (use-package lsp-mode
+  :commands (lsp lsp-deferred)
   :config
   (define-key lsp-mode-map (kbd "M-l") lsp-command-map)
   (with-eval-after-load 'lsp-mode
 	(unbind-key "M-n" lsp-mode-map))
   (setq lsp-signature-render-documentation nil))
 (use-package lsp-ui
+  :defer t
+  :hook (lsp-mode . lsp-ui-mode)
   :config
   (setq lsp-ui-doc-delay 2)
-  (setq lsp-ui-doc-position "At point")
-  )
-;; (use-package lsp-java
-;;   :config
-;;   (add-hook 'java-mode-hook 'lsp))
+  (setq lsp-ui-doc-position "At point"))
+
 (use-package lsp-pyright
+  :defer t
   :ensure t
   :hook (python-mode . (lambda ()
 						 (setq tab-width 4)
@@ -355,29 +367,28 @@ With argument ARG, do this that many times."
 		company-idle-delay 1) ;; Delay to display suggestions
 
   )
+
 (use-package yaml
   :defer t
 )
 (use-package yaml-mode
   :config
-     (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-	 )
+  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+)
 (use-package xclip
   :config
   (xclip-mode 1) ; Enables easy copy/pasting in the terminal
 )
 
-;; (use-package snap-indent
-;;   :hook (prog-mode . snap-indent-mode)
-;;   :custom ((snap-indent-format 'untabify)
-;;            (snap-indent-on-save t)))
-
 ;; Shows colors of hex codes
 (use-package rainbow-mode
-  :config
-  (define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
-	(lambda () (rainbow-mode 1)))
-  (my-global-rainbow-mode 1))
+  ;; :config
+  ;; (define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
+  ;; 	(lambda () (rainbow-mode 1)))
+  ;; (my-global-rainbow-mode 1)
+  :hook (prog-mode . rainbow-mode))
+
+
   ;; (add-hook 'find-file-hook (lambda () rainbow-mode 1)))
 
 ;; Mode to make all shortcuts work on greek layout
@@ -397,17 +408,9 @@ With argument ARG, do this that many times."
   :defer t
 )
 
-;; (use-package elpy
-;;   :ensure t
-;;   :init
-;;   (elpy-enable))
-
 (use-package rustic
   :ensure t
   :defer t
-  ;; :config
-  ;; (require 'lsp-rust)
-  ;; (setq lsp-rust-analyzer-completion-add-call-parenthesis nil)
   :hook (rustic-mode . (lambda ()
                          (require 'lsp-rust)
                          (setq lsp-rust-analyzer-completion-add-call-parenthesis nil)))
@@ -417,8 +420,8 @@ With argument ARG, do this that many times."
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
-(use-package tex-mode
-  :ensure auctex
+(use-package auctex
+  :ensure t
   :config
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
@@ -427,20 +430,17 @@ With argument ARG, do this that many times."
   (setq-default TeX-engine 'luatex)
   (setq TeX-view-program-selection
 		'((output-pdf "Okular")))
-)
+  :hook (tex-mode . LaTeX-mode)
+  )
 
-(use-package yasnippet
-  :ensure t
-  :defer t
-  :hook (prog-mode . yas-minor-mode))
+;; (use-package yasnippet
+;;   :defer t
+;;   :hook (prog-mode . yas-minor-mode)
+;; )
 
 (use-package treemacs
   :defer t
 )
-(use-package ace-window)
-(use-package pfuture)
-(use-package hydra)
-(use-package cfrs)
 
 (defun efs/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
@@ -450,3 +450,16 @@ With argument ARG, do this that many times."
            gcs-done))
 
 (add-hook 'emacs-startup-hook #'efs/display-startup-time)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("603a831e0f2e466480cdc633ba37a0b1ae3c3e9a4e90183833bc4def3421a961" default)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
