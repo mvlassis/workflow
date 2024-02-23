@@ -103,8 +103,6 @@
 (electric-pair-mode)
 (global-auto-revert-mode 1)
 (setq global-auto-revert-non-file-buffers t)
-;; (recentf-mode 1)
-;; (save-place-mode 1)
 
 
 ;; Global shortcuts
@@ -226,6 +224,7 @@ With argument ARG, do this that many times."
 (use-package ini-mode ;; mode for .ini files
   :config
   (add-to-list 'auto-mode-alist '("\\.ini\\'" . ini-mode)))
+
 (use-package vterm
   :bind (:map vterm-mode-map ("C-y" . vterm-yank))
   :config
@@ -247,7 +246,9 @@ With argument ARG, do this that many times."
 (use-package monokai-theme
   :defer t
 )
-(use-package material-theme)
+(use-package material-theme
+  :defer t
+)
 (use-package gruvbox-theme
   :defer t
 )
@@ -388,7 +389,9 @@ With argument ARG, do this that many times."
   (reverse-im-mode t))
 
 ;; (use-package esup)
-(use-package restart-emacs)
+(use-package restart-emacs
+  :defer t
+)
 
 (use-package dap-mode
   :defer t
