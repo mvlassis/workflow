@@ -4,7 +4,8 @@
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file)
 
-(setq use-package-compute-statistics t)
+;; Increase threshold of garbage collectiosn to improve startup time
+(setq gc-cons-threshold (* 50 1000 1000))
 
 ;; Theme to load
 (load-theme 'dracula)
@@ -34,8 +35,6 @@
 ;; (add-hook 'focus-in-hook #'turn-off-mouse)
 ;; (add-hook 'focus-out-hook #'turn-on-mouse)
 ;; (add-hook 'delete-frame-functions #'turn-on-mouse)
-
-(setq gc-cons-threshold (* 50 1000 1000)) ; Force less garbage collections to improve startup time
 
 (define-coding-system-alias 'UTF-8 'utf-8)
 ;; Make the alias a bit shorter
@@ -220,11 +219,11 @@ With argument ARG, do this that many times."
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(use-package benchmark-init
-  :ensure t
-  :config
-  ;; To disable collection of benchmark data after init is done.
-  (add-hook 'after-init-hook 'benchmark-init/deactivate))
+;; (use-package benchmark-init
+;;   :ensure t
+;;   :config
+;;   ;; To disable collection of benchmark data after init is done.
+;;   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
 ;; Packages to load and configurations
 (use-package arduino-mode
@@ -442,6 +441,7 @@ With argument ARG, do this that many times."
   :defer t
 )
 
+
 (defun efs/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
            (format "%.2f seconds"
@@ -449,17 +449,6 @@ With argument ARG, do this that many times."
                    (time-subtract after-init-time before-init-time)))
            gcs-done))
 
-(add-hook 'emacs-startup-hook #'efs/display-startup-time)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("603a831e0f2e466480cdc633ba37a0b1ae3c3e9a4e90183833bc4def3421a961" default)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; (add-hook 'emacs-startup-hook #'efs/display-startup-time)
+
+
