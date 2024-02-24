@@ -290,6 +290,10 @@ With argument ARG, do this that many times."
   :init
   (vertico-mode))
 
+(use-package consult
+  :ensure t
+  :after vertico)
+
 (use-package marginalia
   :after vertico
   :ensure t
@@ -448,7 +452,9 @@ With argument ARG, do this that many times."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940" "78e6be576f4a526d212d5f9a8798e5706990216e9be10174e3f3b015b8662e27" default)))
+   '("90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940" "78e6be576f4a526d212d5f9a8798e5706990216e9be10174e3f3b015b8662e27" default))
+ '(package-selected-packages
+   '(consult zenburn-theme yaml-mode xclip which-key vterm vertico use-package sudo-edit snap-indent rustic reverse-im restart-emacs rainbow-mode rainbow-delimiters quelpa monokai-theme math-preview material-theme marginalia lsp-ui lsp-pyright keycast kaolin-themes ini-mode helm gruvbox-theme flycheck evil esup elpy ein eat dracula-theme doom-themes doom-modeline dap-mode cyberpunk-theme clipetty benchmark-init auto-package-update auctex arduino-mode anzu all-the-icons)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
