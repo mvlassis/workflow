@@ -1,14 +1,15 @@
 ;; init.el
 
 ;; Use "custom.el" to save internal configuration done by Emacs
-(setq custom-file (locate-user-emacs-file "custom.el"))
-(load custom-file)
+;; (setq custom-file (concat user-emacs-directory "custom.el"))
+;; (when (file-exists-p custom-file)
+;;   (load custom-file))
 
 ;; Increase threshold of garbage collectiosn to improve startup time
 (setq gc-cons-threshold (* 50 1000 1000))
 
 ;; Theme to load
-(load-theme 'dracula)
+(load-theme 'dracula t)
 
 (when (find-font (font-spec :name "Fira Mono"))
   (set-face-attribute 'default nil :font "Fira Mono:style=Regular" :height 130))
@@ -232,10 +233,10 @@ With argument ARG, do this that many times."
 )
 
 (use-package ini-mode ;; mode for .ini files
-  :config
-  (add-to-list 'auto-mode-alist '("\\.ini\\'" . ini-mode)))
+  :mode ("\\.ini\\'" . ini-mode))
 
 (use-package vterm
+  :defer t
   :bind (:map vterm-mode-map ("C-y" . vterm-yank))
   :config
   (setq vterm-max-scrollback 10000)
@@ -277,7 +278,6 @@ With argument ARG, do this that many times."
   :init (doom-modeline-mode 1))
 
 (use-package all-the-icons)
-
 
 (use-package vertico
   :ensure t
@@ -369,6 +369,7 @@ With argument ARG, do this that many times."
 )
 
 (use-package flyspell
+  :defer t
   :config
   (setq ispell-dictionary "en_US,el_GR")
   (ispell-set-spellchecker-params)
@@ -388,9 +389,8 @@ With argument ARG, do this that many times."
   :defer t
 )
 (use-package yaml-mode
-  :config
-  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-)
+  :mode ("\\.yml\\'" . yaml-mode))
+
 (use-package xclip
   :config
   (xclip-mode 1) ; Enables easy copy/pasting in the terminal
@@ -398,14 +398,7 @@ With argument ARG, do this that many times."
 
 ;; Shows colors of hex codes
 (use-package rainbow-mode
-  ;; :config
-  ;; (define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
-  ;; 	(lambda () (rainbow-mode 1)))
-  ;; (my-global-rainbow-mode 1)
   :hook (prog-mode . rainbow-mode))
-
-
-  ;; (add-hook 'find-file-hook (lambda () rainbow-mode 1)))
 
 ;; Mode to make all shortcuts work on greek layout
 (use-package reverse-im
@@ -433,8 +426,9 @@ With argument ARG, do this that many times."
 )
 
 (use-package rainbow-delimiters
+  :ensure t
   :config
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package auctex
   :ensure t
@@ -454,11 +448,6 @@ With argument ARG, do this that many times."
 ;;   :hook (prog-mode . yas-minor-mode)
 ;; )
 
-(use-package treemacs
-  :defer t
-)
-
-
 (defun efs/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
            (format "%.2f seconds"
@@ -467,5 +456,24 @@ With argument ARG, do this that many times."
            gcs-done))
 
 (add-hook 'emacs-startup-hook #'efs/display-startup-time)
+
+(use-package treemacs
+  :defer t
+)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940" "78e6be576f4a526d212d5f9a8798e5706990216e9be10174e3f3b015b8662e27" default)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
 
 
