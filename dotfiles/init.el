@@ -340,7 +340,11 @@ With argument ARG, do this that many times."
                          (require 'lsp-pyright)
                          (lsp))))  ; or lsp-deferred
 
-(use-package auto-package-update)
+(use-package auto-package-update
+  :custom
+  (auto-package-update-interval 7)
+  :config
+  (auto-package-update-maybe))
 (use-package which-key
   :config
   (which-key-mode)
