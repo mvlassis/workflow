@@ -219,11 +219,11 @@ With argument ARG, do this that many times."
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-;; (use-package benchmark-init
-;;   :ensure t
-;;   :config
-;;   ;; To disable collection of benchmark data after init is done.
-;;   (add-hook 'after-init-hook 'benchmark-init/deactivate))
+(use-package benchmark-init
+  :ensure t
+  :config
+  ;; To disable collection of benchmark data after init is done.
+  (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
 ;; Packages to load and configurations
 (use-package arduino-mode
@@ -277,17 +277,26 @@ With argument ARG, do this that many times."
   :init (doom-modeline-mode 1))
 
 (use-package all-the-icons)
-(use-package helm-core)
-(use-package helm
-  :bind
-  ((:map helm-map 
-                ([tab] . helm-execute-if-single-persistent-action)
-                ))
+
+
+(use-package vertico
+  :ensure t
+  :custom
+  (vertico-cycle t)
   :config
-  (global-set-key (kbd "M-x") 'helm-M-x)
-  (global-set-key (kbd "C-x C-f") 'helm-find-files)
-  (global-set-key (kbd "C-x r b") 'helm-bookmarks)
-  )
+  (setq read-file-name-completion-ignore-case t
+      read-buffer-completion-ignore-case t
+      completion-ignore-case t)
+  :init
+  (vertico-mode))
+
+(use-package marginalia
+  :after vertico
+  :ensure t
+  :custom
+  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+  :init
+  (marginalia-mode))
 
 (defun double-flash-mode-line ()
  "Flash the modeline"
@@ -316,8 +325,12 @@ With argument ARG, do this that many times."
 (use-package rust-mode
   :defer t
 )
-(use-package math-preview)
-(use-package flycheck)
+(use-package math-preview
+  :defer t
+)
+(use-package flycheck
+  :defer t
+)
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :config
@@ -453,6 +466,6 @@ With argument ARG, do this that many times."
                    (time-subtract after-init-time before-init-time)))
            gcs-done))
 
-;; (add-hook 'emacs-startup-hook #'efs/display-startup-time)
+(add-hook 'emacs-startup-hook #'efs/display-startup-time)
 
 
