@@ -60,6 +60,7 @@
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
 (global-set-key  (kbd "C-x C-r") 'recentf-open-files)
+(savehist-mode 1)
 
 ;; Customization
 ;; Set custom font and font size if it exists in the system
@@ -292,7 +293,11 @@ With argument ARG, do this that many times."
 
 (use-package consult
   :ensure t
-  :after vertico)
+  :after vertico
+  :bind (
+		 ("C-x b" . consult-buffer)
+		 ))
+  
 
 (use-package marginalia
   :after vertico
@@ -301,6 +306,12 @@ With argument ARG, do this that many times."
   (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
   :init
   (marginalia-mode))
+
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
 
 (use-package bind-key)
 (use-package markdown-mode
