@@ -298,24 +298,6 @@ With argument ARG, do this that many times."
   :init
   (marginalia-mode))
 
-(defun double-flash-mode-line ()
- "Flash the modeline"
- (let ((flash-sec (/ 1.0 20)))
-   (invert-face 'mode-line)
-   (run-with-timer flash-sec nil #'invert-face 'mode-line)
-   (run-with-timer (* 2 flash-sec) nil #'invert-face 'mode-line)
-   (run-with-timer (* 3 flash-sec) nil #'invert-face 'mode-line)))
-
-(defun helm-execute-if-single-persistent-action (&optional attr split-onewindow)
- "Execute persistent action if the candidate list is less than 2"
- (interactive)
- (with-helm-alive-p
-   (if (> (helm-get-candidate-number) 2)
-	   ()
-       ;; (double-flash-mode-line)
-     (helm-execute-persistent-action)
-     )))
-
 (use-package bind-key)
 (use-package markdown-mode
   :defer t
@@ -430,8 +412,8 @@ With argument ARG, do this that many times."
   :config
   :hook (prog-mode . rainbow-delimiters-mode))
 
-(use-package auctex
-  :ensure t
+(use-package tex
+  :ensure auctex
   :config
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
@@ -440,8 +422,7 @@ With argument ARG, do this that many times."
   (setq-default TeX-engine 'luatex)
   (setq TeX-view-program-selection
 		'((output-pdf "Okular")))
-  :hook (tex-mode . LaTeX-mode)
-  )
+  :hook (tex-mode . LaTeX-mode))
 
 ;; (use-package yasnippet
 ;;   :defer t
