@@ -222,14 +222,12 @@ With argument ARG, do this that many times."
 (setq use-package-always-ensure t)
 
 (use-package benchmark-init
-  :ensure t
   :config
   ;; To disable collection of benchmark data after init is done.
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
 ;; Packages to load and configurations
 (use-package arduino-mode
-  :ensure t
   :mode ("\\.ino\\'" . arduino-mode)
 )
 
@@ -275,13 +273,11 @@ With argument ARG, do this that many times."
   (setq doom-modeline-indent-info nil)
   (setq doom-modeline-battery nil)
   (setq doom-modeline-buffer-modification-icon nil)
-  :ensure t
   :init (doom-modeline-mode 1))
 
 (use-package all-the-icons)
 
 (use-package vertico
-  :ensure t
   :custom
   (vertico-cycle t)
   :config
@@ -292,7 +288,6 @@ With argument ARG, do this that many times."
   (vertico-mode))
 
 (use-package consult
-  :ensure t
   :after vertico
   :bind (
 		 ("C-x b" . consult-buffer)
@@ -301,14 +296,12 @@ With argument ARG, do this that many times."
 
 (use-package marginalia
   :after vertico
-  :ensure t
   :custom
   (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
   :init
   (marginalia-mode))
 
 (use-package orderless
-  :ensure t
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
@@ -344,7 +337,6 @@ With argument ARG, do this that many times."
 
 (use-package lsp-pyright
   :defer t
-  :ensure t
   :hook (python-mode . (lambda ()
 						 (setq tab-width 4)
                          (require 'lsp-pyright)
@@ -399,7 +391,6 @@ With argument ARG, do this that many times."
 
 ;; Mode to make all shortcuts work on greek layout
 (use-package reverse-im
-  :ensure t
   :custom
   (reverse-im-input-methods '("greek"))
   :config
@@ -415,7 +406,6 @@ With argument ARG, do this that many times."
 )
 
 (use-package rustic
-  :ensure t
   :defer t
   :hook (rustic-mode . (lambda ()
                          (require 'lsp-rust)
@@ -423,7 +413,6 @@ With argument ARG, do this that many times."
 )
 
 (use-package rainbow-delimiters
-  :ensure t
   :config
   :hook (prog-mode . rainbow-delimiters-mode))
 
