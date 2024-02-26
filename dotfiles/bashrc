@@ -68,7 +68,7 @@ alias ....="cd ../../.."
 # Finds unused packages (orhans) and removes them
 alias clean='pacman -Qtdq | sudo pacman -Rns -'
 alias duck='ddgr -j'
-alias emacs='emacscliententry'
+# alias emacs='emacscliententry'
 alias te='emacsclient -t'
 alias restart-emacs='systemctl restart --user emacs.service'
 alias open='xdg-open'

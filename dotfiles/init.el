@@ -198,8 +198,6 @@ With argument ARG, do this that many times."
 
 (global-unset-key (kbd "C-S-v"))
 (global-unset-key (kbd "M-l"))
-(global-set-key (kbd "M-k") 'previous-buffer)
-(global-set-key (kbd "M-l") 'next-buffer)
 (global-set-key (kbd "M-,") 'beginning-of-buffer) ; Move to the beginning of the buffer
 (global-set-key (kbd "M-.") 'end-of-buffer) ; Move to the end of the buffer
 (global-set-key (kbd "<C-return>") (lambda ()
@@ -217,7 +215,6 @@ With argument ARG, do this that many times."
 (global-set-key (kbd "<C-backspace>") 'backward-delete-word)
 (global-set-key (kbd "M-n") (lambda () (interactive) (next-line 5)))
 (global-set-key (kbd "M-p") (lambda () (interactive) (previous-line 5)))
-
 
 
 ;; Use 'package for package management
@@ -249,10 +246,16 @@ With argument ARG, do this that many times."
   :bind (:map vterm-mode-map ("C-y" . vterm-yank))
   :config
   (setq vterm-max-scrollback 10000)
-  :hook(vterm-mode . (lambda () (display-line-numbers-mode 0))))     
+  :hook(vterm-mode . (lambda () (display-line-numbers-mode 0))))
+
 (use-package ein) ; Jupyter notebook in Emacs
+
 (use-package evil
-  :defer t
+  :config
+  (setq evil-default-state 'emacs)
+  :init
+  (setq evil-want-C-u-scroll t)
+  (evil-mode 1)
 )
 
 ;; Themes
@@ -280,6 +283,7 @@ With argument ARG, do this that many times."
 (use-package doom-modeline
   :config
   (setq doom-modeline-height 30)
+  (setq doom-modeline-icon (display-graphic-p))
   (setq doom-modeline-major-mode-color-icon t)
   (setq doom-modeline-env-version t)
   :init (doom-modeline-mode 1))
@@ -300,7 +304,7 @@ With argument ARG, do this that many times."
   :after vertico
   :bind (
 		 ("C-x b" . consult-buffer)
-		 )
+		 ("M-s l" . consult-line))
   :config
   (consult-customize consult-theme :preview-key '(:debounce 0.5 any)))
   
@@ -476,4 +480,4 @@ With argument ARG, do this that many times."
  )
 
 
-
+(message "Hello!")
