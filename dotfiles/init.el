@@ -9,7 +9,7 @@
 (setq gc-cons-threshold (* 50 1000 1000))
 
 ;; Theme to load
-(load-theme 'dracula t)
+(load-theme 'doom-vibrant t)
 
 (when (find-font (font-spec :name "Fira Mono"))
   (set-face-attribute 'default nil :font "Fira Mono:style=Regular" :height 130))
@@ -273,16 +273,14 @@ With argument ARG, do this that many times."
   :defer t
 )
 
+(use-package doom-themes
+  :defer t
+)
+
 (use-package doom-modeline
   :config
-  (setq doom-modeline-icon nil)
-  ;; (setq doom-modeline-height 26)  
-  (setq doom-modeline-buffer-name t)
-  ;; (setq doom-modeline-highlight-modified-buffer-name t)
-  (setq doom-modeline-time-icon t)
-  (setq doom-modeline-indent-info nil)
-  (setq doom-modeline-battery nil)
-  (setq doom-modeline-buffer-modification-icon nil)
+  (setq doom-modeline-height 30)
+  (setq doom-modeline-major-mode-color-icon nil)
   :init (doom-modeline-mode 1))
 
 (use-package all-the-icons)

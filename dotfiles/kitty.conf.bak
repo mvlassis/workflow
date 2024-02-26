@@ -23,6 +23,7 @@ map ctrl+tab next_tab
 map ctrl+q close_tab
 map ctrl+shift+f launch --type=overlay --stdin-source=@screen_scrollback /usr/bin/fzf --no-sort --no-mouse --exact -i
 
+include 'Modus Vivendi Tinted.conf'
 # include theme_kitty.conf
 
 # foreground
@@ -2374,9 +2375,3 @@ map ctrl+shift+f launch --type=overlay --stdin-source=@screen_scrollback /usr/bi
 #: }}}
 
 #: }}}
-
-
-# BEGIN_KITTY_THEME
-# Modus Vivendi Tinted
-include current-theme.conf
-# END_KITTY_THEME
