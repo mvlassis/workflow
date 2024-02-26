@@ -360,8 +360,10 @@ With argument ARG, do this that many times."
   :config
   (auto-package-update-maybe))
 (use-package which-key
-  :config
+  :init
   (which-key-mode)
+  :config
+  (setq which-key-idle-delay 0.5)
 )
 ;; Simple mode to show total matches when searching
 (use-package anzu 
