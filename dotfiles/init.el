@@ -64,12 +64,12 @@
 
 ;; Customization
 ;; Set custom font and font size if it exists in the system
-;; (defun set-font-if-exists (frame)
-;;   (select-frame frame)
-;;   (when (find-font (font-spec :name "Fira Mono"))
-;;     (set-face-attribute 'default nil :font "Fira Mono:style=Regular" :height 130)))
+(defun set-font-if-exists (frame)
+  (select-frame frame)
+  (when (find-font (font-spec :name "Fira Mono"))
+    (set-face-attribute 'default nil :font "Fira Mono:style=Regular" :height 130)))
 
-;; (add-hook 'after-make-frame-functions 'set-font-if-exists)
+(add-hook 'after-make-frame-functions 'set-font-if-exists)
 
 (setq inhibit-startup-message t) ; Disable the startup screen when opening Emacs
 (setq column-number-mode t) ; Display the current column of the cursor
@@ -254,6 +254,7 @@ With argument ARG, do this that many times."
   :config
   (setq evil-default-state 'emacs)
   :init
+  (setq evil-want-integration t)
   (setq evil-want-C-u-scroll t)
   (evil-mode 1)
 )
@@ -479,5 +480,3 @@ With argument ARG, do this that many times."
  ;; If there is more than one, they won't work right.
  )
 
-
-(message "Hello!")
