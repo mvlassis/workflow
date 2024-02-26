@@ -21,7 +21,7 @@
     (copy-region-as-kill (region-beginning) (region-end)))
   ad-do-it)
 
-;; Make the mouse a bit better on the terminal
+;; Make the mouse work a bit better on the terminal
 (add-hook 'tty-setup-hook (lambda () (xterm-mouse-mode)))
 
 ;; ;; Turn off the touchpad when Emacs is in 
@@ -99,10 +99,20 @@
       '("<%d %b %A>" . "<%d %b %H:%M>"))
 
 ;; Minor modes
-(global-display-line-numbers-mode 1) ; Enable line numbers
+(global-display-line-numbers-mode t) ; Enable line numbers
 ; Dont shift the line numbers mode when moving after line 100 (or 1000)
 (setq display-line-numbers-width-start t)
 (setq display-line-numbers-grow-only t)
+
+; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                shell-mode-hook
+                treemacs-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+
 ;; Disable the default minor modes for beginners
 ;; (menu-bar-mode -1)
 ;; (tool-bar-mode -1)
@@ -291,7 +301,9 @@ With argument ARG, do this that many times."
   :after vertico
   :bind (
 		 ("C-x b" . consult-buffer)
-		 ))
+		 )
+  :config
+  (consult-customize consult-theme :preview-key '(:debounce 0.5 any)))
   
 
 (use-package marginalia
