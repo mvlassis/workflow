@@ -280,7 +280,8 @@ With argument ARG, do this that many times."
 (use-package doom-modeline
   :config
   (setq doom-modeline-height 30)
-  (setq doom-modeline-major-mode-color-icon nil)
+  (setq doom-modeline-major-mode-color-icon t)
+  (setq doom-modeline-env-version t)
   :init (doom-modeline-mode 1))
 
 (use-package all-the-icons)
