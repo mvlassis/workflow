@@ -9,7 +9,10 @@
 (setq gc-cons-threshold (* 50 1000 1000))
 
 ;; Theme to load
-(load-theme 'doom-vibrant t)
+(if (locate-file (concat "doom-vibrant-theme.el") custom-theme-load-path)
+    (load-theme 'doom-vibrant t)
+  (load-theme 'modus-vivendi t))
+
 
 (when (find-font (font-spec :name "Fira Mono"))
   (set-face-attribute 'default nil :font "Fira Mono:style=Regular" :height 130))
