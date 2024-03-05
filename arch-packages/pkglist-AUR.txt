@@ -27,7 +27,6 @@ realvnc-vnc-viewer
 scc
 skypeforlinux-stable-bin
 spotify
-sunshine
 tdrop
 teams
 teamviewer
