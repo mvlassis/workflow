@@ -12,6 +12,8 @@ heroic-games-launcher-bin
 i3-volume
 i3lock-color
 i3tree-git
+khotkeys
+kopete
 lenovolegionlinux-git
 libreoffice-extension-orthos-greek-english-dictionary
 micromamba-bin

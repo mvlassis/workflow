@@ -22,8 +22,8 @@ blender
 blisp
 bluedevil
 blueman
-breeze
 breeze-gtk
+breeze5
 brightnessctl
 btop
 catimg
@@ -123,7 +123,6 @@ kgamma
 kget
 kgpg
 khelpcenter
-khotkeys
 kicad
 kicad-library
 kimagemapeditor
@@ -146,7 +145,6 @@ konqueror
 konsole
 kontrast
 konversation
-kopete
 krdc
 krfb
 krita
@@ -214,8 +212,8 @@ openssl-1.1
 os-prober
 otf-fira-mono
 otf-font-awesome
-oxygen
 oxygen-icons
+oxygen5
 p7zip
 pamixer
 papirus-icon-theme
@@ -234,7 +232,6 @@ plasma-browser-integration
 plasma-desktop
 plasma-disks
 plasma-firewall
-plasma-integration
 plasma-nm
 plasma-pa
 plasma-sdk
@@ -243,6 +240,7 @@ plasma-thunderbolt
 plasma-vault
 plasma-workspace
 plasma-workspace-wallpapers
+plasma5-integration
 polkit-kde-agent
 polybar
 powerdevil
