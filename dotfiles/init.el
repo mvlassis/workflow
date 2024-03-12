@@ -354,6 +354,7 @@ With argument ARG, do this that many times."
   (setq lsp-ui-doc-delay 2)
   (setq lsp-ui-doc-position "At point"))
 
+;; Might need package "npm" to install pyright
 (use-package lsp-pyright
   :defer t
   :hook (python-mode . (lambda ()
