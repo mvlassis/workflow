@@ -38,3 +38,4 @@ woeusb
 x2goclient
 yay
 zsh-autocomplete-git
+zsh-theme-powerlevel10k
