@@ -206,7 +206,6 @@ oath-toolkit
 obs-studio
 octave
 okular
-openconnect
 openmp
 openssl-1.1
 os-prober
