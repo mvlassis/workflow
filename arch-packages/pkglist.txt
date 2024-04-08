@@ -5,7 +5,6 @@ akregator
 amd-ucode
 android-tools
 android-udev
-apparmor
 arandr
 arduino-cli
 ark
@@ -38,6 +37,7 @@ dialog
 discord
 discover
 dmenu
+dnsmasq
 docker
 docker-compose
 dolphin
@@ -172,7 +172,6 @@ libgnome-keyring
 libkscreen
 libksysguard
 libreoffice-fresh
-libvirt
 linux
 linux-firmware
 lokalize
@@ -257,7 +256,6 @@ python-pyswip
 python-seaborn
 python-watchdog
 qbittorrent
-qemu-base
 qt5-imageformats
 ranger
 redis

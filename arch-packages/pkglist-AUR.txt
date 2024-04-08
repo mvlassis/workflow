@@ -3,6 +3,7 @@ aseprite
 blesh-git
 brightness-controller-git
 burpsuite
+canonical-multipass
 checkra1n-cli
 downgrade
 etcher-bin
