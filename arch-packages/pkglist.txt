@@ -5,6 +5,7 @@ akregator
 amd-ucode
 android-tools
 android-udev
+apparmor
 arandr
 arduino-cli
 ark
@@ -171,6 +172,7 @@ libgnome-keyring
 libkscreen
 libksysguard
 libreoffice-fresh
+libvirt
 linux
 linux-firmware
 lokalize
@@ -255,6 +257,7 @@ python-pyswip
 python-seaborn
 python-watchdog
 qbittorrent
+qemu-base
 qt5-imageformats
 ranger
 redis
