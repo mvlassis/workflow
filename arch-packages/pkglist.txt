@@ -195,6 +195,7 @@ ncdu
 neofetch
 network-manager-applet
 networkmanager
+networkmanager-openvpn
 nfs-utils
 nmap
 nnn
