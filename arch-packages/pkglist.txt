@@ -22,6 +22,7 @@ blender
 blisp
 bluedevil
 blueman
+bluez-utils
 breeze-gtk
 breeze5
 brightnessctl
