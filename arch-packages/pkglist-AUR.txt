@@ -21,6 +21,7 @@ noto-color-emoji-fontconfig
 octave-statistics
 ookla-speedtest-bin
 optimus-manager
+optimus-manager-qt
 otf-cm-unicode
 otf-gfs
 palera1n
