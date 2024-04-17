@@ -258,6 +258,7 @@ python-flask-cors
 python-hypothesis
 python-i3ipc
 python-json5
+python-openstackclient
 python-pycryptodome
 python-pydantic
 python-pydantic-core
