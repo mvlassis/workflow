@@ -253,14 +253,14 @@ With argument ARG, do this that many times."
 
 (use-package ein) ; Jupyter notebook in Emacs
 
-(use-package evil
-  :config
-  (setq evil-default-state 'emacs)
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-C-u-scroll t)
-  (evil-mode 1)
-)
+;; (use-package evil
+;;   :config
+;;   (setq evil-default-state 'emacs)
+;;   :init
+;;   (setq evil-want-integration t)
+;;   (setq evil-want-C-u-scroll t)
+;;   (evil-mode 1)
+;; )
 
 ;; Themes
 (use-package zenburn-theme
