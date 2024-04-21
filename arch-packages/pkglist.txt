@@ -72,6 +72,7 @@ gparted
 grantlee-editor
 graphviz
 grub
+guvcview
 gwenview
 htop
 hunspell-el
