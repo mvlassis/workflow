@@ -276,6 +276,7 @@ qt6-quicktimeline
 qt6-virtualkeyboard
 qt6-websockets
 qt6-webview
+quilt
 ranger
 redis
 reflector
