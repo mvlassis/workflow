@@ -2,15 +2,13 @@
 All tools, software, scripts, and configuration files I use on my computer.
 
 ## Shell
-- [Zsh](https://www.zsh.org/) with the following extensions:
-### Zsh Extensions
-- [Powerlevel10k](https://github.com/romkatv/powerlevel10k): A flexible theme with icons
-- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions): On the fly suggestions
-- [zsh-autocomplete](https://github.com/marlonrichert/zsh-autocomplete): Real-time autocompletion
-- [zsh-syntax-highlightinh](https://github.com/zsh-users/zsh-syntax-highlighting): Syntax highlighting
+- [bash](https://www.gnu.org/software/bash/) with the following extensions:
+### Bash Extensions
+- [ble.sh](https://github.com/akinomyoga/ble.sh)
+- [micromamba](https://github.com/mamba-org/mamba)
 
 ## Text Editors
-- [Emacs](https://www.gnu.org/software/emacs/): The main editor I use for text files and programming
+- [Emacs](https://www.gnu.org/software/emacs/): The main editor I use for programming and editin text files
 - [Visual Studio Code](https://code.visualstudio.com/): For Jupyter Notebooks or for languages that don't cooperate well with Emacs
 
 ## CLI tools
@@ -18,10 +16,9 @@ All tools, software, scripts, and configuration files I use on my computer.
 - [github-cli](https://github.com/cli/cli): To handle the Github accounts and authentication
 - [speedtest](https://www.speedtest.net/apps/cli): For measuring the internet connection
 - [yt-dlp](https://github.com/yt-dlp/yt-dlp): For easily downloading videos and audio from Youtube and other sources
-- [ddg](https://github.com/jarun/ddgr): Search DuckDuckGo from the terminal.
 
 ## Arch Linux specific
-- [paru](https://github.com/Morganamilo/paru): AUR helper
+- [yay](https://github.com/Jguer/yay): AUR helper
 - [downgrade](https://aur.archlinux.org/packages/downgrade): To easily downgrade packages
 
 ## LibreOffice
@@ -33,3 +30,5 @@ All tools, software, scripts, and configuration files I use on my computer.
 - [Audacity](https://www.audacityteam.org/): For audio editing
 - [Qbittorrent](https://www.qbittorrent.org/): Bittorrent client
 - [Shotcut](https://shotcut.org/): For basic video editing
+
+
