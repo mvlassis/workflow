@@ -1,2 +1,4 @@
+kitty
 emacs
+xclip
 zoxide

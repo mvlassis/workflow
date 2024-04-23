@@ -1,0 +1,9 @@
+export TERMINAL="kitty"
+export XDG_CURRENT_DESKTOP="KDE"
+# xrandr --output eDP-1 --off --output HDMI-1-0 --auto
+
+if xrandr | grep "DP-1-2 connected"; then
+	xrandr --output eDP-1 --off --output DP-1-2 --mode 3440x1440 --rate 100 --primary
+elif xrandr | grep "HDMI-1-0 connected"; then
+ 	xrandr --output eDP-1 --off --output HDMI-1-0 --mode 3440x1440 --rate 100 --primary
+fi
