@@ -16,8 +16,6 @@ SAVEHIST=500
 # Append .bin to path
 export PATH="$HOME/.bin:$HOME/.local/bin:$PATH"
 export EDITOR="emacsclient -t"
-export SPOTIPY_CLIENT_ID=2c3af1c2720d48449c8134e5d86078e9
-export SPOTIPY_CLIENT_SECRET=c96d4cf1ee5e42debb6bf39f38b25185
 
 # Aliases
 # Easier Navigation
