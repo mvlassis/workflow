@@ -224,7 +224,7 @@ With argument ARG, do this that many times."
 ;; Use 'package for package management
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("elpa" . "https://elpa.gnu.org/packages/")))
+						 ("elpa" . "https://elpa.gnu.org/packages/")))
 (package-initialize)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
