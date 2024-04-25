@@ -73,6 +73,7 @@ alias duck='ddgr -j'
 alias te='emacsclient -t'
 alias restart-emacs='systemctl restart --user emacs.service'
 alias open='xdg-open'
+alias pokecat='${HOME}/Documents/Github/pokecat/src/pokecat.sh'
 alias update='sudo pacman -Syu'
 alias wiki='ddgr -j \!w'
 alias yay='yay --cleanmenu=false --diffmenu=false'
@@ -195,8 +196,8 @@ fi
 # fi
 
 # Get the weather if we are connected to the internet
-# ping -q -W 1 -c 1 google.com &>/dev/null && curl "wttr.in/?1nFq&lang=en"
-curl --max-time 1.3 "wttr.in/Athens,%20Greece?1nFq&lang=en" 2> /dev/null
+# curl --max-time 1.3 "wttr.in/Athens,%20Greece?1nFq&lang=en" 2> /dev/null
+pokecat
 
 eval "$(zoxide init bash)"
 [[ ${BLE_VERSION-} ]] && ble-attach

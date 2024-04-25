@@ -65,6 +65,7 @@ fmt
 gimp
 git
 github-cli
+globalprotect-openconnect
 gnome-keyring
 gnu-netcat
 godot
