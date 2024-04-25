@@ -5,6 +5,7 @@ akregator
 amd-ucode
 android-tools
 android-udev
+apparmor
 arandr
 arduino-cli
 ark

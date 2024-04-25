@@ -3,7 +3,6 @@ aseprite
 blesh-git
 brightness-controller-git
 burpsuite
-canonical-multipass
 checkra1n-cli
 downgrade
 etcher-bin
@@ -28,6 +27,7 @@ pulseaudio-ctl
 realvnc-vnc-viewer
 scc
 skypeforlinux-stable-bin
+snapd
 spotify
 tdrop
 teams
