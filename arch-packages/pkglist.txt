@@ -300,6 +300,7 @@ signon-kwallet-extension
 skanlite
 spectacle
 sqlmap
+sshfs
 steam
 strace
 subversion
