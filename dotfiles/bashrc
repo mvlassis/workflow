@@ -63,6 +63,7 @@ alias gt="cd ~/Documents/Github"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+alias .....="cd ../../../.."
 
 # Shortcuts
 # Finds unused packages (orhans) and removes them
@@ -77,6 +78,7 @@ alias wiki='ddgr -j \!w'
 alias yay='yay --cleanmenu=false --diffmenu=false'
 alias yeet='sudo pacman -Rns'
 alias mm='micromamba'
+alias mp='multipass'
 alias weather='curl --max-time 5 "wttr.in/Athens,%20Greece?1Fq&lang=en" 2> /dev/null'
 
 # ls shortcuts
@@ -157,7 +159,12 @@ make_prompt() {
 	padlock=""
 	[[ -w "." ]] || padlock="[] "
 
-	local top_line="${GREEN}${BOLD}\u${RESET}@${hostname_color}${BOLD}\h${RESET}: ${YELLOW}${BOLD}${padlock}\w${RESET}"
+	# Conda/Mamba/Micromamba environment (if they exist)
+	[[ -n "${CONDA_DEFAULT_ENV}" ]] && conda_env="${GREEN}(${CONDA_DEFAULT_ENV})${RESET}"
+
+	# The top line in full
+	local top_line="${GREEN}${BOLD}\u${RESET}@${hostname_color}${BOLD}\h${RESET}: ${YELLOW}${BOLD}${padlock}\w${RESET} ${conda_env}"
+	
 	PS1="\n\001\$(tput sc; rightprompt; tput rc)\002┌─╴${top_line}\n└─\$(exitstatus)"
 }
 
@@ -194,3 +201,10 @@ curl --max-time 1.3 "wttr.in/Athens,%20Greece?1nFq&lang=en" 2> /dev/null
 eval "$(zoxide init bash)"
 [[ ${BLE_VERSION-} ]] && ble-attach
 
+# Source RACECAR tool # RACECAR_ALIASES
+if [ -f /home/manos/Documents/racecar/Student/scripts/.config ]; then # RACECAR_ALIASES
+. /home/manos/Documents/racecar/Student/scripts/.config # RACECAR_ALIASES
+fi # RACECAR_ALIASES
+if [ -f /home/manos/Documents/racecar/Student/scripts/racecar_tool.sh ]; then # RACECAR_ALIASES
+. /home/manos/Documents/racecar/Student/scripts/racecar_tool.sh # RACECAR_ALIASES
+fi # RACECAR_ALIASES

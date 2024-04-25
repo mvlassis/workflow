@@ -8,7 +8,6 @@ checkra1n-cli
 downgrade
 etcher-bin
 freetube-bin
-hardinfo
 heroic-games-launcher-bin
 i3-volume
 i3lock-color
