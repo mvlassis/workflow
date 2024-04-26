@@ -330,6 +330,7 @@ texstudio
 threadweaver
 thunderbird
 tldr
+tlp
 tmux
 tor
 torbrowser-launcher
