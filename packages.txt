@@ -1,5 +1,9 @@
 bc
+catimg
 emacs
+git
+hunspell-en_us
+hunspell-el
 kitty
 xclip
 zoxide

@@ -100,13 +100,31 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 		ln -sv "${BASEDIR}/dotfiles/xprofile" "${HOME}/.xprofile"
 	fi
 fi
+
+# Micromamba
+if [[ ! -d "${HOME}/.micromamba" ]]; then
+	echo "~/.micromamba directory not found, creating..."
+	mkdir "${HOME}/.micromamba"
+fi
+	
 # Scripts
+
+# First clone and symlink pokecat
+if [[ ! -d "${BASEDIR}/pokecat" ]]; then
+	git clone "https://github.com/gvlassis/pokecat.git"
+fi
+
+if [ ! -L "${HOME}/.bin/pokecat.sh" ]; then
+	ln -sv "${BASEDIR}/pokecat/src/pokecat.sh" "${HOME}/.bin"
+fi	
+
 # Create directory ~/.bin if it doesn't exit, then place all scripts there
 if [ ! -d "${HOME}/.bin" ]; then
 	echo "~/.bin directory not found, creating..."
     mkdir ~/.bin
 fi
 
+# Move all scripts to ~/.bin
 SCRIPTS="${BASEDIR}/bin/*"
 for file in ${SCRIPTS}
 do
