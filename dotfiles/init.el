@@ -466,7 +466,13 @@ With argument ARG, do this that many times."
 (add-hook 'emacs-startup-hook #'efs/display-startup-time)
 
 (use-package treemacs
+  :ensure t
   :defer t
+  :init
+  (with-eval-after-load 'winum
+    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+  :bind
+  ("<f1>" . treemacs)
 )
 
 (custom-set-variables
