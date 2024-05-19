@@ -74,7 +74,7 @@ fi
 read -p "Do you want to symlink i3's config? This will delete your existing config file ${PROMPT}" -n 1 -r
 echo 
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-	if [ -d "${HOME}/.config/i3" ]; then
+	if [[ -d "${HOME}/.config/i3" ]]; then
 		ln -sv "${BASEDIR}/i3/config" "${HOME}/.config/i3/config"
 		ln -sv "${BASEDIR}/i3/i3format.py" "${HOME}/.config/i3/i3format.py"
 		chmod +x "${BASEDIR}/i3/i3format.py"
@@ -85,20 +85,21 @@ fi
 # Polybar configuration file
 read -p "Do you want to symlink Polybar's config.ini? This may delete your existing config.ini file ${PROMPT}" -n 1 -r; echo;
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-	if [ -d "${HOME}/.config/polybar" ]; then
-		ln -sv "${BASEDIR}/polybar/config.ini" "${HOME}/.config/polybar/config.ini"
-		cp "${BASEDIR}/polybar/"*.sh "${HOME}/.config/polybar/"
-		cp "${BASEDIR}/polybar/rofi-power-menu" "${HOME}/.config/polybar/"		
-	fi
+	if [[ ! -d "${HOME}/.config/polybar" ]]; then
+		mkdir "${HOME}/.config/polybar"
+	fi	
+	ln -sv "${BASEDIR}/polybar/config.ini" "${HOME}/.config/polybar/config.ini"
+	cp "${BASEDIR}/polybar/"*.sh "${HOME}/.config/polybar/"
+	cp "${BASEDIR}/polybar/rofi-power-menu" "${HOME}/.config/polybar/"		
 fi
 
 # xprofile
 read -p "Do you want to symlink .xprofile? This may delete your existing .xprofile file ${PROMPT}" -n 1 -r; echo;
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-	if [ -d "${HOME}/.config/polybar" ]; then
+	if [[ -e "${HOME}/.xprofile" ]]; then
 		rm "${HOME}/.xprofile"
-		ln -sv "${BASEDIR}/dotfiles/xprofile" "${HOME}/.xprofile"
 	fi
+	ln -sv "${BASEDIR}/dotfiles/xprofile" "${HOME}/.xprofile"
 fi
 
 # Micromamba
