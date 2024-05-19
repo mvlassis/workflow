@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-if pulseaudio-ctl | grep "Is source muted" | grep -q "yes"; then
+if pactl list sinks | grep "Mute" | grep "yes"; then
 	echo ""
 else
 	echo ""
-fi
+fi	

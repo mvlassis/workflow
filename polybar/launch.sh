@@ -6,8 +6,8 @@
 # Otherwise you can use the nuclear option:
 killall -q polybar
 
-# Launch bar1 and bar2
+# Launch the bar
 echo "---" | tee -a /tmp/polybar.log
-polybar -r example 2>&1 | tee -a /tmp/polybar.log & disown
+polybar -r mvlassis 2>&1 | tee -a /tmp/polybar.log & disown
 
 #echo "Bars launched..."
