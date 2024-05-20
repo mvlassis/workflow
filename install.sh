@@ -43,7 +43,7 @@ fi
 # Dunst configuration file
 read -p "Do you want to symlink dunstrc? This may delete your existing dunstrc file ${PROMPT}" -n 1 -r; echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-	rm "${HOME}/.config/dunstrc"
+	[[ -e "${HOME}/.config/dunstrc" ]] && rm "${HOME}/.config/dunstrc"
 	ln -sv "${BASEDIR}/dotfiles/dunstrc" "${HOME}/.config/dunstrc"
 fi
 
