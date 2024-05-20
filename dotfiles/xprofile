@@ -1,5 +1,5 @@
 export TERMINAL="kitty"
-# export XDG_CURRENT_DESKTOP="KDE"
+export XDG_CURRENT_DESKTOP="KDE"
 # xrandr --output eDP-1 --off --output HDMI-1-0 --auto
 setxkbmap -layout "us,gr" -option ctrl:swapcaps -option grp:alt_shift_toggle
 
