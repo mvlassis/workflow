@@ -1,6 +1,7 @@
 export TERMINAL="kitty"
 # export XDG_CURRENT_DESKTOP="KDE"
 # xrandr --output eDP-1 --off --output HDMI-1-0 --auto
+setxkbmap -layout us,
 setxkbmap -option ctrl:swapcaps -option grp:alt_shift_toggle
 
 if xrandr | grep "DP-1-2 connected"; then
