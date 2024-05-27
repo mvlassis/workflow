@@ -28,14 +28,14 @@ fi
 # Bash configuration file
 read -p "Do you want to symlink .bashrc? This may delete your existing .bashrc file ${PROMPT}" -n 1 -r; echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-	rm "${HOME}/.bashrc"
+	rm -f "${HOME}/.bashrc"
 	ln -sv "${BASEDIR}/dotfiles/bashrc" ~/.bashrc
 fi
 
 # blesh configuration file
 read -p "Do you want to symlink .blerc? This may delete your existing .blerc file ${PROMPT}" -n 1 -r; echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-	rm "${HOME}/.blerc"
+	rm -f "${HOME}/.blerc"
 	ln -sv "${BASEDIR}/dotfiles/blerc" ~/.blerc
 	ln -sv "${BASEDIR}/dotfiles/blerc2" ~/.blerc2
 fi
@@ -50,14 +50,14 @@ fi
 # Kitty configuration file
 read -p "Do you want to symlink kitty.conf? This may delete your existing kitty.conf file ${PROMPT}" -n 1 -r; echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-	rm "${HOME}/.config/kitty/kitty.conf"
+	rm -f "${HOME}/.config/kitty/kitty.conf"
 	ln -sv "${BASEDIR}/dotfiles/kitty.conf" "${HOME}/.config/kitty/kitty.conf"
 fi
 
 # zsh configuration file
 read -p "Do you want to symlink .zshrc? This may delete your existing .zshrc file ${PROMPT}" -n 1 -r; echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-	rm "${HOME}/.zshrc"
+	rm -f "${HOME}/.zshrc"
 	ln -sv "${BASEDIR}/dotfiles/zshrc" ~/.zshrc
 fi
 
@@ -77,9 +77,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	if [[ ! -d "${HOME}/.config/i3" ]]; then
 		mkdir "${HOME}/.config/i3"
 	fi
-	if [[ -e "${HOME}/.config/i3/config" ]]; then
-		rm "${HOME}/.config/i3/config"
-	fi
+	[[ -e "${HOME}/.config/i3/config" ]] && rm "${HOME}/.config/i3/config"
 	ln -sv "${BASEDIR}/i3/config" "${HOME}/.config/i3/config"
 	ln -sv "${BASEDIR}/i3/i3format.py" "${HOME}/.config/i3/i3format.py"
 	chmod +x "${BASEDIR}/i3/i3format.py"
@@ -100,9 +98,7 @@ fi
 # xprofile
 read -p "Do you want to symlink .xprofile? This may delete your existing .xprofile file ${PROMPT}" -n 1 -r; echo;
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-	if [[ -e "${HOME}/.xprofile" ]]; then
-		rm "${HOME}/.xprofile"
-	fi
+	[[ -e "${HOME}/.xprofile" ]] && rm "${HOME}/.xprofile"
 	ln -sv "${BASEDIR}/dotfiles/xprofile" "${HOME}/.xprofile"
 fi
 
