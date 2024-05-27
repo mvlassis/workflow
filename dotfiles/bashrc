@@ -59,7 +59,7 @@ export EDITOR="emacsclient -t"
 # Easier Navigation
 alias d="cd ~/Documents"
 alias dl="cd ~/Downloads"
-alias gt="cd ~/Documents/Github"
+alias gt="cd ~/Github"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
