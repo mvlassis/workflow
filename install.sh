@@ -116,13 +116,13 @@ if [[ ! -d "${BASEDIR}/pokecat" ]]; then
 fi
 
 if [ ! -L "${HOME}/.bin/pokecat.sh" ]; then
-	ln -sv "${BASEDIR}/pokecat/src/pokecat.sh" "${HOME}/.bin"
+	ln -sv "${BASEDIR}/pokecat/src/pokecat.sh" "${HOME}/.bin/pokecat.sh"
 fi	
 
 # Create directory ~/.bin if it doesn't exit, then place all scripts there
 if [ ! -d "${HOME}/.bin" ]; then
 	echo "~/.bin directory not found, creating..."
-    mkdir ~/.bin
+    mkdir "${HOME}/.bin"
 fi
 
 # Move all scripts to ~/.bin
