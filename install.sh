@@ -2,6 +2,7 @@
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+BOLD=$'\e[1m'       # Bold text
 YELLOW=$'\e[1;33m'  # Bold yellow color
 RESET=$'\e[0m'      # Reset to default terminal color
 PROMPT="${YELLOW}[y/n]: ${RESET}"
@@ -26,14 +27,14 @@ fi
 
 
 # Bash configuration file
-read -p "Do you want to symlink .bashrc? This may delete your existing .bashrc file ${PROMPT}" -n 1 -r; echo
+read -p "Do you want to symlink ${BOLD}.bashrc${RESET}? This may delete your existing .bashrc file ${PROMPT}" -n 1 -r; echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	rm -f "${HOME}/.bashrc"
 	ln -sv "${BASEDIR}/dotfiles/bashrc" ~/.bashrc
 fi
 
 # blesh configuration file
-read -p "Do you want to symlink .blerc? This may delete your existing .blerc file ${PROMPT}" -n 1 -r; echo
+read -p "Do you want to symlink ${BOLD}.blerc${RESET}? This may delete your existing .blerc file ${PROMPT}" -n 1 -r; echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	rm -f "${HOME}/.blerc"
 	ln -sv "${BASEDIR}/dotfiles/blerc" ~/.blerc
@@ -41,7 +42,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # Dunst configuration file
-read -p "Do you want to symlink dunstrc? This may delete your existing dunstrc file ${PROMPT}" -n 1 -r; echo
+read -p "Do you want to symlink ${BOLD}dunstrc${RESET}? This may delete your existing dunstrc file ${PROMPT}" -n 1 -r; echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	[[ -d "${HOME}/.config/dunst" ]] || mkdir "${HOME}/.config/dunst"
 	[[ -e "${HOME}/.config/dunst/dunstrc" ]] && rm "${HOME}/.config/dunstrc"
@@ -49,21 +50,21 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # Kitty configuration file
-read -p "Do you want to symlink kitty.conf? This may delete your existing kitty.conf file ${PROMPT}" -n 1 -r; echo
+read -p "Do you want to symlink ${BOLD}kitty.conf${RESET}? This may delete your existing kitty.conf file ${PROMPT}" -n 1 -r; echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	rm -f "${HOME}/.config/kitty/kitty.conf"
 	ln -sv "${BASEDIR}/dotfiles/kitty.conf" "${HOME}/.config/kitty/kitty.conf"
 fi
 
 # zsh configuration file
-read -p "Do you want to symlink .zshrc? This may delete your existing .zshrc file ${PROMPT}" -n 1 -r; echo
+read -p "Do you want to symlink ${BOLD}.zshrc${RESET}? This may delete your existing .zshrc file ${PROMPT}" -n 1 -r; echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	rm -f "${HOME}/.zshrc"
 	ln -sv "${BASEDIR}/dotfiles/zshrc" ~/.zshrc
 fi
 
 # Emacs configuration file
-read -p "Do you want to symlink init.el? This may delete your existing init.el file ${PROMPT}" -n 1 -r; echo
+read -p "Do you want to symlink ${BOLD}init.el${RESET}? This may delete your existing init.el file ${PROMPT}" -n 1 -r; echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	[[ -e "${HOME}/.emacs.d/custom.el" ]] || touch "${HOME}/.emacs.d/custom.el"
 	if [ -d "${HOME}/.emacs.d" ]; then
@@ -72,7 +73,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # i3 configuration file
-read -p "Do you want to symlink i3's config? This will delete your existing config file ${PROMPT}" -n 1 -r
+read -p "Do you want to symlink ${BOLD}i3 config${RESET}? This will delete your existing config file ${PROMPT}" -n 1 -r
 echo 
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	if [[ ! -d "${HOME}/.config/i3" ]]; then
@@ -86,7 +87,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # Polybar configuration file
-read -p "Do you want to symlink Polybar's config.ini? This may delete your existing config.ini file ${PROMPT}" -n 1 -r; echo;
+read -p "Do you want to symlink ${BOLD}Polybar's config.ini${RESET}? This may delete your existing config.ini file ${PROMPT}" -n 1 -r; echo;
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	if [[ ! -d "${HOME}/.config/polybar" ]]; then
 		mkdir "${HOME}/.config/polybar"
@@ -97,7 +98,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # xprofile
-read -p "Do you want to symlink .xprofile? This may delete your existing .xprofile file ${PROMPT}" -n 1 -r; echo;
+read -p "Do you want to symlink ${BOLD}.xprofile${RESET}? This may delete your existing .xprofile file ${PROMPT}" -n 1 -r; echo;
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	[[ -e "${HOME}/.xprofile" ]] && rm "${HOME}/.xprofile"
 	ln -sv "${BASEDIR}/dotfiles/xprofile" "${HOME}/.xprofile"
@@ -134,7 +135,7 @@ do
     fi
 done
 
-read -p "Do you want to symlink the systemd units? ${PROMPT}" -n 1 -r; echo;
+read -p "Do you want to symlink the ${BOLD}systemd units${RESET}? ${PROMPT}" -n 1 -r; echo;
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	[[ -d "${HOME}/.config" ]] || mkdir "${HOME}/.config"
 	[[ -d "${HOME}/.config/systemd" ]] || mkdir "${HOME}/.config/systemd"
