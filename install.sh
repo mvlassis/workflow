@@ -43,8 +43,9 @@ fi
 # Dunst configuration file
 read -p "Do you want to symlink dunstrc? This may delete your existing dunstrc file ${PROMPT}" -n 1 -r; echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-	[[ -e "${HOME}/.config/dunstrc" ]] && rm "${HOME}/.config/dunstrc"
-	ln -sv "${BASEDIR}/dotfiles/dunstrc" "${HOME}/.config/dunstrc"
+	[[ -d "${HOME}/.config/dunst" ]] || mkdir "${HOME}/.config/dunst"
+	[[ -e "${HOME}/.config/dunst/dunstrc" ]] && rm "${HOME}/.config/dunstrc"
+	ln -sv "${BASEDIR}/dotfiles/dunstrc" "${HOME}/.config/dunst/dunstrc"
 fi
 
 # Kitty configuration file
