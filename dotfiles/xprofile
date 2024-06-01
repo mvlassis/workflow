@@ -2,6 +2,11 @@ export TERMINAL="kitty"
 export XDG_CURRENT_DESKTOP="KDE"
 setxkbmap -layout "us,gr" -option ctrl:swapcaps -option grp:alt_shift_toggle
 
+# Turn numlock on (if the necessary command exists)
+if command -v numlockx > /dev/null 2>&1; then
+    numlockx on
+fi
+
 
 if xrandr | grep "DP-1-2 connected"; then
 	xrandr --output eDP-1 --off --output DP-1-2 --mode 3440x1440 --rate 100 --primary
