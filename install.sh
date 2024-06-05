@@ -7,6 +7,10 @@ YELLOW=$'\e[1;33m'  # Bold yellow color
 RESET=$'\e[0m'      # Reset to default terminal color
 PROMPT="${YELLOW}[y/n]: ${RESET}"
 
+send_prompt() {
+	if [[ "${AUTOMATE}" ]]
+}
+
 # Clone and install ble.sh if it isn't already installed
 install_blesh() {
 	blesh_folder1="/usr/share/blesh" 
