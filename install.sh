@@ -7,8 +7,19 @@ YELLOW=$'\e[1;33m'  # Bold yellow color
 RESET=$'\e[0m'      # Reset to default terminal color
 PROMPT="${YELLOW}[y/n]: ${RESET}"
 
+# If ${AUTOMATE} is true, then return yes, otherwise prompt the user
 send_prompt() {
-	if [[ "${AUTOMATE}" ]]
+	local prompt_message="$1"
+	if [[ "${AUTOMATE}" = "true" ]]; then
+		return 0
+	else
+		read -p "$prompt_message" -n 1 -r; echo
+        if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+            return 0
+        else
+            return 1
+        fi
+	fi
 }
 
 # Clone and install ble.sh if it isn't already installed
@@ -33,8 +44,7 @@ install_blesh() {
 
 # Symlink the bash configuration file
 symlink_bash() {
-	read -p "Do you want to symlink ${BOLD}.bashrc${RESET}? This may delete your existing .bashrc file ${PROMPT}" -n 1 -r; echo
-	if [[ $REPLY =~ ^[Yy]$ || "${AUTOMATE}" = true ]]; then
+	if send_prompt "Do you want to symlink ${BOLD}.bashrc${RESET}? This may delete your existing .bashrc file ${PROMPT}"; then
 		rm -f "${HOME}/.bashrc"
 		ln -sv "${BASEDIR}/dotfiles/bashrc" ~/.bashrc
 	fi
@@ -42,8 +52,7 @@ symlink_bash() {
 
 # Symlink the blesh configuration file
 symlink_blesh() {
-	read -p "Do you want to symlink ${BOLD}.blerc${RESET}? This may delete your existing .blerc file ${PROMPT}" -n 1 -r; echo
-	if [[ $REPLY =~ ^[Yy]$ || "${AUTOMATE}" = true ]]; then
+	if send_prompt "Do you want to symlink ${BOLD}.blerc${RESET}? This may delete your existing .blerc file ${PROMPT}"; then
 		rm -f "${HOME}/.blerc"
 		ln -sv "${BASEDIR}/dotfiles/blerc" ~/.blerc
 		ln -sv "${BASEDIR}/dotfiles/blerc2" ~/.blerc2
@@ -52,8 +61,7 @@ symlink_blesh() {
 
 # Symlink the zsh configuration file
 symlink_zsh() {
-	read -p "Do you want to symlink ${BOLD}.zshrc${RESET}? This may delete your existing .zshrc file ${PROMPT}" -n 1 -r; echo
-	if [[ $REPLY =~ ^[Yy]$ || "${AUTOMATE}" = true ]]; then
+	if send_prompt "Do you want to symlink ${BOLD}.zshrc${RESET}? This may delete your existing .zshrc file ${PROMPT}"; then
 		rm -f "${HOME}/.zshrc"
 		ln -sv "${BASEDIR}/dotfiles/zshrc" ~/.zshrc
 	fi
@@ -61,8 +69,7 @@ symlink_zsh() {
 
 # Symlink the Emacs configuration file
 symlink_emacs() {
-	read -p "Do you want to symlink ${BOLD}init.el${RESET}? This may delete your existing init.el file ${PROMPT}" -n 1 -r; echo
-	if [[ $REPLY =~ ^[Yy]$ || "${AUTOMATE}" = true ]]; then
+	if send_prompt "Do you want to symlink ${BOLD}init.el${RESET}? This may delete your existing init.el file ${PROMPT}"; then
 		if [ -d "${HOME}/.emacs.d" ]; then
 			ln -sv "${BASEDIR}/dotfiles/init.el" "${HOME}/.emacs.d/init.el"
 		fi
