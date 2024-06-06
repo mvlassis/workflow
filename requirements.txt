@@ -3,7 +3,8 @@ bc
 catimg
 emacs
 git
-hunspell-en_us
+ispell
+hunspell-en-us
 hunspell-el
 kitty
 xclip

@@ -1,5 +1,6 @@
 #! /usr/bin/env bash
 
+sudo apt install tox -y
 sudo apt install gnome-keyring -y
 sudo snap install charmcraft --classic
 lxd init --auto
