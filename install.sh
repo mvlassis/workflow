@@ -27,8 +27,7 @@ install_blesh() {
 	blesh_folder1="/usr/share/blesh" 
 	blesh_folder2="$HOME/.local/share/blesh"
 	if [[ ! -d "${blesh_folder1}" && ! -d "${blesh_folder2}" ]]; then
-		read -p  "ble.sh not detected! Do you want to install ble.sh in $HOME/.local/share/blesh? ${PROMPT}" -n 1 -r; echo
-		if [[ $REPLY =~ ^[Yy]$ || "${AUTOMATE}" = true ]]; then
+		if send_prompt "ble.sh not detected! Do you want to install ble.sh in $HOME/.local/share/blesh? ${PROMPT}"; then
 			echo "Downloading ble.sh..."
 			git clone --recursive https://github.com/akinomyoga/ble.sh.git
 			cd ble.sh
