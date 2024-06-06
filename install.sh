@@ -22,6 +22,14 @@ send_prompt() {
 	fi
 }
 
+# Install all prerequisite packages (requires sudo)
+install_prerequisites() {
+	while IFS= read -r package
+	do
+		sudo apt install -y "$package" 2>/dev/null || true
+	done < "${BASEDIR}/requirements.txt"
+}
+
 # Clone and install ble.sh if it isn't already installed
 install_blesh() {
 	blesh_folder1="/usr/share/blesh" 
@@ -77,8 +85,7 @@ symlink_emacs() {
 
 # Symlink the kitty configuration file
 symlink_kitty() {
-	read -p "Do you want to symlink ${BOLD}kitty.conf${RESET}? This may delete your existing kitty.conf file ${PROMPT}" -n 1 -r; echo
-	if [[ $REPLY =~ ^[Yy]$ || "${AUTOMATE}" = true ]]; then
+	if send_prompt "Do you want to symlink ${BOLD}kitty.conf${RESET}? This may delete your existing kitty.conf file ${PROMPT}"; then
 		rm -f "${HOME}/.config/kitty/kitty.conf"
 		ln -sv "${BASEDIR}/dotfiles/kitty.conf" "${HOME}/.config/kitty/kitty.conf"
 	fi	
@@ -86,9 +93,7 @@ symlink_kitty() {
 
 # Symlink the i3 configuration file
 symlink_i3() {
-	read -p "Do you want to symlink ${BOLD}i3 config${RESET}? This will delete your existing config file ${PROMPT}" -n 1 -r
-	echo 
-	if [[ $REPLY =~ ^[Yy]$ || "${AUTOMATE}" = true ]]; then
+	if send_prompt "Do you want to symlink ${BOLD}i3 config${RESET}? This will delete your existing config file ${PROMPT}"; then
 		if [[ ! -d "${HOME}/.config/i3" ]]; then
 			mkdir "${HOME}/.config/i3"
 		fi
@@ -102,8 +107,7 @@ symlink_i3() {
 
 # Symlink the polybar configuration file
 symlink_polybar() {
-	read -p "Do you want to symlink ${BOLD}Polybar's config.ini${RESET}? This may delete your existing config.ini file ${PROMPT}" -n 1 -r; echo;
-	if [[ $REPLY =~ ^[Yy]$ || "${AUTOMATE}" = true ]]; then
+	if send_prompt "Do you want to symlink ${BOLD}Polybar's config.ini${RESET}? This may delete your existing config.ini file ${PROMPT}"; then
 		if [[ ! -d "${HOME}/.config/polybar" ]]; then
 			mkdir "${HOME}/.config/polybar"
 		fi	
@@ -115,8 +119,7 @@ symlink_polybar() {
 
 # Symlink the dunst configuration file
 symlink_dunst() {
-	read -p "Do you want to symlink ${BOLD}dunstrc${RESET}? This may delete your existing dunstrc file ${PROMPT}" -n 1 -r; echo
-	if [[ $REPLY =~ ^[Yy]$ || "${AUTOMATE}" = true ]]; then
+	if send_prompt "Do you want to symlink ${BOLD}dunstrc${RESET}? This may delete your existing dunstrc file ${PROMPT}"; then
 		[[ -d "${HOME}/.config/dunst" ]] || mkdir "${HOME}/.config/dunst"
 		rm -f "${HOME}/.config/dunstrc"
 		ln -sv "${BASEDIR}/dotfiles/dunstrc" "${HOME}/.config/dunst/dunstrc"
@@ -125,8 +128,7 @@ symlink_dunst() {
 
 # Symlink the .xprofile file
 symlink_xprofile() {
-	read -p "Do you want to symlink ${BOLD}.xprofile${RESET}? This may delete your existing .xprofile file ${PROMPT}" -n 1 -r; echo;
-	if [[ $REPLY =~ ^[Yy]$ || "${AUTOMATE}" = true ]]; then
+	if send_prompt "Do you want to symlink ${BOLD}.xprofile${RESET}? This may delete your existing .xprofile file ${PROMPT}"; then
 		[[ -e "${HOME}/.xprofile" ]] && rm "${HOME}/.xprofile"
 		ln -sv "${BASEDIR}/dotfiles/xprofile" "${HOME}/.xprofile"
 	fi
@@ -136,7 +138,7 @@ symlink_xprofile() {
 symlink_scripts() {
 	# Scripts
 	# Create directory ~/.bin if it doesn't exit, then place all scripts there
-	if [ ! -d "${HOME}/.bin" ]; then
+	if [[ ! -d "${HOME}/.bin" ]]; then
 		echo "~/.bin directory not found, creating..."
 		mkdir "${HOME}/.bin"
 	fi
@@ -159,8 +161,7 @@ symlink_scripts() {
 
 # Symlink the systemd units
 symlink_systemd() {
-	read -p "Do you want to symlink the ${BOLD}systemd units${RESET}? ${PROMPT}" -n 1 -r; echo;
-	if [[ $REPLY =~ ^[Yy]$ || "${AUTOMATE}" = true ]]; then
+	if send_prompt "Do you want to symlink the ${BOLD}systemd units${RESET}? ${PROMPT}"; then
 		[[ -d "${HOME}/.config" ]] || mkdir "${HOME}/.config"
 		[[ -d "${HOME}/.config/systemd" ]] || mkdir "${HOME}/.config/systemd"
 		[[ -d "${HOME}/.config/systemd/user" ]] || mkdir "${HOME}/.config/systemd/user"
