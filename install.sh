@@ -24,6 +24,7 @@ send_prompt() {
 
 # Install all prerequisite packages (requires sudo)
 install_prerequisites() {
+	sudo apt update
 	while IFS= read -r package
 	do
 		sudo apt install -y "$package" 2>/dev/null || true
@@ -184,21 +185,23 @@ install_micromamba() {
 }
 
 install_vm_profile() {
-    install_blesh
-    symlink_bash
+	install_prerequisites
+	install_blesh
+	symlink_bash
 	symlink_blesh
-    symlink_emacs
+	symlink_emacs
 	symlink_scripts
 	symlink_systemd
 }
 
 
 install_full_profile() {
-    install_blesh
-    symlink_bash
+	install_prerequisites
+	install_blesh
+	symlink_bash
 	symlink_blesh
 	symlink_zsh
-    symlink_emacs
+	symlink_emacs
 	symlink_kitty
 	symlink_i3
 	symlink_polybar
