@@ -78,9 +78,10 @@ symlink_zsh() {
 # Symlink the Emacs configuration file
 symlink_emacs() {
 	if send_prompt "Do you want to symlink ${BOLD}init.el${RESET}? This may delete your existing init.el file ${PROMPT}"; then
-		if [ -d "${HOME}/.emacs.d" ]; then
-			ln -sv "${BASEDIR}/dotfiles/init.el" "${HOME}/.emacs.d/init.el"
+		if [[ -d "${HOME}/.emacs.d" ]]; then
+			mkdir "${HOME}/.emacs.d"
 		fi
+			ln -sv "${BASEDIR}/dotfiles/init.el" "${HOME}/.emacs.d/init.el"
 	fi
 }
 
