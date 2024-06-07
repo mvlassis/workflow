@@ -62,8 +62,9 @@ symlink_bash() {
 symlink_blesh() {
 	if send_prompt "Do you want to symlink ${BOLD}.blerc${RESET}? This may delete your existing .blerc file ${PROMPT}"; then
 		rm -f "${HOME}/.blerc"
-		ln -sv "${BASEDIR}/dotfiles/blerc" ~/.blerc
-		ln -sv "${BASEDIR}/dotfiles/blerc2" ~/.blerc2
+		rm -f "${HOME}/.blerc2"
+		ln -sv "${BASEDIR}/dotfiles/blerc" "${HOME}/.blerc"
+		ln -sv "${BASEDIR}/dotfiles/blerc2" "${HOME}/.blerc2"
 	fi	
 }
 
@@ -81,7 +82,8 @@ symlink_emacs() {
 		if [[ ! -d "${HOME}/.emacs.d" ]]; then
 			mkdir "${HOME}/.emacs.d"
 		fi
-			ln -sv "${BASEDIR}/dotfiles/init.el" "${HOME}/.emacs.d/init.el"
+		rm -f "${HOME}/.emacs.d/init.el"
+		ln -sv "${BASEDIR}/dotfiles/init.el" "${HOME}/.emacs.d/init.el"
 	fi
 }
 
