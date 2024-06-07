@@ -174,6 +174,7 @@ symlink_systemd() {
       			ln -sv "${file}" "${HOME}/.config/systemd/user/$(basename ${file})"
 			fi
 		done
+		systemctl --user enable --now emacs.service
 	fi
 } 
 
