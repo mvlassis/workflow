@@ -6,6 +6,7 @@ sudo apt install gnome-keyring -y
 sudo snap install microk8s --classic
 sudo snap install charmcraft --classic
 sudo snap install rockcraft --classic
+sudo snap install jhack
 
 lxd init --auto
 adduser ubuntu lxd
