@@ -8,6 +8,8 @@ sudo snap install charmcraft --classic
 sudo snap install rockcraft --classic
 sudo snap install jhack
 
+pip install pip-tools # For pip-compile
+
 lxd init --auto
 adduser ubuntu lxd
 
