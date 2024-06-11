@@ -64,6 +64,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
 
 # Shortcuts
 # Finds unused packages (orhans) and removes them

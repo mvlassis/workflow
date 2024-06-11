@@ -3,6 +3,7 @@ bc
 catimg
 emacs
 git
+gh
 ispell
 hunspell-en-us
 hunspell-el
