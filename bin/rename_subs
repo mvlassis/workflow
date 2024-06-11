@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+for dir in */; do
+	if [[ $(ls "$dir" | wc -l) -eq 2 ]]; then
+		video_file=""
+		subtitle_file=""
+		# Get the name of the video and the subtitle files
+		for file in "$dir"*; do
+			if [[ "$file" == *.mp4 || "$file" == *.mkv ]]; then
+				video_file="$file"
+			elif [[ "$file" == *.srt ]]; then
+				subtitle_file="$file"
+			fi
+		done
+
+		if [[ -n "$video_file" ]] && [[ -n "$subtitle_file" ]]; then
+			video_base_name=$(basename "$video_file" | sed 's/\(.*\)\..*/\1/')
+			subtitle_dir=$(dirname "$subtitle_file")
+			mv "$subtitle_file" "$subtitle_dir/$video_base_name.srt"
+			echo "Renamed $subtitle_file to $subtitle_dir/$video_base_name.srt"
+		fi
+	fi
+done
