@@ -1,0 +1,34 @@
+From 730f59151520c671fcfe5d8120a9d0f7d0ef6b25 Mon Sep 17 00:00:00 2001
+From: mvlassis <accounts@mvlassis.com>
+Date: Tue, 11 Jun 2024 18:00:44 +0300
+Subject: [PATCH] Auto commit at 2024-06-11T18:00:44 EEST
+
+---
+ dotfiles/bashrc  | 1 +
+ requirements.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/dotfiles/bashrc b/dotfiles/bashrc
+index 6ea15d9..9410bd6 100644
+--- a/dotfiles/bashrc
++++ b/dotfiles/bashrc
+@@ -64,6 +64,7 @@ alias ..="cd .."
+ alias ...="cd ../.."
+ alias ....="cd ../../.."
+ alias .....="cd ../../../.."
++alias ......="cd ../../../../.."
+ 
+ # Shortcuts
+ # Finds unused packages (orhans) and removes them
+diff --git a/requirements.txt b/requirements.txt
+index 2fc1a2a..c961b4f 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -3,6 +3,7 @@ bc
+ catimg
+ emacs
+ git
++gh
+ ispell
+ hunspell-en-us
+ hunspell-el

@@ -1,0 +1,212 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+
+# Source ble.sh if it exists
+# Depending on the machine, load either the default configuration file
+# or a faster version of ble.sh
+blesh_folder1="/usr/share/blesh" 
+blesh_folder2="$HOME/.local/share/blesh"
+if [[ -d "${blesh_folder1}" ]]; then
+    if [[ $HOSTNAME == "legion" ]]; then
+	source "${blesh_folder1}/ble.sh" --noattach
+    else
+	source "${blesh_folder1}/ble.sh" --noattach "${HOME}/.blerc2"
+    fi
+	blesh=1
+else
+    if [[ -d "${blesh_folder2}" ]]; then
+	    if [[ $HOSTNAME == "legion" ]]; then
+			source "${blesh_folder2}/ble.sh" --noattach
+	    else
+			source "${blesh_folder2}/ble.sh" --noattach --rcfile "${HOME}/.blerc2"
+	    fi
+	    blesh=1
+    fi
+fi    
+unset blesh_folder1
+unset blesh_folder2
+
+# Enable kitty shell integration manually
+if test -n "$KITTY_INSTALLATION_DIR"; then
+    export KITTY_SHELL_INTEGRATION="enabled"
+    source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"
+fi
+
+check_source () {
+	[[ -f "$1" ]] && source "$1"
+}
+
+# Source fzf to enable fuzzy searching
+check_source "/usr/share/fzf/key-bindings.bash"
+check_source "/usr/share/fzf/completion.bash"
+check_source "/usr/share/doc/fzf/examples/key-bindings.bash"
+check_source "/usr/share/doc/fzf/examples/completion.bash"
+
+
+# Ignore consecutive identical commands and command that begin with space
+export HISTCONTROL=ignoreboth
+export PATH="$HOME/.bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+export CHROME_EXECUTABLE=chromium
+export LANG=en_US.UTF-8
+export EDITOR="emacsclient -t"
+
+# Aliases
+# Easier Navigation
+alias d="cd ~/Documents"
+alias dl="cd ~/Downloads"
+alias gt="cd ~/Github"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+
+# Shortcuts
+# Finds unused packages (orhans) and removes them
+alias clean='pacman -Qtdq | sudo pacman -Rns -'
+alias duck='ddgr -j'
+# alias emacs='emacscliententry'
+alias te='emacsclient -t'
+alias restart-emacs='systemctl restart --user emacs.service'
+alias open='xdg-open'
+alias pokecat='pokecat.sh'
+alias update='sudo pacman -Syu'
+alias wiki='ddgr -j \!w'
+alias yay='yay --cleanmenu=false --diffmenu=false'
+alias yeet='sudo pacman -Rns'
+alias mm='micromamba'
+alias mp='multipass'
+alias weather='curl --max-time 5 "wttr.in/Athens,%20Greece?1Fq&lang=en" 2> /dev/null'
+
+# ls shortcuts
+alias ll='la -l'
+alias ls='ls --color=auto'
+alias la='ls -aA'
+
+# Change the ssh to the appropriate kitten when using kitty
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
+
+
+# Text colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
+CYAN='\033[0;36m'
+WHITE='\033[0;37m'
+BOLD='\033[1m'
+RESET='\033[0m'
+
+
+## Prompt
+if [[ $blesh == 1 ]]; then
+	blehook PREEXEC+="preexec"
+fi
+COMMAND_EXIT_CODE=0
+start_time=${EPOCHREALTIME}
+preexec()
+{
+	start_time=${EPOCHREALTIME}
+}
+
+# Color the prompt depending on whether the last command exited successfully
+exitstatus()
+{
+    if [[ ${COMMAND_EXIT_CODE} == 0 ]]; then
+		echo -e "${GREEN}${BOLD}>${RESET} "
+    else
+		echo -e "${RED}${BOLD}>${RESET} "
+    fi
+}
+
+rightprompt()
+{
+    if [[ $blesh == 1 ]]; then
+		printf "%*s" $COLUMNS "${elapsed_time}s [$COMMAND_EXIT_CODE]"
+    else
+		printf "%*s" $COLUMNS "[$COMMAND_EXIT_CODE]"
+    fi
+}
+
+PROMPT_COMMAND="make_prompt; $PROMPT_COMMAND"
+make_prompt() {
+	# Get the exit code of the command executed and save it
+	COMMAND_EXIT_CODE="$?"
+
+	# Get the command's execution time if we have ble.sh
+	if [[ $blesh == 1 ]]; then
+		# end_time=${EPOCHREALTIME}
+		# elapsed_time=$(echo "scale=3; $end_time - $start_time" | bc | awk '{printf "%.3f", $0}')
+		if [[  ${_ble_exec_time_tot} -gt 0 ]]; then
+			elapsed_time=$(echo "scale=3; $_ble_exec_time_tot / 1000" | bc | awk '{printf "%.3f", $0}')
+		else
+			elapsed_time=0
+		fi
+	fi
+
+	# Change color when connected via ssh
+	if [[ -n $SSH_CLIENT ]]; then
+		local hostname_color=${MAGENTA}
+	else
+		local hostname_color=${BLUE}
+	fi
+
+	# Add a padlock next to the working directory if it is read-only
+	padlock=""
+	[[ -w "." ]] || padlock="[] "
+
+	# Conda/Mamba/Micromamba environment (if they exist)
+	[[ -n "${CONDA_DEFAULT_ENV}" ]] && conda_env="${GREEN}(${CONDA_DEFAULT_ENV})${RESET}"
+
+	# The top line in full
+	local top_line="${GREEN}${BOLD}\u${RESET}@${hostname_color}${BOLD}\h${RESET}: ${YELLOW}${BOLD}${padlock}\w${RESET} ${conda_env}"
+	
+	PS1="\n\001\$(tput sc; rightprompt; tput rc)\002┌─╴${top_line}\n└─\$(exitstatus)"
+}
+
+
+# >>> mamba initialize >>>
+if [[ $HOSTNAME == "legion" ]]; then
+	export MAMBA_EXE='/usr/bin/micromamba';
+else
+	export MAMBA_EXE="/home/manos/.local/bin/micromamba";
+fi
+export MAMBA_ROOT_PREFIX='/home/manos/.micromamba'
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell bash --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias micromamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+fi
+unset __mamba_setup
+
+if which micromamba >/dev/null; then
+    micromamba activate base
+fi
+
+# <<< mamba initialize <<<
+
+# if command -v fastfetch > /dev/null 2>&1; then
+# 	time fastfetch
+# fi
+
+# Get the weather if we are connected to the internet
+# curl --max-time 1.3 "wttr.in/Athens,%20Greece?1nFq&lang=en" 2> /dev/null
+pokecat
+
+eval "$(zoxide init bash)"
+[[ ${BLE_VERSION-} ]] && ble-attach
+
+# Source RACECAR tool # RACECAR_ALIASES
+if [ -f /home/manos/Documents/racecar/Student/scripts/.config ]; then # RACECAR_ALIASES
+. /home/manos/Documents/racecar/Student/scripts/.config # RACECAR_ALIASES
+fi # RACECAR_ALIASES
+if [ -f /home/manos/Documents/racecar/Student/scripts/racecar_tool.sh ]; then # RACECAR_ALIASES
+. /home/manos/Documents/racecar/Student/scripts/racecar_tool.sh # RACECAR_ALIASES
+fi # RACECAR_ALIASES

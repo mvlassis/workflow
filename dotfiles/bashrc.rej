@@ -1,0 +1,7 @@
+--- dotfiles/bashrc
++++ dotfiles/bashrc
+@@ -64,4 +64,3 @@ alias ..="cd .."
+ alias ...="cd ../.."
+ alias ....="cd ../../.."
+ alias .....="cd ../../../.."
+-alias ......="cd ../../../../.."
