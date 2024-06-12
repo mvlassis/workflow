@@ -1,9 +1,0 @@
-diff --git a/dotfiles/bashrc b/dotfiles/bashrc
-index 6ea15d9..9410bd6 100644
---- a/dotfiles/bashrc
-+++ b/dotfiles/bashrc
-@@ -64,3 +64,4 @@ alias ..="cd .."
- alias ...="cd ../.."
- alias ....="cd ../../.."
- alias .....="cd ../../../.."
-+alias ......="cd ../../../../.."
