@@ -24,13 +24,22 @@ send_prompt() {
 
 # Install all prerequisite packages (requires sudo)
 install_prerequisites() {
+	if ! [[ $(command -v apt) ]]; then
+        echo "apt command not found. Exiting."
+        return 1
+    fi
+	
 	sudo apt update
 	while IFS= read -r package
 	do
 		if dpkg -s "$package" >/dev/null 2>&1; then
             echo "$package is already installed."
         else
-			sudo apt install -y "$package" 2>/dev/null || true
+		    if [[ "$package" = "emacs" ]]; then
+                sudo snap install "$package" --classic || true
+            else
+                sudo apt install -y "$package" 2>/dev/null || true
+            fi
 		fi
 	done < "${BASEDIR}/requirements.txt"
 }
@@ -180,7 +189,8 @@ symlink_systemd() {
       			ln -sv "${file}" "${HOME}/.config/systemd/user/$(basename ${file})"
 			fi
 		done
-		systemctl --user enable --now emacs.service
+		systemctl --user daemon-reload
+		systemctl --user enable --now emacs.service &
 	fi
 } 
 
