@@ -27,7 +27,11 @@ install_prerequisites() {
 	sudo apt update
 	while IFS= read -r package
 	do
-		sudo apt install -y "$package" 2>/dev/null || true
+		if dpkg -s "$package" >/dev/null 2>&1; then
+            echo "$package is already installed."
+        else
+			sudo apt install -y "$package" 2>/dev/null || true
+		fi
 	done < "${BASEDIR}/requirements.txt"
 }
 

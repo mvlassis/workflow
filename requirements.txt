@@ -1,7 +1,6 @@
 make
 bc
 catimg
-emacs
 git
 gh
 ispell
