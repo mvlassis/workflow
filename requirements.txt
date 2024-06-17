@@ -5,6 +5,7 @@ emacs
 git
 gh
 ispell
+hunspell
 hunspell-en-us
 hunspell-el
 kitty
