@@ -26,4 +26,12 @@ juju add-model kubeflow
 # Deploy Charmed Kubeflow
 sudo sysctl fs.inotify.max_user_instances=1280
 sudo sysctl fs.inotify.max_user_watches=655360
+if ! grep -q "^fs.inotify.max_user_instances" /etc/sysctl.conf; then
+    echo "fs.inotify.max_user_instances=1280" | sudo tee -a /etc/sysctl.conf
+fi
+
+if ! grep -q "^fs.inotify.max_user_watches" /etc/sysctl.conf; then
+    echo "fs.inotify.max_user_watches=655360" | sudo tee -a /etc/sysctl.conf
+fi
+
 juju deploy kubeflow --trust  --channel=1.8/stable
