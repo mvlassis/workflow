@@ -3,6 +3,7 @@
 sudo apt install libffi-dev -y
 sudo apt install tox -y
 sudo apt install gnome-keyring -y
+sudo apt install pip -y
 sudo snap install microk8s --classic
 sudo snap install charmcraft --classic
 sudo snap install rockcraft --classic

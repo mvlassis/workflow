@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+echo "${USER}"
 # Ensure the script is running as root
 if [ "$(id -u)" -ne 0 ]; then
     echo "This script must be run as root"
@@ -10,7 +10,6 @@ fi
 apt update
 snap install microk8s --classic --channel=1.26/stable
 usermod -a -G microk8s $USER
-newgrp microk8s
 chown -f -R $USER ~/.kube
 
 # Enable some Microk8s addons
