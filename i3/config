@@ -65,7 +65,7 @@ bindsym --release button8 fullscreen toggle
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+d exec --no-startup-id rofi -show drun -theme dmenu
+bindsym $mod+d exec --no-startup-id rofi -show drun
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -211,7 +211,7 @@ include $HOME/.config/i3/gruvbox.conf
 # Dunst a notification daemon
 # Feh to set the background
 exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1 &
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh &
+exec_always --no-startup-id $HOME/.config/polybar/try/launch.sh &
 exec_always --no-startup-id $HOME/.config/i3/i3format.py &
 exec --no-startup-id picom &
 exec --no-startup-id dunst &
