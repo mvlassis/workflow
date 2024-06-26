@@ -72,6 +72,7 @@ alias clean='pacman -Qtdq | sudo pacman -Rns -'
 alias duck='ddgr -j'
 # alias emacs='emacscliententry'
 alias k='kubectl'
+command -v kubecolor >/dev/null 2>&1 && alias kubectl="kubecolor"
 alias te='emacsclient -t'
 alias restart-emacs='systemctl restart --user emacs.service'
 alias open='xdg-open'
