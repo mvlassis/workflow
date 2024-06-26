@@ -71,6 +71,7 @@ alias ......="cd ../../../../.."
 alias clean='pacman -Qtdq | sudo pacman -Rns -'
 alias duck='ddgr -j'
 # alias emacs='emacscliententry'
+alias k='kubectl'
 alias te='emacsclient -t'
 alias restart-emacs='systemctl restart --user emacs.service'
 alias open='xdg-open'
