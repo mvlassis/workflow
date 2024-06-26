@@ -475,6 +475,10 @@ With argument ARG, do this that many times."
   ("<f1>" . treemacs)
 )
 
+(use-package clipetty
+  :ensure t
+  :hook (after-init . global-clipetty-mode))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
