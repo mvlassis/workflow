@@ -9,5 +9,6 @@ hunspell
 hunspell-en-us
 hunspell-el
 kitty
+kubecolor
 xclip
 zoxide
