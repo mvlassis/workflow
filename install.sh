@@ -190,7 +190,7 @@ symlink_systemd() {
 			fi
 		done
 		systemctl --user daemon-reload
-		systemctl --user enable --now emacs.service &
+		# systemctl --user enable --now emacs.service &
 	fi
 } 
 
