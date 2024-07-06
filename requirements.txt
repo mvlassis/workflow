@@ -2,6 +2,7 @@ make
 bc
 catimg
 emacs
+gawk
 git
 gh
 ispell
