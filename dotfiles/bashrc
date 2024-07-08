@@ -47,8 +47,10 @@ check_source "/usr/share/fzf/completion.bash"
 check_source "/usr/share/doc/fzf/examples/key-bindings.bash"
 check_source "/usr/share/doc/fzf/examples/completion.bash"
 
+# Source git-prompt.sh
+check_source "/usr/share/git/git-prompt.sh"
 
-# Ignore consecutive identical commands and command that begin with space
+# Ignore consecutive identical commands and commands that begin with space
 export HISTCONTROL=ignoreboth
 export PATH="$HOME/.bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 export CHROME_EXECUTABLE=chromium
@@ -169,12 +171,14 @@ make_prompt() {
 	[[ -w "." ]] || padlock="[] "
 
 	# Conda/Mamba/Micromamba environment (if they exist)
-	[[ -n "${CONDA_DEFAULT_ENV}" ]] && conda_env="${GREEN}(${CONDA_DEFAULT_ENV})${RESET}"
+	# [[ -n "${CONDA_DEFAULT_ENV}" ]] && conda_env="${GREEN}(${CONDA_DEFAULT_ENV})${RESET}"
 
-	# The top line in full
-	local top_line="${GREEN}${BOLD}\u${RESET}@${hostname_color}${BOLD}\h${RESET}: ${YELLOW}${BOLD}${padlock}\w${RESET} ${conda_env}"
+	[[ -n "$__git_ps1" ]] && git_branch="(${__git_ps1})"
 	
-	PS1="\n\001\$(tput sc; rightprompt; tput rc)\002┌─╴${top_line}\n└─\$(exitstatus)"
+	# The top line in full
+	local top_line="${GREEN}${BOLD}\u${RESET}@${hostname_color}${BOLD}\h${RESET}: ${YELLOW}${BOLD}${padlock}\w${RESET} ${git_branch} ${conda_env}"
+	
+	PS1="\n┌─╴${top_line}\n└─\$(exitstatus)"
 }
 
 
