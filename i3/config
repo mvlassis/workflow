@@ -228,7 +228,7 @@ bindsym $mod+plus scratchpad show
 bindsym Print exec spectacle
 
 # Correct handling of floating dialogs
-for_window [class="Pavucontrol" instance="pavucontrol"] floating enable, resize set height 350, resize set width 400, move down 385, move right 260
+for_window [class="pavucontrol" instance="pavucontrol"] floating enable, resize set height 500, resize set width 500
 #for_window [instance="Godot_Engine"] floating enable
 for_window [title=".*(DEBUG).*"] floating enable
 for_window [class="spectacle" instance="spectacle"] floating enable
