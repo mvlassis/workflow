@@ -252,7 +252,7 @@ With argument ARG, do this that many times."
   (setq vterm-max-scrollback 10000)
   :hook(vterm-mode . (lambda () (display-line-numbers-mode 0))))
 
-(use-package ein) ; Jupyter notebook in Emacs
+;; (use-package ein) ; Jupyter notebook in Emacs
 
 ;; (use-package evil
 ;;   :config
@@ -440,6 +440,7 @@ With argument ARG, do this that many times."
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package tex
+  :defer t
   :ensure auctex
   :config
   (setq TeX-auto-save t)
