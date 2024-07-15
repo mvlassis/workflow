@@ -10,7 +10,7 @@
 # Depending on the machine, load either the default configuration file
 # or a faster version of ble.sh
 blesh_folder1="/usr/share/blesh" 
-blesh_folder2="$HOME/.local/share/blesh"
+blesh_folder2="${HOME}/.local/share/blesh"
 if [[ -d "${blesh_folder1}" ]]; then
     if [[ $HOSTNAME == "legion" ]]; then
 	source "${blesh_folder1}/ble.sh" --noattach
@@ -48,7 +48,7 @@ check_source "/usr/share/doc/fzf/examples/key-bindings.bash"
 check_source "/usr/share/doc/fzf/examples/completion.bash"
 
 # Source git-prompt.sh
-check_source "/usr/share/git/git-prompt.sh"
+check_source "${HOME}/.bin/git-prompt.sh"
 
 # Ignore consecutive identical commands and commands that begin with space
 export HISTCONTROL=ignoreboth
