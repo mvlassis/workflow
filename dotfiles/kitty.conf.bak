@@ -4,8 +4,8 @@ font_size 12
 cursor_shape block
 shell_integration disabled
 
-scrollback_lines 50000
-scrollback_page_history_size 100000
+scrollback_lines 100000
+scrollback_page_history_size 10000
 
 url_style dashed
 
@@ -15,13 +15,15 @@ tab_bar_style powerline
 
 confirm_os_window_close 5
 
+paste_actions quote-urls-at-prompt,confirm-if-large
+
 map ctrl+c copy_or_interrupt
 # map ctrl+v paste_from_clipboard
 map f5 load_config_file
 # map ctrl+t new_tab
 map ctrl+tab next_tab
 map ctrl+q close_tab
-map ctrl+shift+f launch --type=overlay --stdin-source=@screen_scrollback /usr/bin/fzf --no-sort --no-mouse --exact -i
+map ctrl+shift+f show_scrollback
 
 # include theme_kitty.conf
 
@@ -2377,6 +2379,6 @@ map ctrl+shift+f launch --type=overlay --stdin-source=@screen_scrollback /usr/bi
 
 
 # BEGIN_KITTY_THEME
-# Tomorrow Night Bright
+# Paul Millr
 include current-theme.conf
 # END_KITTY_THEME
