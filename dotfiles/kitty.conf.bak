@@ -2379,6 +2379,6 @@ map ctrl+shift+f show_scrollback
 
 
 # BEGIN_KITTY_THEME
-# Paul Millr
+# Dark Pastel
 include current-theme.conf
 # END_KITTY_THEME
