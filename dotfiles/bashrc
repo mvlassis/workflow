@@ -208,6 +208,8 @@ else
 fi
 unset __mamba_setup
 # <<< mamba initialize <<<
+# Activate base if it exists
+micromamba activate base >/dev/null 2>&1
 
 # if command -v fastfetch > /dev/null 2>&1; then
 # 	time fastfetch
