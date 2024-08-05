@@ -1,5 +1,6 @@
 export TERMINAL="kitty"
 export XDG_CURRENT_DESKTOP="KDE"
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=setting'
 setxkbmap -layout "us,gr" -option ctrl:swapcaps -option grp:alt_shift_toggle
 
 # Turn numlock on (if the necessary command exists)
