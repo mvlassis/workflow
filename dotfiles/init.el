@@ -383,25 +383,32 @@ With argument ARG, do this that many times."
 (use-package flyspell
   :defer t
   :config
-  (setq ispell-dictionary "en_US,el_GR")
+  (setq ispell-hunspell-dict-paths-alist '(("en_US" "/usr/share/hunspell/en_US.aff", "el_GR" "/usr/share/hunspell/el_GR.aff")
+  ;; (setq ispell-dictionary "en_US,el_GR")
+  ;; (ispell-set-spellchecker-params)
+  ;; (ispell-hunspell-add-multi-dic "en_US,el_GR")
+  (setq ispell-dictionary "en_US")
   (ispell-set-spellchecker-params)
-  (ispell-hunspell-add-multi-dic "en_US,el_GR")
+  (ispell-hunspell-add-multi-dic "en_US")
 )
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
+(dolist (hook '(yaml-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode -1))))
+
 (use-package company
   :config
   (global-company-mode)
   (setq company-minimum-prefix-length 5
 		company-idle-delay 1) ;; Delay to display suggestions
-
   )
 
 (use-package yaml
   :defer t
 )
 (use-package yaml-mode
-  :mode ("\\.yml\\'" . yaml-mode))
+  :mode ("\\.yml\\'" . yaml-mode)
+)
 
 (use-package xclip
   :config
