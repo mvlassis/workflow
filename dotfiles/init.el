@@ -383,13 +383,10 @@ With argument ARG, do this that many times."
 (use-package flyspell
   :defer t
   :config
-  (setq ispell-hunspell-dict-paths-alist '(("en_US" "/usr/share/hunspell/en_US.aff", "el_GR" "/usr/share/hunspell/el_GR.aff")
-  ;; (setq ispell-dictionary "en_US,el_GR")
-  ;; (ispell-set-spellchecker-params)
-  ;; (ispell-hunspell-add-multi-dic "en_US,el_GR")
-  (setq ispell-dictionary "en_US")
+  (setq ispell-program-name "/usr/bin/hunspell")
+  (setq ispell-dictionary "en_US, el_GR")
   (ispell-set-spellchecker-params)
-  (ispell-hunspell-add-multi-dic "en_US")
+  (ispell-hunspell-add-multi-dic "en_US,el_GR")
 )
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
