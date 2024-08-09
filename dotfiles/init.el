@@ -383,8 +383,9 @@ With argument ARG, do this that many times."
 (use-package flyspell
   :defer t
   :config
+  (setq ispell-quietly 1)
   (setq ispell-program-name "/usr/bin/hunspell")
-  (setq ispell-dictionary "en_US, el_GR")
+  (setq ispell-dictionary "en_US,el_GR")
   (ispell-set-spellchecker-params)
   (ispell-hunspell-add-multi-dic "en_US,el_GR")
 )
