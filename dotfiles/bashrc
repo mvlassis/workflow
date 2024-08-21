@@ -54,7 +54,7 @@ check_source "${HOME}/.bin/git-prompt.sh"
 export HISTCONTROL=ignoreboth
 export HISTSIZE=10000
 export HISTFILESIZE=10000
-export PATH="$HOME/.bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.bin:$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/go/bin:$PATH"
 export CHROME_EXECUTABLE=chromium
 export LANG=en_US.UTF-8
 export EDITOR="emacsclient -t"
