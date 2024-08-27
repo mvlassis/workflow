@@ -151,6 +151,14 @@ symlink_xprofile() {
 	fi
 }
 
+# Symlink the .Xresources file
+symlink_xresources() {
+	if send_prompt "Do you want to symlink ${BOLD}.Xresources${RESET}? This may delete your existing .Xresources file ${PROMPT}"; then
+		[[ -e "${HOME}/.Xresources" ]] && rm "${HOME}/.Xresources"
+		ln -sv "${BASEDIR}/dotfiles/Xresources" "${HOME}/.Xresources"
+	fi
+}
+
 # Symlink the scripts
 symlink_scripts() {
 	# Scripts
@@ -225,6 +233,7 @@ install_full_profile() {
 	symlink_polybar
 	symlink_dunst
 	symlink_xprofile
+	symlink_xresources
 	symlink_scripts
 	symlink_systemd
 	install_micromamba
