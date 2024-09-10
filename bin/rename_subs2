@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+working_directory = ARGV[0] || "."
+parent_directory = File.dirname(working_directory)
+show_name = File.basename(parent_directory).split('Season')[0].strip
+puts "Show name: #{show_name}"
+
+video_files = Dir.glob("*.{mkv,mp4}")
+subtitle_files = Dir.glob("*.srt")
+
+if video_files.empty?
+  puts "Error: No video files found in the current directory."
+  exit 1
+end
+
+video_count = video_files.size
+subtitle_count = subtitle_files.size
+
+if video_count != subtitle_count
+  puts "Error: The number of video files (#{video_count}) and subtitle files (#{subtitle_count}) do not match."
+  exit 2
+end
+
+# Create a subfolder for each episode
+(1..video_count).each do |i|
+  folder_name = format("Episode 1x%02d", i)
+  Dir.mkdir(folder_name) unless Dir.exist?(folder_name)
+end
