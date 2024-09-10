@@ -94,13 +94,12 @@ alias yeet='sudo pacman -Rns'
 alias mm='micromamba'
 alias mp='multipass'
 alias weather='curl --max-time 5 "wttr.in/Athens,%20Greece?1Fq&lang=en" 2> /dev/null'
+alias destroy-kubeflow="juju destroy-model kubeflow --no-prompt --release-storage --force"
 kubeflow-notify() {
 	sudo sysctl fs.inotify.max_user_instances=1280 
 	sudo sysctl fs.inotify.max_user_watches=655360
 }
 kubeflow-config() {
-	juju config dex-auth public-url=http://10.64.140.43.nip.io 
-	juju config oidc-gatekeeper public-url=http://10.64.140.43.nip.io
 	juju config dex-auth static-username=admin 
 	juju config dex-auth static-password=admin
 }
