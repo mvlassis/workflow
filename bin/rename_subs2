@@ -1,9 +1,13 @@
 #!/usr/bin/env ruby
 
-working_directory = ARGV[0] || "."
+require 'fileutils'
+
+# Get the name of the series and the season
+working_directory = ARGV[0] || Dir.pwd
 parent_directory = File.dirname(working_directory)
-show_name = File.basename(parent_directory).split('Season')[0].strip
-puts "Show name: #{show_name}"
+show_name = File.basename(working_directory).split('Season')[0].strip
+season_match = File.basename(working_directory).match(/Season\s*(\d+)/)
+season_number = season_match ? season_match[1] : "0"
 
 video_files = Dir.glob("*.{mkv,mp4}")
 subtitle_files = Dir.glob("*.srt")
@@ -23,6 +27,24 @@ end
 
 # Create a subfolder for each episode
 (1..video_count).each do |i|
-  folder_name = format("Episode 1x%02d", i)
-  Dir.mkdir(folder_name) unless Dir.exist?(folder_name)
+  episode_string = format("E%02d", i)
+  folder_name = format("#{show_name} #{season_number}x%02d", i)
+  
+  FileUtils.mkdir_p(folder_name)
+
+  video_file = video_files.find { |file| file.match(/#{episode_string}/i) }
+  subtitle_file = subtitle_files.find { |file| file.match(/#{episode_string}/i) }
+
+  if video_file.nil? || subtitle_file.nil?
+    puts "Error: Missing video or subtitle for episode #{episode_string}."
+    next 
+  end
+
+  video_destination = File.join(folder_name, File.basename(video_file))
+  FileUtils.mv(video_file, video_destination)
+  
+  new_subtitle_name = "#{File.basename(video_file, File.extname(video_file))}.srt"
+  subtitle_destination = File.join(folder_name, new_subtitle_name)
+  FileUtils.mv(subtitle_file, subtitle_destination)
 end
+
