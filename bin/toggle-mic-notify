@@ -2,12 +2,12 @@
 
 # Toggles microphone mute and sends a notification to dunst
 
-pulseaudio-ctl mute-input
+pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-if pulseaudio-ctl | grep "Is source muted" | grep -q "yes"; then
-	dunstify -a "Microphone" -h string:x-dunst-stack-tag:mic -t 1000 \
+if pactl get-source-mute @DEFAULT_SOURCE@ | grep -q "yes"; then
+	dunstify -a "Microphone" -h string:x-dunst-stack-tag:mute -t 1000 \
 			 " Muted"
 else
-	dunstify -a "Microphone" -h string:x-dunst-stack-tag:mic -t 1000 \
+	dunstify -a "Microphone" -h string:x-dunst-stack-tag:mute -t 1000 \
 			 " Unmuted"
 fi
