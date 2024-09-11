@@ -1,23 +1,85 @@
-#!/usr/bin/env bash
+#!/usr/bin/env ruby
 
-for dir in */; do
-	if [[ $(ls "$dir" | wc -l) -eq 2 ]]; then
-		video_file=""
-		subtitle_file=""
-		# Get the name of the video and the subtitle files
-		for file in "$dir"*; do
-			if [[ "$file" == *.mp4 || "$file" == *.mkv ]]; then
-				video_file="$file"
-			elif [[ "$file" == *.srt ]]; then
-				subtitle_file="$file"
-			fi
-		done
+require 'fileutils'
+require 'optparse'
 
-		if [[ -n "$video_file" ]] && [[ -n "$subtitle_file" ]]; then
-			video_base_name=$(basename "$video_file" | sed 's/\(.*\)\..*/\1/')
-			subtitle_dir=$(dirname "$subtitle_file")
-			mv "$subtitle_file" "$subtitle_dir/$video_base_name.srt"
-			echo "Renamed $subtitle_file to $subtitle_dir/$video_base_name.srt"
-		fi
-	fi
-done
+options = {sync: false, verbose: 0}
+OptionParser.new do |opts|
+  opts.banner = "Usage: rename_subs [path]"
+
+  opts.on("-h", "--help", "Show this help message") do
+    puts opts
+    exit
+  end
+
+  opts.on("-s", "--sync", "Sync subtitles using ffsubsync") do
+    if system("which ffsubsync > /dev/null 2>&1")
+      options[:sync] = true
+    end
+  end
+
+  opts.on("-v", "--verbose", "Enable verbose output") do
+    options[:verbose] += 1
+  end
+end.parse!
+
+# Simple function to log based on the verbosity level
+def log(message, options, level=1)
+  puts message if options[:verbose] >= level
+end
+
+# Get the name of the series and the season
+working_directory = ARGV[0] || Dir.pwd
+parent_directory = File.dirname(working_directory)
+show_name = File.basename(working_directory).split('Season')[0].strip
+season_match = File.basename(working_directory).match(/Season\s*(\d+)/)
+season_number = season_match ? season_match[1] : "0"
+
+Dir.chdir(working_directory)
+video_files = Dir.glob("*.{mkv,mp4}")
+subtitle_files = Dir.glob("*.srt")
+
+if video_files.empty?
+  puts "Error: No video files found in the current directory."
+  exit 1
+end
+
+video_count = video_files.size
+subtitle_count = subtitle_files.size
+
+if video_count != subtitle_count
+  puts "Error: The number of video files (#{video_count}) and subtitle files (#{subtitle_count}) do not match."
+  exit 2
+end
+
+log("Found #{video_count} episodes and their subtitles.", options)
+
+# Create a subfolder for each episode
+(1..video_count).each do |i|
+  episode_string = format("E%02d", i)
+  folder_name = format("#{show_name} #{season_number}x%02d", i)
+  
+  FileUtils.mkdir_p(folder_name)
+
+  video_file = video_files.find { |file| file.match(/#{episode_string}/i) }
+  subtitle_file = subtitle_files.find { |file| file.match(/#{episode_string}/i) }
+
+  if video_file.nil? || subtitle_file.nil?
+    puts "Error: Missing video or subtitle for episode #{episode_string}."
+    next 
+  end
+
+  if options[:sync]
+    log("Syncing #{video_file} with #{subtitle_file}...", options)
+    system("ffsubsync #{video_file} -i #{subtitle_file} -o subtitle.srt")
+    FileUtils.mv("subtitle.srt", subtitle_file)
+  end
+  
+  video_destination = File.join(folder_name, File.basename(video_file))
+  FileUtils.mv(video_file, video_destination)
+  
+  new_subtitle_name = "#{File.basename(video_file, File.extname(video_file))}.srt"
+  subtitle_destination = File.join(folder_name, new_subtitle_name)
+  FileUtils.mv(subtitle_file, subtitle_destination)
+end
+
