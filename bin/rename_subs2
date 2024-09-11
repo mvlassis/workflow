@@ -5,10 +5,20 @@ require 'optparse'
 
 options = {sync: false}
 option_parser = OptionParser.new do |opts|
-  opts.banner "Usage: rename_subs [path]"
+  opts.banner = "Usage: rename_subs [path]"
 
+  opts.on("-h", "--help", "Show this help message") do
+    puts opts
+    exit
+  end
+
+  opts.on("-s", "--sync", "Sync subtitles using ffsubsync") do
+    options[:sync] = true
+  end
   
 end
+
+option_parser.parse!
 
 # Get the name of the series and the season
 working_directory = ARGV[0] || Dir.pwd
@@ -48,6 +58,10 @@ end
     next 
   end
 
+  if options[:sync]
+    
+  end
+  
   video_destination = File.join(folder_name, File.basename(video_file))
   FileUtils.mv(video_file, video_destination)
   
