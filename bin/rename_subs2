@@ -1,6 +1,14 @@
 #!/usr/bin/env ruby
 
 require 'fileutils'
+require 'optparse'
+
+options = {sync: false}
+option_parser = OptionParser.new do |opts|
+  opts.banner "Usage: rename_subs [path]"
+
+  
+end
 
 # Get the name of the series and the season
 working_directory = ARGV[0] || Dir.pwd
