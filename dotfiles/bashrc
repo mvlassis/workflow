@@ -95,10 +95,8 @@ alias mm='micromamba'
 alias mp='multipass'
 alias weather='curl --max-time 5 "wttr.in/Athens,%20Greece?1Fq&lang=en" 2> /dev/null'
 alias destroy-kubeflow="juju destroy-model kubeflow --no-prompt --release-storage --force"
-kubeflow-notify() {
-	sudo sysctl fs.inotify.max_user_instances=1280 
-	sudo sysctl fs.inotify.max_user_watches=655360
-}
+alias lxd-networking="sudo iptables -I DOCKER-USER -i lxdbr0 -j ACCEPT \
+sudo iptables -I DOCKER-USER -o lxdbr0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"
 kubeflow-config() {
 	juju config dex-auth static-username=admin 
 	juju config dex-auth static-password=admin
