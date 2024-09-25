@@ -1,0 +1,67 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+options = {output: nil, replace: false, verbose: 0}
+OptionParser.new do |opts|
+  opts.banner = "remove_sdh - Remove SDH parts from an .srt file"
+  opts.separator "Usage: remove_sdh FILE"
+
+  opts.on("-h", "--help", "Show this help message") do
+    puts opts
+    exit
+  end
+
+  opts.on("-o", "--output OUTPUT", "Specify the output file name") do |output|
+    options[:output] = output
+  end
+  
+  opts.on("-r", "--replace", "Replace file with newly created file") do
+    options[:replace] = true
+  end
+
+  opts.on("-v", "--verbose", "Enable verbose output") do
+    options[:verbose] += 1
+  end
+end.parse!
+
+# Simple function to log based on the verbosity level
+def log(message, verbosity, level=1)
+  puts message if verbosity >= level
+end
+
+def remove_sdh(input_file, output_file, verbosity=0)
+  cleaned_lines = []
+  
+  File.open(input_file, 'r') do |file|
+    file.each_line do |line|
+      # If it's an empty line, keep it
+      if line.strip.empty?
+        cleaned_lines << line
+        next
+      end
+      # Remove sound noises like [Jazz music stops]
+      cleaned_line = line.gsub(/\[.*?\]|\(.*?\)/, '').strip
+      # Remove character names like BRITTA:
+      cleaned_line = cleaned_line.gsub(/[A-Z]+:/, '').rstrip
+      cleaned_lines << cleaned_line unless cleaned_line.empty? && !line.strip.match(/^\d+$/)
+    end
+  end
+
+  File.open(output_file, 'w') do |file|
+    cleaned_lines.each {
+      |line| file.puts(line)
+    }
+  end
+    log("Removing SDH from the subtitle is finished!", verbosity)
+end
+
+if ARGV[0].nil? || !File.exist?(ARGV[0])
+  puts "Error: Please provide a file as an argument"
+  exit(1)
+end
+
+input_srt = ARGV[0]
+output_srt = options[:output] || (options[:replace] ? input_srt : "output.srt")
+
+remove_sdh(input_srt, output_srt, options[:verbose])
