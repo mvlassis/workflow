@@ -103,7 +103,9 @@ alias weather='curl --max-time 5 "wttr.in/Athens,%20Greece?1Fq&lang=en" 2> /dev/
 alias destroy-kubeflow="juju destroy-model kubeflow --no-prompt --release-storage --force"
 alias lxd-networking="sudo iptables -I DOCKER-USER -i lxdbr0 -j ACCEPT \
 sudo iptables -I DOCKER-USER -o lxdbr0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"
-alias assh='ssh -i ~/.ssh/aws-try2.pem ubuntu@'
+assh() {
+    ssh -i ~/.ssh/aws-try2.pem ubuntu@"$1"
+}
 kubeflow-config() {
 	juju config dex-auth static-username=admin 
 	juju config dex-auth static-password=admin
