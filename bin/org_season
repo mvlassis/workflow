@@ -5,7 +5,7 @@ require 'optparse'
 
 options = {sync: false, verbose: 0}
 OptionParser.new do |opts|
-  opts.banner = "Usage: rename_subs [path]"
+  opts.banner = "Usage: org_season [path]"
 
   opts.on("-h", "--help", "Show this help message") do
     puts opts
@@ -44,10 +44,16 @@ if video_files.empty?
   exit 1
 end
 
+rename_subs = true
+if subtitle_files.empty?
+  log("No subtitle files found, organizing just the video files.", options)
+  rename_subs = false
+end  
+
 video_count = video_files.size
 subtitle_count = subtitle_files.size
 
-if video_count != subtitle_count
+if rename_subs && video_count != subtitle_count
   puts "Error: The number of video files (#{video_count}) and subtitle files (#{subtitle_count}) do not match."
   exit 2
 end
@@ -64,12 +70,12 @@ log("Found #{video_count} episodes and their subtitles.", options)
   video_file = video_files.find { |file| file.match(/#{episode_string}/i) }
   subtitle_file = subtitle_files.find { |file| file.match(/#{episode_string}/i) }
 
-  if video_file.nil? || subtitle_file.nil?
+  if video_file.nil? || (rename_subs && subtitle_file.nil?)
     puts "Error: Missing video or subtitle for episode #{episode_string}."
     next 
   end
 
-  if options[:sync]
+  if options[:sync] && rename_subs
     log("Syncing #{video_file} with #{subtitle_file}...", options)
     system("ffsubsync #{video_file} -i #{subtitle_file} -o subtitle.srt")
     FileUtils.mv("subtitle.srt", subtitle_file)
@@ -77,9 +83,11 @@ log("Found #{video_count} episodes and their subtitles.", options)
   
   video_destination = File.join(folder_name, File.basename(video_file))
   FileUtils.mv(video_file, video_destination)
-  
-  new_subtitle_name = "#{File.basename(video_file, File.extname(video_file))}.srt"
-  subtitle_destination = File.join(folder_name, new_subtitle_name)
-  FileUtils.mv(subtitle_file, subtitle_destination)
+
+  if rename_subs
+    new_subtitle_name = "#{File.basename(video_file, File.extname(video_file))}.srt"
+    subtitle_destination = File.join(folder_name, new_subtitle_name)
+    FileUtils.mv(subtitle_file, subtitle_destination)
+  end
 end
 
