@@ -81,6 +81,7 @@ then
     alias k='microk8s.kubectl'
 else
     alias k='kubectl'
+
 fi
 if command -v "microk8s.kubectl" >/dev/null 2>&1
 then
@@ -88,7 +89,8 @@ then
 else
     alias kk='kubectl -n kubeflow'
 fi
-# command -v kubecolor >/dev/null 2>&1 && alias kubectl="kubecolor"
+command -v kubecolor >/dev/null 2>&1 && alias kc="kubecolor"
+
 alias te='emacsclient -t'
 alias restart-emacs='systemctl restart --user emacs.service'
 alias open='xdg-open'
