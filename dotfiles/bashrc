@@ -42,6 +42,7 @@ check_source () {
 }
 
 # Source fzf to enable fuzzy searching
+check_source "${HOME}/.env"
 check_source "/usr/share/fzf/key-bindings.bash"
 check_source "/usr/share/fzf/completion.bash"
 check_source "/usr/share/doc/fzf/examples/key-bindings.bash"
