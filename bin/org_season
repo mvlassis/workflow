@@ -13,6 +13,10 @@ OptionParser.new do |opts|
   end
 
   opts.on("-r", "--remove-sdh", "Remove SDH from subtitles") do
+    if system("which remove_sdh > /dev/null 2>&1")
+      options[:remove_sdh] = true
+    end
+  end
   
   opts.on("-s", "--sync", "Sync subtitles using ffsubsync") do
     if system("which ffsubsync > /dev/null 2>&1")
@@ -77,12 +81,17 @@ log("Found #{video_count} episodes and their subtitles.", options)
     next 
   end
 
+  if options[:remove_sdh] && rename_subs
+    log("Removing SDH from #{subtitle_file}...", options)
+    system("remove_sdh #{subtitle_file} -r")
+  end
+  
   if options[:sync] && rename_subs
     log("Syncing #{video_file} with #{subtitle_file}...", options)
     system("ffsubsync #{video_file} -i #{subtitle_file} -o subtitle.srt")
     FileUtils.mv("subtitle.srt", subtitle_file)
   end
-  
+
   video_destination = File.join(folder_name, File.basename(video_file))
   FileUtils.mv(video_file, video_destination)
 
