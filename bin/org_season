@@ -12,6 +12,8 @@ OptionParser.new do |opts|
     exit
   end
 
+  opts.on("-r", "--remove-sdh", "Remove SDH from subtitles") do
+  
   opts.on("-s", "--sync", "Sync subtitles using ffsubsync") do
     if system("which ffsubsync > /dev/null 2>&1")
       options[:sync] = true
