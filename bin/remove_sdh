@@ -30,11 +30,13 @@ def log(message, verbosity, level=1)
   puts message if verbosity >= level
 end
 
+# Remove the SDH parts in the .srt file
 def remove_sdh(input_file, output_file, verbosity=0)
   cleaned_lines = []
   
   File.open(input_file, 'r') do |file|
     file.each_line do |line|
+
       # If it's an empty line, keep it
       if line.strip.empty?
         cleaned_lines << line
@@ -44,6 +46,8 @@ def remove_sdh(input_file, output_file, verbosity=0)
       cleaned_line = line.gsub(/\[.*?\]|\(.*?\)/, '').strip
       # Remove character names like BRITTA:
       cleaned_line = cleaned_line.gsub(/[A-Z]+:/, '').rstrip
+      # Remove this encoded character shown in some audio clips
+      cleaned_line = cleaned_line.gsub(/âª.*?âª/, '').rstrip
       cleaned_lines << cleaned_line unless cleaned_line.empty? && !line.strip.match(/^\d+$/)
     end
   end
@@ -56,6 +60,44 @@ def remove_sdh(input_file, output_file, verbosity=0)
     log("Removing SDH from the subtitle is finished!", verbosity)
 end
 
+# Remove empty entries in the .srt file, and update the line indexes
+def update_line_indexes(input_file, output_file, verbosity=0)
+  cleaned_entries = []
+  current_entry = []
+  entry_number = 1
+
+  File.open(input_file, 'r') do |file|
+    file.each_line do |line|
+      # Detect the start of a new entry
+      if line.strip.match(/^\d+$/) && !current_entry.empty?
+        # Check the current entry to see if it has text
+        if current_entry.size > 3
+          current_entry[0] = entry_number.to_s
+          cleaned_entries << current_entry
+          entry_number += 1
+        end
+        current_entry = []
+      end
+
+      current_entry << line
+    end
+
+    # Check the last entry
+    if current_entry.size > 3
+      current_entry[0] = entry_number.to_s
+      cleaned_entries << current_entry
+    end
+  end
+    
+    File.open(output_file, 'w') do |file|
+    cleaned_entries.each {
+      |entry| file.puts(entry)
+    }
+    end
+    log("Updating line indexes has finished", verbosity)
+end
+
+  
 if ARGV[0].nil? || !File.exist?(ARGV[0])
   puts "Error: Please provide a file as an argument"
   exit(1)
@@ -65,3 +107,4 @@ input_srt = ARGV[0]
 output_srt = options[:output] || (options[:replace] ? input_srt : "output.srt")
 
 remove_sdh(input_srt, output_srt, options[:verbose])
+update_line_indexes(output_srt, output_srt, options[:verbose])
