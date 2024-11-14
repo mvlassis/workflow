@@ -1,0 +1,72 @@
+#! /usr/bin/env python
+
+import os
+import shutil
+from datetime import datetime
+import sys
+
+# Base directory for interview entries
+BASE_DIR = os.path.expanduser("~/Documents/obsidian/obsidian/Written Interviews")
+DOWNLOADS_DIR = os.path.expanduser("~/Downloads")
+
+def create_interview_entry(pdf_path):
+    # Ensure the PDF file exists
+    if not os.path.isfile(pdf_path):
+        print(f"Error: PDF file not found at {pdf_path}")
+        return
+    
+    # Create a folder with the current date
+    date_name = datetime.now().strftime("%Y-%m-%d")
+    target_dir = os.path.join(BASE_DIR, date_name)
+    os.makedirs(target_dir, exist_ok=True)
+
+    # Create the scorecard file with the template
+    scorecard_file = os.path.join(target_dir, date_name + " Scorecard.md")
+    with open(scorecard_file, "w") as f:
+        f.write(
+            f"## Evidence of exceptional achievement\n\n\n"
+            f"- Writing: \n"
+            f"- Experience: \n"
+            f"- Ideas: \n"
+            f"- Motivation: \n"
+            f"## Attributes\n"
+            f"- Communication: \n"
+            f"- Python: \n"
+            f"- Data Science: \n"
+            f"- Kubernetes: \n"
+            f"- Linux: \n"
+            f"- Kubeflow/MLflow: \n"
+            f"- Infrastructure-as-code, Configuration Management: \n"
+            f"- ETC: \n"
+            f"- Container -- Docker, LXD, etc.: \n"
+            f"- Meets experience requirements: \n"
+            f"## Overall Recommendation\n\n\n"
+            f"## Recommendation\n"
+        )
+    print(f"Scorecard created for date {date_name}")
+
+    # Move the provided PDF file to the new folder
+    pdf_target_path = os.path.join(target_dir, date_name + "-interview.pdf")
+    shutil.move(pdf_path, pdf_target_path)
+
+# Return the path of the last *.pdf file in the Downloads folder with a specific filename    
+def find_last_interview():
+    pdf_files = [
+        f for f in os.listdir(DOWNLOADS_DIR) 
+        if f.startswith("File1") and f.endswith(".pdf")
+    ]
+
+    pdf_files.sort(key=lambda x: os.path.getmtime(os.path.join(DOWNLOADS_DIR, x)), reverse=True)
+    
+    return os.path.join(DOWNLOADS_DIR, pdf_files[0]) if pdf_files else None
+    
+if __name__ == "__main__":
+    # Check if a PDF file path was provided as an argument
+    if len(sys.argv) < 2:
+        pdf_path = find_last_interview()
+        if not pdf_path:
+            sys.exit(1)
+    else:
+        pdf_path = sys.argv[1]
+
+    create_interview_entry(pdf_path)
