@@ -37,7 +37,7 @@ def create_interview_entry(pdf_path):
             f"- Linux: \n"
             f"- Kubeflow/MLflow: \n"
             f"- Infrastructure-as-code, Configuration Management: \n"
-            f"- ETC: \n"
+            f"- ETL: \n"
             f"- Container -- Docker, LXD, etc.: \n"
             f"- Meets experience requirements: \n"
             f"## Overall Recommendation\n\n\n"
