@@ -108,6 +108,14 @@ symlink_kitty() {
 	fi	
 }
 
+# Symlink the hyprland configuration file
+symlink_hyprland() {
+	if send_prompt "Do you want to symlink ${BOLD}hyprland.conf${RESET}? This may delete your existing hyprland.conf file ${PROMPT}"; then
+		rm -f "${HOME}/.config/hypr/hyprland.conf"
+		ln -sv "${BASEDIR}/dotfiles/hyprland/hyprland.conf" "${HOME}/.config/hypr/hyprland.conf"
+	fi	
+}
+
 # Symlink the i3 configuration file
 symlink_i3() {
 	if send_prompt "Do you want to symlink ${BOLD}i3 config${RESET}? This will delete your existing config file ${PROMPT}"; then
@@ -229,6 +237,7 @@ install_full_profile() {
 	symlink_zsh
 	symlink_emacs
 	symlink_kitty
+	symlink_hyprland
 	symlink_i3
 	symlink_polybar
 	symlink_dunst
