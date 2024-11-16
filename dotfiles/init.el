@@ -408,10 +408,10 @@ With argument ARG, do this that many times."
   :mode ("\\.yml\\'" . yaml-mode)
 )
 
-(use-package xclip
-  :config
-  (xclip-mode 1) ; Enables easy copy/pasting in the terminal
-)
+;; (use-package xclip
+;;   :config
+;;   (xclip-mode 1) ; Enables easy copy/pasting in the terminal
+;; )
 
 ;; Shows colors of hex codes
 (use-package rainbow-mode
