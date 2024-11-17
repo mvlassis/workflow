@@ -1,6 +1,7 @@
 [Unit]
 Description=Emacs text editor
 Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
+After=xdg-desktop-autostart.target
 
 [Service]
 Type=forking
@@ -11,4 +12,4 @@ Environment=SSH_AUTH_SOCK=%t/keyring/ssh
 Restart=on-failure
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical.target
