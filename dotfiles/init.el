@@ -408,10 +408,13 @@ With argument ARG, do this that many times."
   :mode ("\\.yml\\'" . yaml-mode)
 )
 
-;; (use-package xclip
-;;   :config
-;;   (xclip-mode 1) ; Enables easy copy/pasting in the terminal
-;; )
+; Make xclip work in Emacs, see: https://discourse.doomemacs.org/t/how-to-copy-and-paste-in-wayland/4566/8
+(use-package xclip
+  :config
+  (setq xclip-program "wl-copy")
+  (setq xclip-select-enable-clipboard t)
+  (setq xclip-mode t)
+  (setq xclip-method (quote wl-copy)))
 
 ;; Shows colors of hex codes
 (use-package rainbow-mode
