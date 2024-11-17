@@ -408,13 +408,19 @@ With argument ARG, do this that many times."
   :mode ("\\.yml\\'" . yaml-mode)
 )
 
-; Make xclip work in Emacs, see: https://discourse.doomemacs.org/t/how-to-copy-and-paste-in-wayland/4566/8
 (use-package xclip
   :config
-  (setq xclip-program "wl-copy")
-  (setq xclip-select-enable-clipboard t)
-  (setq xclip-mode t)
-  (setq xclip-method (quote wl-copy)))
+  (if (string-equal (getenv "XDG_SESSION_TYPE") "wayland")
+      ;; Configuration for Wayland
+	  ;; See https://discourse.doomemacs.org/t/how-to-copy-and-paste-in-wayland/4566/8
+      (progn
+        (setq xclip-program "wl-copy")
+		(setq xclip-select-enable-clipboard t)
+        (setq xclip-method 'wl-copy)
+        (xclip-mode t)))
+  :init
+  (xclip-mode t))
+
 
 ;; Shows colors of hex codes
 (use-package rainbow-mode
