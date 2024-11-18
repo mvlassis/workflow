@@ -49,7 +49,6 @@
 ;; Make resizing smoother
 (setq frame-resize-pixelwise t)
 (setq x-select-enable-clipboard t)
-(add-to-list 'exec-path "/usr/bin/vendor_perl/") ; Add this to the emacs path for biber
 ;;(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; Add recentf mode and a shortcut to open recent files
@@ -410,7 +409,7 @@ With argument ARG, do this that many times."
 
 (use-package xclip
   :config
-  (message "Value of XDG_USER_SESSION: %s" (getenv "XDG_SESSION_TYPE"))
+  (message "Value of XDG_SESSION_TYPE: %s" (getenv "XDG_SESSION_TYPE"))
   (if (string-equal (getenv "XDG_SESSION_TYPE") "wayland")
       ;; Configuration for Wayland
 	  ;; See https://discourse.doomemacs.org/t/how-to-copy-and-paste-in-wayland/4566/8
@@ -530,7 +529,7 @@ With argument ARG, do this that many times."
  '(custom-safe-themes
    '("88f7ee5594021c60a4a6a1c275614103de8c1435d6d08cc58882f920e0cec65e" "c7fd1708e08544d1df2cba59b85bd25263180b19b287489d4f17b9118487e718" "0170347031e5dfa93813765bc4ef9269a5e357c0be01febfa3ae5e5fcb351f09" "90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940" "78e6be576f4a526d212d5f9a8798e5706990216e9be10174e3f3b015b8662e27" default))
  '(package-selected-packages
-   '(terraform-mode gnu-elpa-keyring-update consult zenburn-theme yaml-mode xclip which-key vterm vertico use-package sudo-edit snap-indent rustic reverse-im restart-emacs rainbow-mode rainbow-delimiters quelpa monokai-theme math-preview material-theme marginalia lsp-ui lsp-pyright keycast kaolin-themes ini-mode helm gruvbox-theme flycheck evil esup elpy ein eat dracula-theme doom-themes doom-modeline dap-mode cyberpunk-theme clipetty benchmark-init auto-package-update auctex arduino-mode anzu all-the-icons)))
+   '(exec-path-from-shell terraform-mode gnu-elpa-keyring-update consult zenburn-theme yaml-mode xclip which-key vterm vertico use-package sudo-edit snap-indent rustic reverse-im restart-emacs rainbow-mode rainbow-delimiters quelpa monokai-theme math-preview material-theme marginalia lsp-ui lsp-pyright keycast kaolin-themes ini-mode helm gruvbox-theme flycheck evil esup elpy ein eat dracula-theme doom-themes doom-modeline dap-mode cyberpunk-theme clipetty benchmark-init auto-package-update auctex arduino-mode anzu all-the-icons)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
