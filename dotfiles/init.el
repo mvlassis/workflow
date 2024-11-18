@@ -408,28 +408,45 @@ With argument ARG, do this that many times."
   :mode ("\\.yml\\'" . yaml-mode)
 )
 
-;; (use-package xclip
-;;   :config
-;;   (message "Value of XDG_USER_SESSION: %s" (getenv "XDG_SESSION_TYPE"))
-;;   (if (string-equal (getenv "XDG_SESSION_TYPE") "wayland")
-;;       ;; Configuration for Wayland
-;; 	  ;; See https://discourse.doomemacs.org/t/how-to-copy-and-paste-in-wayland/4566/8
-;;       (progn
-;; 		(message "Seeting xclip-program to wl-copy...")
-;;         (setq xclip-program "wl-copy")
-;; 		(setq xclip-select-enable-clipboard t)
-;;         (setq xclip-method 'wl-copy)))
-;;   (setq xclip-mode 1))
-
 (use-package xclip
   :config
   (message "Value of XDG_USER_SESSION: %s" (getenv "XDG_SESSION_TYPE"))
-  (message "Seeting xclip-program to wl-copy...")
-  (setq xclip-program "wl-copy")
+  (if (string-equal (getenv "XDG_SESSION_TYPE") "wayland")
+      ;; Configuration for Wayland
+	  ;; See https://discourse.doomemacs.org/t/how-to-copy-and-paste-in-wayland/4566/8
+      (progn
+		(message "Setting xclip-program to wl-copy...")
+        (setq xclip-program "wl-copy")
+        (setq xclip-method 'wl-copy)))
   (setq xclip-select-enable-clipboard t)
-  (setq xclip-method 'wl-copy)
   (setq xclip-mode 1))
 
+;; (use-package xclip
+;;   :config
+;;   (let ((exit-code (call-process "wl-paste" nil nil nil)))
+;;     (if (= exit-code 0)
+;;         (progn
+;;           (message "wl-paste detected, using wl-copy...")
+;;           (setq xclip-program "wl-copy")
+;;           (setq xclip-method 'wl-copy))
+;;       (message "wl-paste not detected, skipping wl-copy configuration.")))
+;;   (setq xclip-select-enable-clipboard t)
+;;   (setq xclip-mode 1))
+
+;; (use-package xclip
+;;   :defer t
+;;   :init
+;;   (add-hook 'server-visit-hook
+;;             (lambda ()
+;;               (message "Value of XDG_SESSION_TYPE: %s" (getenv "XDG_SESSION_TYPE"))
+;; 			  (if (string-equal (getenv "XDG_SESSION_TYPE") "wayland")
+;;                   (progn
+;;                     (message "wl-paste detected, using wl-copy...")
+;;                     (setq xclip-program "wl-copy")
+;;                     (setq xclip-method 'wl-copy))
+;;                   (message "wl-paste not detected, skipping wl-copy configuration."))
+;;               (setq xclip-select-enable-clipboard t)
+;;               (xclip-mode 1))))
 
 ;; Shows colors of hex codes
 (use-package rainbow-mode
