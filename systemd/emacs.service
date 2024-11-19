@@ -1,13 +1,14 @@
 [Unit]
 Description=Emacs text editor
 Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
-Requires=graphical.target
-After=graphical.target
 
 [Service]
 Type=forking
-ExecStartPre=sleep 1
+ExecStartPre=sleep 3
 ExecStart=/usr/bin/env emacs --daemon
 ExecStop=/usr/bin/env emacsclient --eval "(kill-emacs)"
 Environment=SSH_AUTH_SOCK=%t/keyring/ssh
 Restart=on-failure
+
+[Install]
+WantedBy=default.target
