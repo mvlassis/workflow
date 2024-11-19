@@ -211,6 +211,7 @@
 		"menu-actions": {
 			"shutdown": "shutdown",
 			"reboot": "reboot",
+			"logout": "hyprctl dispatch exit",
 			"suspend": "systemctl suspend",
 			"hibernate": "systemctl hibernate"
 		}
