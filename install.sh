@@ -120,8 +120,8 @@ symlink_hyprland() {
 symlink_waybar() {
 	if send_prompt "Do you want to symlink ${BOLD}Waybar's config${RESET}? This may delete your existing config file ${PROMPT}"; then
 		mkdir -p "${HOME}/.config/waybar"
-		rm -f "${HOME}/.config/waybar/config"
-		ln -sv "${BASEDIR}/dotfiles/waybar/config" "${HOME}/.config/waybar/config"
+		rm -f "${HOME}/.config/waybar/*"
+		ln -sv ${BASEDIR}/dotfiles/waybar/* "${HOME}/.config/waybar/"
 	fi	
 }
 

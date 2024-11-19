@@ -34,21 +34,26 @@
         "custom/power"
     ],
     // Modules configuration
-     "hyprland/workspaces": {
-         "disable-scroll": true,
-         "all-outputs": true,
-         "warp-on-scroll": false,
-         "format": "{name}: {icon}",
-         "format-icons": {
-			 "active": "",
-             "urgent": "",
-             "focused": "",
-             "default": ""
-         }
-     },
+	"hyprland/language": {
+		"format-en": "en",
+		"format-gr": "ελ"
+	},
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "warp-on-scroll": false,
+        "format": "{name}: {icon}",
+        "format-icons": {
+			"active": "",
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        }
+    },
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
+		"binding-keys": [29, 58, 69, 70],
         "format": "{name} {icon}",
         "format-icons": {
             "locked": "",
