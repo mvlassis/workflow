@@ -46,7 +46,7 @@ def create_interview_entry(pdf_path):
     print(f"Scorecard created for date {date_name}")
 
     # Move the provided PDF file to the new folder
-    pdf_target_path = os.path.join(target_dir, date_name + "-interview.pdf")
+    pdf_target_path = os.path.join(target_dir, date_name + "-Interview.pdf")
     shutil.move(pdf_path, pdf_target_path)
 
 # Return the path of the last *.pdf file in the Downloads folder with a specific filename    
