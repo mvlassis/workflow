@@ -126,11 +126,11 @@ symlink_waybar() {
 }
 
 # Symlink the Kanshi configuration file
-symlink_waybar() {
-	if send_prompt "Do you want to symlink ${BOLD}Waybar's config${RESET}? This may delete your existing config file ${PROMPT}"; then
-		mkdir -p "${HOME}/.config/waybar"
-		rm -f "${HOME}/.config/waybar/*"
-		ln -sv ${BASEDIR}/dotfiles/waybar/* "${HOME}/.config/waybar/"
+symlink_kanshi() {
+	if send_prompt "Do you want to symlink ${BOLD}kanshi's config${RESET}? This may delete your existing config file ${PROMPT}"; then
+		mkdir -p "${HOME}/.config/kanshi"
+		rm -f "${HOME}/.config/kanshi/*"
+		ln -sv ${BASEDIR}/dotfiles/kanshi/* "${HOME}/.config/kanshi/"
 	fi	
 }
 
@@ -257,6 +257,7 @@ install_full_profile() {
 	symlink_kitty
 	symlink_hyprland
 	symlink_waybar
+	symlink_kanshi
 	symlink_i3
 	symlink_polybar
 	symlink_dunst
