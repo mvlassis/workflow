@@ -125,6 +125,15 @@ symlink_waybar() {
 	fi	
 }
 
+# Symlink the Kanshi configuration file
+symlink_waybar() {
+	if send_prompt "Do you want to symlink ${BOLD}Waybar's config${RESET}? This may delete your existing config file ${PROMPT}"; then
+		mkdir -p "${HOME}/.config/waybar"
+		rm -f "${HOME}/.config/waybar/*"
+		ln -sv ${BASEDIR}/dotfiles/waybar/* "${HOME}/.config/waybar/"
+	fi	
+}
+
 # Symlink the i3 configuration file
 symlink_i3() {
 	if send_prompt "Do you want to symlink ${BOLD}i3 config${RESET}? This will delete your existing config file ${PROMPT}"; then
