@@ -51,7 +51,7 @@
         }
     },
     "keyboard-state": {
-        "numlock": true,
+        "numlock": false,
         "capslock": true,
 		"binding-keys": [29, 58, 69, 70],
         "format": "{name} {icon}",
