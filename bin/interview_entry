@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 import os
 import shutil
@@ -7,6 +7,7 @@ import sys
 
 # Base directory for interview entries
 BASE_DIR = os.path.expanduser("~/Documents/obsidian/obsidian/Written Interviews")
+# Directory where the script searches for the PDF files
 DOWNLOADS_DIR = os.path.expanduser("~/Downloads")
 
 def create_interview_entry(pdf_path):
@@ -15,13 +16,21 @@ def create_interview_entry(pdf_path):
         print(f"Error: PDF file not found at {pdf_path}")
         return
     
-    # Create a folder with the current date
+
     date_name = datetime.now().strftime("%Y-%m-%d")
-    target_dir = os.path.join(BASE_DIR, date_name)
-    os.makedirs(target_dir, exist_ok=True)
+    # Create a folder with the current date
+    # If a such folder exists, this means we already have an entry on this date
+    # In that case, create a new dirrectory by appending (<num>) to the date
+    base_entry_dir = os.path.join(BASE_DIR, date_name)
+    target_entry_dir = base_entry_dir
+    same_date_interviews = 1
+    while os.path.exists(target_entry_dir):
+        same_date_interviews += 1
+        target_entry_dir = f"{base_entry_dir} ({same_date_interviews})"
+    os.makedirs(target_entry_dir, exist_ok=True)
 
     # Create the scorecard file with the template
-    scorecard_file = os.path.join(target_dir, date_name + " Scorecard.md")
+    scorecard_file = os.path.join(target_entry_dir, date_name + " Scorecard.md")
     with open(scorecard_file, "w") as f:
         f.write(
             f"## Evidence of exceptional achievement\n\n\n"
@@ -43,10 +52,10 @@ def create_interview_entry(pdf_path):
             f"## Overall Recommendation\n\n\n"
             f"## Recommendation\n"
         )
-    print(f"Scorecard created for date {date_name}")
+    print(f"Scorecard created at {target_entry_dir}")
 
     # Move the provided PDF file to the new folder
-    pdf_target_path = os.path.join(target_dir, date_name + "-Interview.pdf")
+    pdf_target_path = os.path.join(target_entry_dir, date_name + "-Interview.pdf")
     shutil.move(pdf_path, pdf_target_path)
 
 # Return the path of the last *.pdf file in the Downloads folder with a specific filename    
@@ -63,10 +72,12 @@ def find_last_interview():
 if __name__ == "__main__":
     # Check if a PDF file path was provided as an argument
     if len(sys.argv) < 2:
+        # If no PDF file path was given, search for the latest one that starts with File1
         pdf_path = find_last_interview()
         if not pdf_path:
             sys.exit(1)
     else:
+        # If a path was given, register that PDF file
         pdf_path = sys.argv[1]
 
     create_interview_entry(pdf_path)
