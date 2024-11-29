@@ -112,7 +112,7 @@ symlink_kitty() {
 symlink_hyprland() {
 	if send_prompt "Do you want to symlink ${BOLD}hyprland.conf${RESET}? This may delete your existing hyprland.conf file ${PROMPT}"; then
 		rm -f "${HOME}/.config/hypr/hyprland.conf"
-		ln -sv "${BASEDIR}/dotfiles/hyprland/hyprland.conf" "${HOME}/.config/hypr/hyprland.conf"
+		ln -sv "${BASEDIR}/dotfiles/hyprland/"* "${HOME}/.config/hypr/"
 	fi	
 }
 

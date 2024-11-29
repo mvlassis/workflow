@@ -28,7 +28,6 @@
         "keyboard-state",
         "hyprland/language",
         "battery",
-        "battery#bat2",
         "clock",
         "tray",
         "custom/power"
@@ -132,7 +131,9 @@
     "backlight": {
         // "device": "acpi_video1",
         "format": "{percent}% {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
+		"scroll-step": 5.0,
+		"smooth-scrolling-threshold": 1.0,
     },
     "battery": {
         "states": {
@@ -148,9 +149,6 @@
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
-    },
-    "battery#bat2": {
-        "bat": "BAT2"
     },
     "power-profiles-daemon": {
       "format": "{icon}",
