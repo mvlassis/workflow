@@ -210,6 +210,13 @@ make_prompt() {
 	PS1="\n┌─╴${top_line}\n└─\$(exitstatus)"
 }
 
+## Setup Ruby path (if we have Ruby installed)
+
+if command -v "gem" >/dev/null 2>&1
+then
+	export GEM_HOME="$(gem env user_gemhome)"
+	export PATH="$PATH:$GEM_HOME/bin"
+fi
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba init' !!
@@ -244,5 +251,3 @@ fi # RACECAR_ALIASES
 if [ -f /home/manos/Documents/racecar/Student/scripts/racecar_tool.sh ]; then # RACECAR_ALIASES
 . /home/manos/Documents/racecar/Student/scripts/racecar_tool.sh # RACECAR_ALIASES
 fi # RACECAR_ALIASES
-alias 'shift-cd'='cd ~/shift-pro-coding/lessons'
-alias python='python3'
