@@ -214,8 +214,10 @@ make_prompt() {
 
 if command -v "gem" >/dev/null 2>&1
 then
-	export GEM_HOME="$(gem env user_gemhome)"
-	export PATH="$PATH:$GEM_HOME/bin"
+	if "gem env user_gemhome" >/dev/null 2>&1; then
+		export GEM_HOME="$(gem env user_gemhome)"
+		export PATH="$PATH:$GEM_HOME/bin"
+	fi
 fi
 
 # >>> mamba initialize >>>
