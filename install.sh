@@ -113,7 +113,11 @@ symlink_hyprland() {
 	if send_prompt "Do you want to symlink ${BOLD}hyprland.conf${RESET}? This may delete your existing hyprland.conf file ${PROMPT}"; then
 		rm -f "${HOME}/.config/hypr/hyprland.conf"
 		ln -sv "${BASEDIR}/dotfiles/hyprland/"* "${HOME}/.config/hypr/"
-	fi	
+	fi
+
+	# Also add all the plugins we use
+	hyprpm update
+	hyprpm add https://github.com/outfoxxed/hy3
 }
 
 # Symlink the Waybar configuration file
@@ -195,7 +199,7 @@ symlink_scripts() {
 	fi
 	# Clone and symlink pokecat
 	if [[ ! -d "${BASEDIR}/pokecat" ]]; then
-		git clone "https://github.com/gvlassis/pokecat.git"
+		git clone "https://github.com/mvlassis/pokecat.git"
 	fi
 	if [ ! -L "${HOME}/.bin/pokecat.sh" ]; then
 		ln -sv "${BASEDIR}/pokecat/src/pokecat.sh" "${HOME}/.bin/pokecat.sh"

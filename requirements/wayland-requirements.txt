@@ -1,3 +1,5 @@
 brightnessctl
+cpio
 hypridle
+meson
 
