@@ -201,8 +201,8 @@ With argument ARG, do this that many times."
 
 (global-unset-key (kbd "C-S-v"))
 (global-unset-key (kbd "M-l"))
-(global-set-key (kbd "M-,") 'beginning-of-buffer) ; Move to the beginning of the buffer
-(global-set-key (kbd "M-.") 'end-of-buffer) ; Move to the end of the buffer
+(global-set-key (kbd "M-<") 'beginning-of-buffer) ; Move to the beginning of the buffer
+(global-set-key (kbd "M->") 'end-of-buffer) ; Move to the end of the buffer
 (global-set-key (kbd "<C-return>") (lambda ()
 		  (interactive)
                   (end-of-line)
@@ -340,19 +340,11 @@ With argument ARG, do this that many times."
 (use-package flycheck
   :defer t
 )
-(use-package lsp-mode
-  :commands (lsp lsp-deferred)
-  :config
-  (define-key lsp-mode-map (kbd "M-l") lsp-command-map)
-  (with-eval-after-load 'lsp-mode
-	(unbind-key "M-n" lsp-mode-map))
-  (setq lsp-signature-render-documentation nil))
-(use-package lsp-ui
-  :defer t
-  :hook (lsp-mode . lsp-ui-mode)
-  :config
-  (setq lsp-ui-doc-delay 2)
-  (setq lsp-ui-doc-position "At point"))
+
+(use-package eglot
+  :hook
+  (python-mode . eglot-ensure)
+  )
 
 ;; Might need package "npm" to install pyright
 ;; (use-package lsp-pyright
