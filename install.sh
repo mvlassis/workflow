@@ -229,7 +229,7 @@ symlink_systemd() {
 } 
 
 # Starts emacs systemd service starting from the next boot
-start_emacs_service() {
+enable_emacs_service() {
 	systemctl --user enable emacs
 }
 
@@ -249,6 +249,7 @@ install_vm_profile() {
 	symlink_emacs
 	symlink_scripts
 	symlink_systemd
+	enable_emacs_service
 }
 
 
@@ -270,6 +271,7 @@ install_full_profile() {
 	symlink_xresources
 	symlink_scripts
 	symlink_systemd
+	enable_emacs_service
 	install_micromamba
 }
 
