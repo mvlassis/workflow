@@ -228,6 +228,11 @@ symlink_systemd() {
 	fi
 } 
 
+# Starts emacs systemd service starting from the next boot
+start_emacs_service() {
+	systemctl --user enable emacs
+}
+
 # Install micromamba
 install_micromamba() {
 	if [[ ! -d "${HOME}/.micromamba" ]]; then

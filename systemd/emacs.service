@@ -9,6 +9,7 @@ ExecStart=/usr/bin/env emacs --daemon
 ExecStop=/usr/bin/env emacsclient --eval "(kill-emacs)"
 Environment=SSH_AUTH_SOCK=%t/keyring/ssh
 Restart=on-failure
+TimeoutSec=180
 
 [Install]
 WantedBy=default.target
