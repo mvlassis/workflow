@@ -51,6 +51,9 @@
 (setq x-select-enable-clipboard t)
 ;;(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+;; Disable all comments on the scratchpad
+(setq initial-scratch-message "")
+
 ;; Add recentf mode and a shortcut to open recent files
 (defun my-recentf-cleanup-silently ()
   (let ((inhibit-message t))
@@ -128,6 +131,22 @@
 (electric-pair-mode)
 (global-auto-revert-mode 1)
 (setq global-auto-revert-non-file-buffers t)
+
+;; Supress the following messages
+(defvar inhibited-message-patterns '("\\[eglot\\] Connected!*"))
+
+(defun inhibit-matching-messages (orig-fun &rest args)
+  "Suppress messages that match any pattern in `inhibited-message-patterns`."
+  (let ((inhibit-message
+         (and (stringp (car args)) ;; Ensure the first argument is a string
+              (cl-some (lambda (pattern)
+                         (string-match pattern (car args)))
+                       inhibited-message-patterns)))) ;; Check all patterns
+    (unless inhibit-message
+      (apply orig-fun args)))) ;; Call the original function if no match
+
+(advice-add 'message :around #'inhibit-matching-messages)
+
 
 
 ;; Global shortcuts
@@ -218,6 +237,7 @@ With argument ARG, do this that many times."
 (global-set-key (kbd "<C-backspace>") 'backward-delete-word)
 (global-set-key (kbd "M-n") (lambda () (interactive) (next-line 5)))
 (global-set-key (kbd "M-p") (lambda () (interactive) (previous-line 5)))
+
 
 
 ;; Use 'package for package management
@@ -342,20 +362,14 @@ With argument ARG, do this that many times."
 )
 
 (use-package eglot
+  :config
+  (setq eglot-report-progress nil)
   :hook
   (python-mode . eglot-ensure)
   )
 
 (use-package pyvenv-auto
   :hook ((python-mode . pyvenv-auto-run)))
-
-;; Might need package "npm" to install pyright
-;; (use-package lsp-pyright
-;;   :defer t
-;;   :hook (python-mode . (lambda ()
-;; 						 (setq tab-width 4)
-;;                          (require 'lsp-pyright)
-;;                          (lsp))))  ; or lsp-deferred
 
 (use-package auto-package-update
   :custom
@@ -367,7 +381,8 @@ With argument ARG, do this that many times."
   (which-key-mode)
   :config
   (setq which-key-idle-delay 0.5)
-)
+  )
+
 ;; Simple mode to show total matches when searching
 (use-package anzu 
   :config
@@ -485,11 +500,6 @@ With argument ARG, do this that many times."
   (setq TeX-view-program-selection
 		'((output-pdf "Okular")))
   :hook (tex-mode . LaTeX-mode))
-
-;; (use-package yasnippet
-;;   :defer t
-;;   :hook (prog-mode . yas-minor-mode)
-;; )
 
 (defun efs/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
