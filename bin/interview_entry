@@ -7,6 +7,11 @@ import sys
 
 # Base directory for interview entries
 BASE_DIR = os.path.expanduser("~/Documents/obsidian/obsidian/Written Interviews")
+current_year = str(datetime.now().year)
+BASE_YEAR_DIR = os.path.join(BASE_DIR, current_year)
+# Also create the directory if it doesn't exist
+os.makedirs(BASE_YEAR_DIR, exist_ok=True)
+
 # Directory where the script searches for the PDF files
 DOWNLOADS_DIR = os.path.expanduser("~/Downloads")
 
@@ -21,7 +26,7 @@ def create_interview_entry(pdf_path):
     # Create a folder with the current date
     # If a such folder exists, this means we already have an entry on this date
     # In that case, create a new dirrectory by appending (<num>) to the date
-    base_entry_dir = os.path.join(BASE_DIR, date_name)
+    base_entry_dir = os.path.join(BASE_YEAR_DIR, date_name)
     target_entry_dir = base_entry_dir
     same_date_interviews = 1
     while os.path.exists(target_entry_dir):
