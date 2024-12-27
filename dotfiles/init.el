@@ -356,6 +356,7 @@ With argument ARG, do this that many times."
       (apply orig-fun args)))   ;; Call the original eglot-message function
 
   (advice-add 'eglot--message :around #'my-inhibit-eglot-messages)
+  (add-hook 'eglot-managed-mode-hook (lambda () (eglot-inlay-hints-mode -1))) 
   :hook
   (python-mode . eglot-ensure)
   (rust-mode . eglot-ensure))
