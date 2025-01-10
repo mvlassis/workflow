@@ -59,6 +59,11 @@ export PATH="$HOME/.bin:$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/go/bin:/usr
 export CHROME_EXECUTABLE=chromium
 export LANG=en_US.UTF-8
 export EDITOR="emacsclient -t"
+# The gpg-agent daemon needs this environment variable
+# See https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
+GPG_TTY=$(tty)
+export GPG_TTY
+
 
 # Aliases
 # Easier Navigation
