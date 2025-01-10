@@ -92,6 +92,7 @@ else
 fi
 command -v kubecolor >/dev/null 2>&1 && alias kc="kubecolor"
 
+alias glog="git log --oneline --decorate --graph"
 alias te='emacsclient -t'
 alias restart-emacs='systemctl restart --user emacs.service'
 alias open='xdg-open'
