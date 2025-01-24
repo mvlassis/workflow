@@ -115,6 +115,7 @@ sudo iptables -I DOCKER-USER -o lxdbr0 -m conntrack --ctstate RELATED,ESTABLISHE
 git-commit() {
 	git add . && git commit -m "$1"
 }
+alias gcom='git-commit'
 git-rebase-sign() {
 	# Rebase on a specified branch and sign all commits without editing
     git rebase --exec 'git commit --amend --no-edit -n -S' -i $1
