@@ -127,7 +127,7 @@ stop-vpn() {
 	sudo nmcli con down Canonical
 }
 assh() {
-    ssh -i ~/.ssh/aws-try2.pem ubuntu@"$1"
+    ssh -i ~/.ssh/aws-try2.pem -o StrictHostKeyChecking=no ubuntu@"$1"
 }
 kubeflow-config() {
 	juju config dex-auth static-username=admin 
