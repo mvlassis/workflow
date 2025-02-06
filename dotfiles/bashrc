@@ -120,6 +120,21 @@ git-rebase-sign() {
 	# Rebase on a specified branch and sign all commits without editing
     git rebase --exec 'git commit --amend --no-edit -n -S' -i $1
 }
+# Checkout to a specific branch based on its PR number
+git-pr-checkout () {
+	# Receives 2 arguments
+        local remote=$1
+        local pr_num=$2
+        git fetch $remote pull/$pr_num/head:pr-$pr_num
+        git checkout pr-$pr_num
+}
+docker-to-microk8s () {
+	# Receives 1 argument
+    TEMPFILE=mktemp 
+    docker save $1 > $TEMPFILE
+    microk8s ctr image import $TEMPFILE
+    rm $TEMPFILE
+}
 start-vpn() {
 	sudo nmcli con up Canonical passwd-file ~/.sesame/passwd-file
 }

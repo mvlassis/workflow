@@ -286,6 +286,11 @@ case "$PROFILE" in
         AUTOMATE=true
         install_vm_profile
         ;;
+	can)
+        AUTOMATE=true
+        install_vm_profile
+		source canonical/
+        ;;
     full)
         AUTOMATE=true
         install_full_profile
