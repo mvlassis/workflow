@@ -289,7 +289,8 @@ case "$PROFILE" in
 	can)
         AUTOMATE=true
         install_vm_profile
-		source canonical/
+		source "canonical/setup.sh"
+		setup_canonical_dev
         ;;
     full)
         AUTOMATE=true
