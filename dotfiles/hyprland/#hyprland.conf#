@@ -12,10 +12,10 @@
 
 # See https://wiki.hyprland.org/Configuring/Monitors/
 #monitor = desc:Samsung Electric Company Odyssey G85SB H1AK500000, disabled
-monitor = eDP-1, preferred, auto, 1.25
+monitor = eDP-1, preferred, auto, 1.25xc
 # monitor = desc:Samsung Electric Company Odyssey G85SB H1AK500000, 3440x1440@120Hz, auto, 1.25
-# monitor = eDP-1, disabledxc
-# monitor = HDMI-A-1, 1920x1080, auto, auto, mirror, eDP-1
+# monitor = eDP-1, disabled
+#monitor = HDMI-A-1, 1920x1080, auto, auto, mirror, eDP-1
 
 ###################
 ### MY PROGRAMS ###
@@ -144,6 +144,12 @@ decoration {
 
         vibrancy = 0.1696
     }
+}
+
+group {
+	  groupbar {
+	  		   font_size = 14
+	  }
 }
 
 # https://wiki.hyprland.org/Configuring/Variables/#animations
