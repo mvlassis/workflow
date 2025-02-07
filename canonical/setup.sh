@@ -7,6 +7,7 @@ setup_canonical_dev() {
 	sudo snap install rockcraft --channel=latest/candidate --classic
 	sudo snap install docker
 	sudo snap install yq
+	sudo snap install kustomize
 	
 	sudo groupadd docker
 	sudo usermod -aG docker $USER
