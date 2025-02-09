@@ -1,1 +1,8 @@
-ye
+profile docked {
+  output "DP-2" enable position 0,0
+  output "eDP-1" disable
+}
+
+profile undocked {
+  output "eDP-1" enable position 0,0
+}
