@@ -3,7 +3,11 @@ profile docked {
   output "eDP-1" disable
 }
 
+profile projector {
+	output "eDP-1" enable position 0,0 scale 1.25
+	output "HDMI-A-1" enable mirror "eDP-1"
+}
+
 profile undocked {
   output "eDP-1" enable position 0,0 scale 1.25
 }
-
