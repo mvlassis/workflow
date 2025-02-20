@@ -272,6 +272,5 @@ if [ -f ${RACECAR_PATH}/scripts/.config ]; then # RACECAR_ALIASES
 	. ${RACECAR_PATH}/scripts/.config # RACECAR_ALIASES
 fi # RACECAR_ALIASES
 if [ -f ${RACECAR_PATH}/scripts/racecar_tool.sh ]; then # RACECAR_ALIASES
-	echo "yee"
 	. ${RACECAR_PATH}/scripts/racecar_tool.sh # RACECAR_ALIASES
 fi # RACECAR_ALIASES
