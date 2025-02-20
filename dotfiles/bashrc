@@ -267,8 +267,8 @@ eval "$(zoxide init bash)"
 [[ ${BLE_VERSION-} ]] && ble-attach
 
 # Source RACECAR tool # RACECAR_ALIASES
-if [ -f /home/manos/Documents/racecar/Student/scripts/.config ]; then # RACECAR_ALIASES
-. /home/manos/Documents/racecar/Student/scripts/.config # RACECAR_ALIASES
+if [ -f ${USER}/Github/racecar-mvlassis/scripts/.config ]; then # RACECAR_ALIASES
+. ${USER}/Github/racecar-mvlassis/scripts/.config # RACECAR_ALIASES
 fi # RACECAR_ALIASES
 if [ -f /home/manos/Documents/racecar/Student/scripts/racecar_tool.sh ]; then # RACECAR_ALIASES
 . /home/manos/Documents/racecar/Student/scripts/racecar_tool.sh # RACECAR_ALIASES
