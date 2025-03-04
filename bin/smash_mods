@@ -1,0 +1,56 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+require 'optparse'
+
+# Rename all items in this sudirectory recursively, by replacing old_str with new_str
+def rename_items(directory, old_str, new_str)
+  # Get all files/directories, and sort then by their depth to handle deep items first
+  items = Dir.glob("#{directory}/**/*", File::FNM_DOTMATCH).sort_by { |path| -path.count('/') }
+
+  items.each do |item|
+    next if item.end_with?('.', '..')
+    base_name = File.basename(item)
+    # Only rename directories and specific model files
+    next unless base_name.include?(old_str) && (File.directory?(item) || base_name.end_with?('.bntx'))
+
+    new_name = base_name.gsub(old_str, new_str)
+
+    new_path = File.join(File.dirname(item), new_name)
+
+    FileUtils.mv(item, new_path)
+    puts "Renamed: #{item} -> #{new_path}"
+  end
+end
+
+directory = "."
+
+OptionParser.new  do |opts|
+  opts.banner = "replace_names - Remove SDH parts from an .srt file"
+  opts.separator "Usage: remove_names [DIRECTORY] OLD NEW"
+
+  opts.on("-h", "--help", "Show this help message") do
+    puts opts
+    exit
+  end
+
+  opts.on("-d", "--directory", "Directory to search") do |dir|
+    directory = dir
+  end
+end.parse!
+
+if ARGV.length < 2
+  puts "Usage: remove_names [DIRECTORY] OLD NEW"
+  exit(1)
+end
+
+old_str = ARGV[0]
+new_str = ARGV[1]
+
+unless Dir.exist?(directory)
+  puts "Error: Directory does not exist"
+  exit(1)
+end
+
+rename_items(directory, old_str, new_str)
+
