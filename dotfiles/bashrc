@@ -48,6 +48,9 @@ check_source "/usr/share/fzf/completion.bash"
 check_source "/usr/share/doc/fzf/examples/key-bindings.bash"
 check_source "/usr/share/doc/fzf/examples/completion.bash"
 
+# Source bash_completion
+check_source "/etc/bash_completion"
+
 # Source git-prompt.sh
 check_source "${HOME}/.bin/git-prompt.sh"
 
