@@ -12,7 +12,7 @@ def rename_items(directory, old_str, new_str)
     next if item.end_with?('.', '..')
     base_name = File.basename(item)
     # Only rename directories and specific model files
-    next unless base_name.include?(old_str) && (File.directory?(item) || base_name.end_with?('.bntx'))
+    next unless base_name.include?(old_str) && (File.directory?(item) || base_name.end_with?('.bntx', '.nus3audio'))
 
     new_name = base_name.gsub(old_str, new_str)
 
@@ -22,6 +22,7 @@ def rename_items(directory, old_str, new_str)
     puts "Renamed: #{item} -> #{new_path}"
   end
 end
+
 
 directory = "."
 
