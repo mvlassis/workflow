@@ -54,6 +54,9 @@ check_source "/etc/bash_completion"
 # Source git-prompt.sh
 check_source "${HOME}/.bin/git-prompt.sh"
 
+# Source Canonistack credentials
+check_source "${HOME}/.canonistack/novarc_bos01"
+
 # Ignore consecutive identical commands and commands that begin with space
 export HISTCONTROL=ignoreboth
 export HISTSIZE=50000
@@ -139,10 +142,10 @@ docker-to-microk8s () {
     rm $TEMPFILE
 }
 start-vpn() {
-	sudo nmcli con up Canonical passwd-file ~/.sesame/passwd-file
+	sudo nmcli con up "uk-mvlassis"
 }
 stop-vpn() {
-	sudo nmcli con down Canonical
+	sudo nmcli con down "uk-mvlassis"
 }
 assh() {
     ssh -i ~/.ssh/aws-try2.pem -o StrictHostKeyChecking=no ubuntu@"$1"
