@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'fileutils'
+require 'json'
 require 'optparse'
 
 # Rename all items in this sudirectory recursively, by replacing old_str with new_str
@@ -23,6 +24,21 @@ def rename_items(directory, old_str, new_str)
   end
 end
 
+
+def update_json_content(json_file, old_str, new_str)
+  begin
+    content = File.read(json_file)
+    json_data = JSON.parse(content)
+
+    # Convert the JSON back to a string after replacing occurrences
+    updated_content = JSON.pretty_generate(json_data).gsub(old_str, new_str)
+
+    File.write(json_file, updated_content)
+    puts "Updated JSON content in: #{json_file}"
+  rescue JSON::ParserError => e
+    puts "Warning: Could not parse JSON file #{json_file}: #{e.message}"
+  end
+end
 
 directory = "."
 
