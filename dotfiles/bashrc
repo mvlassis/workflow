@@ -155,7 +155,6 @@ kubeflow-config() {
 	juju config dex-auth static-password=admin
 }
 
-# ls shortcuts
 alias ll='la -l'
 alias ls='ls --color=auto'
 alias la='ls -aA'
@@ -271,6 +270,7 @@ pokecat
 
 eval "$(zoxide init bash)"
 [[ ${BLE_VERSION-} ]] && ble-attach
+eval "$(atuin init bash)"
 
 # Source RACECAR tool # RACECAR_ALIASES
 RACECAR_PATH="${HOME}/Github/racecar-mvlassis"
