@@ -64,8 +64,8 @@ install_blesh() {
 }
 
 install_atuin() {
-	atuin_bin1="${HOME}/.atuin/bin"
-	atuin_bin2="/usr/bin/atuin/atuin"
+	atuin_bin1="${HOME}/.atuin/bin/atuin"
+	atuin_bin2="/usr/bin/atuin"
 	if [[ ! -f "${atuin_bin1}" && ! -d "${atuin_bin2}" ]]; then
 		if send_prompt "atuin not detected! Do you want to install atuin in $HOME/.atuin/bin? ${PROMPT}"; then
 			curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh	
