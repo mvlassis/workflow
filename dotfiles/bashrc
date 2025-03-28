@@ -272,7 +272,7 @@ eval "$(zoxide init bash)"
 [[ ${BLE_VERSION-} ]] && ble-attach
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
 [[ -f "$HOME/.atuin/bin/env" ]] && . "$HOME/.atuin/bin/env"
-eval "$(atuin init bash)"
+eval "$(atuin init bash --disable-up-arrow)"
 
 # Source RACECAR tool # RACECAR_ALIASES
 RACECAR_PATH="${HOME}/Github/racecar-mvlassis"
