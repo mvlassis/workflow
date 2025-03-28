@@ -63,6 +63,20 @@ install_blesh() {
 	fi   
 }
 
+install_atuin() {
+	atuin_bin1="${HOME}/.atuin/bin"
+	atuin_bin2="/usr/bin/atuin/atuin"
+	if [[ ! -f "${atuin_bin1}" && ! -d "${atuin_bin2}" ]]; then
+		if send_prompt "atuin not detected! Do you want to install atuin in $HOME/.atuin/bin? ${PROMPT}"; then
+			curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh	
+			echo "atuin successfully installed!"
+		fi
+	else
+		echo "atuin is already installed! Moving on..."
+	fi   
+
+}
+
 # Symlink the bash configuration file
 symlink_bash() {
 	if send_prompt "Do you want to symlink ${BOLD}.bashrc${RESET}? This may delete your existing .bashrc file ${PROMPT}"; then
@@ -248,6 +262,7 @@ install_micromamba() {
 install_vm_profile() {
 	install_prerequisites
 	install_blesh
+	install_atuin
 	symlink_bash
 	symlink_blesh
 	symlink_emacs
@@ -260,6 +275,7 @@ install_vm_profile() {
 install_full_profile() {
 	install_prerequisites
 	install_blesh
+	install_atuin
 	symlink_bash
 	symlink_blesh
 	symlink_zsh
