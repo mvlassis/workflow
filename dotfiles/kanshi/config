@@ -4,5 +4,5 @@ profile docked {
 }
 
 profile undocked {
-  output "eDP-1" enable position 0,0 scale 1
+  output "eDP-1" enable position 0,0 scale 1.25
 }
