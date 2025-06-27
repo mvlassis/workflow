@@ -251,6 +251,10 @@ then
 	fi
 fi
 
+# Add keys to ssh-agent
+eval "$(ssh-agent -s)"
+[[ -f "${HOME}/.ssh/no-pass" ]] && ssh-add "${HOME}/.ssh/no-pass"
+
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba init' !!
 # export MAMBA_EXE="/usr/bin/micromamba";
@@ -274,6 +278,7 @@ eval "$(zoxide init bash)"
 [[ -f "$HOME/.atuin/bin/env" ]] && . "$HOME/.atuin/bin/env"
 eval "$(atuin init bash --disable-up-arrow)"
 
+# For RACECAR challenge
 # Source RACECAR tool # RACECAR_ALIASES
 RACECAR_PATH="${HOME}/Github/racecar-mvlassis"
 if [ -f ${RACECAR_PATH}/scripts/.config ]; then # RACECAR_ALIASES
