@@ -253,7 +253,7 @@ fi
 
 # Add keys to ssh-agent
 eval "$(ssh-agent -s)" >/dev/null
-[[ -f "${HOME}/.ssh/no-pass" ]] && ssh-add "${HOME}/.ssh/no-pass" >/dev/null
+[[ -f "${HOME}/.ssh/no-pass" ]] && ssh-add "${HOME}/.ssh/no-pass" >/dev/null 2>&1
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba init' !!
