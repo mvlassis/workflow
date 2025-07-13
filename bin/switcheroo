@@ -5,9 +5,35 @@
 # DESCRIPTION
 # Toggle between swapping caps lock with left ctrl
 
-options=$(setxkbmap -query | grep -c "swapcaps")
-if [[ options -gt "0" ]]; then
-    setxkbmap -option -option grp:alt_shift_toggle
+if [[ "${XDG_CURRENT_DESKTOP}" == "Hyprland" ]]; then
+	current_options=$(hyprctl getoption input:kb_options | grep '^str:' | sed 's/str: //')
+
+	if echo "$current_options" | grep -q "ctrl:swapcaps"; then
+		# Remove the option and leftover commas
+		new_options=$(echo "${current_options}" | sed 's/ctrl:swapcaps//' | sed 's/,,/,/' | sed 's/^,//' | sed 's/,$//')
+		hyprctl keyword -q input:kb_options "${new_options}"
+		notify-send "Keyboard: Caps Lock and Ctrl restored"
+	else
+		if [ -z "${current_options}" ]; then
+			new_options="ctrl:swapcaps"
+		else
+			new_options="${current_options},ctrl:swapcaps"
+		fi
+		hyprctl keyword -q input:kb_options "$new_options"
+		notify-send "Keyboard: Caps Lock and Ctrl swapped"
+	fi
+elif [[ ${XDG_SESSION_TYPE} == "x11" ]]; then
+	options=$(setxkbmap -query | grep -c "swapcaps")
+	if [[ options -gt "0" ]]; then
+		setxkbmap -option -option grp:alt_shift_toggle
+		notify-send "Keyboard: Caps Lock and Ctrl restored"
+	else
+		setxkbmap -option ctrl:swapcaps -option grp:alt_shift_toggle
+		notify-send "Keyboard: Caps Lock and Ctrl swapped"
+	fi
 else
-    setxkbmap -option ctrl:swapcaps -option grp:alt_shift_toggle
+	echo "non-Hyprland Wayland sessions not supported"
+	exit 1
 fi
+
+
