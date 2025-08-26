@@ -11,6 +11,7 @@ hunspell-en-us
 hunspell-el
 kitty
 kubecolor
+pipx
 pyright
 xclip
 zoxide
