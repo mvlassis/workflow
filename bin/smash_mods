@@ -25,39 +25,51 @@ def rename_items(directory, old_str, new_str)
 end
 
 
-def update_json_content(json_file, old_str, new_str)
+def update_json_content(directory, old_str, new_str)
+  old_str_prefix = "c#{old_str}"
+  new_str_prefix = "c#{new_str}"
   begin
-    content = File.read(json_file)
-    json_data = JSON.parse(content)
+    # Get all files/directories, and sort then by their depth to handle deep items first
+    items = Dir.glob("#{directory}/**/*", File::FNM_DOTMATCH).sort_by { |path| -path.count('/') }
+    items.each do |item|
+      base_name = File.basename(item)
+      # Only work on JSON files
+      next unless base_name.end_with?('.json')
+      content = File.read(item)
+      json_data = JSON.parse(content)
 
-    # Convert the JSON back to a string after replacing occurrences
-    updated_content = JSON.pretty_generate(json_data).gsub(old_str, new_str)
+      # Convert the JSON back to a string after replacing occurrences
+      updated_content = JSON.pretty_generate(json_data).gsub(old_str_prefix, new_str_prefix)
 
-    File.write(json_file, updated_content)
-    puts "Updated JSON content in: #{json_file}"
-  rescue JSON::ParserError => e
-    puts "Warning: Could not parse JSON file #{json_file}: #{e.message}"
+      File.write(item, updated_content)
+      puts "Updated JSON content in: #{item}"
+    rescue JSON::ParserError => e
+      puts "Warning: Could not parse JSON file #{item}: #{e.message}"
+    end
   end
 end
 
 directory = "."
 
 OptionParser.new  do |opts|
-  opts.banner = "replace_names - Remove SDH parts from an .srt file"
-  opts.separator "Usage: remove_names [DIRECTORY] OLD NEW"
+  opts.banner = "smash_mods - Replace a character slot with another"
+  opts.separator "Usage: smash_mods OLD NEW"
+  opts.separator ""
+  opts.separator "OLD    Number between 01 and 07"
+  opts.separator "NEW    Number between 01 and 07"
 
   opts.on("-h", "--help", "Show this help message") do
     puts opts
     exit
   end
 
-  opts.on("-d", "--directory", "Directory to search") do |dir|
+  opts.on("-d", "--directory", "Directory to search (by default PWD)") do |dir|
     directory = dir
   end
 end.parse!
 
 if ARGV.length < 2
-  puts "Usage: remove_names [DIRECTORY] OLD NEW"
+  puts "Usage: smash_mods OLD NEW"
   exit(1)
 end
 
@@ -70,4 +82,5 @@ unless Dir.exist?(directory)
 end
 
 rename_items(directory, old_str, new_str)
+update_json_content(directory, old_str, new_str)
 
