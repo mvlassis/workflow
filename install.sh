@@ -311,8 +311,7 @@ case "$PROFILE" in
         AUTOMATE=true
         install_vm_profile
 		edit_microk8s_inotify
-		# source "canonical/setup.sh"
-		# setup_canonical_dev
+		source "canonical/setup.sh"
         ;;
     full)
         AUTOMATE=true
