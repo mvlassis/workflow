@@ -249,6 +249,10 @@ With argument ARG, do this that many times."
 (use-package ini-mode ;; mode for .ini files
   :mode ("\\.ini\\'" . ini-mode))
 
+(use-package leetcode
+  :config
+  (setq leetcode-prefer-language "python3"))
+
 (use-package vterm
   :defer t
   :bind (:map vterm-mode-map ("C-y" . vterm-yank))
@@ -536,9 +540,9 @@ With argument ARG, do this that many times."
 				   exec-path-from-shell flycheck
 				   gnu-elpa-keyring-update gruvbox-theme
 				   hyprlang-ts-mode ini-mode kaolin-themes keycast
-				   lsp-pyright lsp-ui marginalia material-theme
-				   math-preview monokai-theme pyvenv pyvenv-auto
-				   quelpa rainbow-delimiters rainbow-mode
+				   leetcode lsp-pyright lsp-ui marginalia
+				   material-theme math-preview monokai-theme pyvenv
+				   pyvenv-auto quelpa rainbow-delimiters rainbow-mode
 				   restart-emacs reverse-im snap-indent sudo-edit
 				   terraform-mode use-package vterm which-key xclip
 				   yaml-mode zenburn-theme)))
