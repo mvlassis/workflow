@@ -249,10 +249,6 @@ With argument ARG, do this that many times."
 (use-package ini-mode ;; mode for .ini files
   :mode ("\\.ini\\'" . ini-mode))
 
-(use-package leetcode
-  :config
-  (setq leetcode-prefer-language "python3"))
-
 (use-package vterm
   :defer t
   :bind (:map vterm-mode-map ("C-y" . vterm-yank))
