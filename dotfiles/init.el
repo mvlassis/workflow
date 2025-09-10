@@ -222,6 +222,8 @@ With argument ARG, do this that many times."
 (global-set-key (kbd "<C-backspace>") 'backward-delete-word)
 (global-set-key (kbd "M-n") (lambda () (interactive) (next-line 5)))
 (global-set-key (kbd "M-p") (lambda () (interactive) (previous-line 5)))
+(define-key isearch-mode-map (kbd "<right>") 'isearch-repeat-forward)
+(define-key isearch-mode-map (kbd "<left>") 'isearch-repeat-backward)
 
 
 
