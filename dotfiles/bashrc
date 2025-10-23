@@ -61,7 +61,7 @@ check_source "${HOME}/.canonistack/novarc_bos01"
 export HISTCONTROL=ignoreboth
 export HISTSIZE=50000
 export HISTFILESIZE=50000
-export PATH="$HOME/.bin:$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/go/bin:/usr/lib/emscripten:$PATH"
+export PATH="$HOME/.bin:$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/go/bin:/usr/lib/emscripten:$HOME/go/bin:$PATH"
 export CHROME_EXECUTABLE=chromium
 export LANG=en_US.UTF-8
 export EDITOR="emacsclient -t"
