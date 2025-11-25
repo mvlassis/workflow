@@ -15,7 +15,7 @@ if [[ -d "${blesh_folder1}" ]]; then
     if [[ $HOSTNAME == "legion" ]]; then
 	source "${blesh_folder1}/ble.sh" --noattach
     else
-	source "${blesh_folder1}/ble.sh" --noattach "${HOME}/.blerc2"
+	source "${blesh_folder1}/ble.sh" --noattach "${HOME}/.blerc"
     fi
 	blesh=1
 else
@@ -23,7 +23,7 @@ else
 	    if [[ $HOSTNAME == "legion" ]]; then
 			source "${blesh_folder2}/ble.sh" --noattach
 	    else
-			source "${blesh_folder2}/ble.sh" --noattach --rcfile "${HOME}/.blerc2"
+			source "${blesh_folder2}/ble.sh" --noattach --rcfile "${HOME}/.blerc"
 	    fi
 	    blesh=1
     fi
