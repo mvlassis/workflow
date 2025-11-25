@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+sudo snap install terraform --classic
 sudo snap install concierge --classic
 
 sudo apt-get remove -y docker-ce docker-ce-cli containerd.io

@@ -12,7 +12,7 @@
 blesh_folder1="/usr/share/blesh" 
 blesh_folder2="${HOME}/.local/share/blesh"
 if [[ -d "${blesh_folder1}" ]]; then
-    if [[ $HOSTNAME == "legion" ]]; then
+    if [[ $HOSTNAME == "legion" || $HOSTNAME == "dev" ]]; then
 	source "${blesh_folder1}/ble.sh" --noattach
     else
 	source "${blesh_folder1}/ble.sh" --noattach "${HOME}/.blerc"

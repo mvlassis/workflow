@@ -5,6 +5,7 @@ emacs
 gawk
 git
 gh
+jupytext
 ispell
 hunspell
 hunspell-en-us
@@ -13,5 +14,6 @@ kitty
 kubecolor
 pipx
 pyright
+ripgrep
 xclip
 zoxide
