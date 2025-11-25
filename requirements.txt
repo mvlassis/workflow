@@ -5,6 +5,7 @@ emacs
 gawk
 git
 gh
+jupytext
 ispell
 hunspell
 hunspell-en-us
