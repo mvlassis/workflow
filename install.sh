@@ -28,8 +28,12 @@ install_prerequisites() {
         echo "apt command not found. Exiting."
         return 1
     fi
-	
+
 	sudo apt update
+	if ! command -v pipx &> /dev/null; then
+        sudo apt install -y pipx
+    fi
+	
 	while IFS= read -r package
 	do
 		if dpkg -s "$package" >/dev/null 2>&1; then
@@ -37,7 +41,9 @@ install_prerequisites() {
         else
 		    if [[ "$package" = "emacs" || "$package" = "pyright" ]]; then
                 sudo snap install "$package" --classic || true
-            else
+            elif [[ "$package" = "jupytext" ]]; then
+				pipx install "$package" || true
+			else
                 sudo apt install -y "$package" 2>/dev/null || true
             fi
 		fi

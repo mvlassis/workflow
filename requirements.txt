@@ -12,7 +12,7 @@ hunspell-en-us
 hunspell-el
 kitty
 kubecolor
-pipx
+kustomize
 pyright
 ripgrep
 xclip
