@@ -538,16 +538,7 @@ With argument ARG, do this that many times."
 	 "90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940"
 	 "78e6be576f4a526d212d5f9a8798e5706990216e9be10174e3f3b015b8662e27"
 	 default))
- '(package-selected-packages
-   '(all-the-icons anzu arduino-mode auctex auto-package-update
-				   benchmark-init clipetty code-cells company consult
-				   dap-mode dockerfile-mode doom-modeline doom-themes
-				   dracula-theme flycheck gruvbox-theme ini-mode
-				   kaolin-themes marginalia material-theme
-				   math-preview monokai-theme orderless poetry
-				   pyvenv-auto rainbow-delimiters rainbow-mode
-				   restart-emacs reverse-im rust-mode terraform-mode
-				   vertico vterm xclip yaml-mode zenburn-theme)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
