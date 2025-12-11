@@ -434,33 +434,6 @@ With argument ARG, do this that many times."
   (setq xclip-select-enable-clipboard t)
   (setq xclip-mode 1))
 
-;; (use-package xclip
-;;   :config
-;;   (let ((exit-code (call-process "wl-paste" nil nil nil)))
-;;     (if (= exit-code 0)
-;;         (progn
-;;           (message "wl-paste detected, using wl-copy...")
-;;           (setq xclip-program "wl-copy")
-;;           (setq xclip-method 'wl-copy))
-;;       (message "wl-paste not detected, skipping wl-copy configuration.")))
-;;   (setq xclip-select-enable-clipboard t)
-;;   (setq xclip-mode 1))
-
-;; (use-package xclip
-;;   :defer t
-;;   :init
-;;   (add-hook 'server-visit-hook
-;;             (lambda ()
-;;               (message "Value of XDG_SESSION_TYPE: %s" (getenv "XDG_SESSION_TYPE"))
-;; 			  (if (string-equal (getenv "XDG_SESSION_TYPE") "wayland")
-;;                   (progn
-;;                     (message "wl-paste detected, using wl-copy...")
-;;                     (setq xclip-program "wl-copy")
-;;                     (setq xclip-method 'wl-copy))
-;;                   (message "wl-paste not detected, skipping wl-copy configuration."))
-;;               (setq xclip-select-enable-clipboard t)
-;;               (xclip-mode 1))))
-
 ;; Shows colors of hex codes
 (use-package rainbow-mode
   :hook (prog-mode . rainbow-mode))
@@ -538,7 +511,18 @@ With argument ARG, do this that many times."
 	 "90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940"
 	 "78e6be576f4a526d212d5f9a8798e5706990216e9be10174e3f3b015b8662e27"
 	 default))
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(all-the-icons anzu arduino-mode auctex auto-package-update
+				   benchmark-init clipetty code-cells company consult
+				   dap-mode dockerfile-mode doom-modeline doom-themes
+				   dracula-theme ein exec-path-from-shell
+				   gruvbox-theme hyprlang-ts-mode ini-mode just-mode
+				   kaolin-themes leetcode lsp-pyright lsp-ui
+				   marginalia material-theme math-preview
+				   monokai-theme orderless poetry pyvenv-auto
+				   rainbow-delimiters rainbow-mode restart-emacs
+				   reverse-im rustic terraform-mode vertico vterm
+				   which-key xclip yaml-mode zenburn-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -546,3 +530,4 @@ With argument ARG, do this that many times."
  ;; If there is more than one, they won't work right.
  )
 
+(use-package just-mode)
