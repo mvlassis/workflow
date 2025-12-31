@@ -79,6 +79,9 @@ def update_line_indexes(input_file, output_file, verbosity=0)
         current_entry = []
       end
 
+      # Skip lines containing only "-"
+      next if line.strip == "-"
+      
       current_entry << line
     end
 
