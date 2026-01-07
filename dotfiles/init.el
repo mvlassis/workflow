@@ -404,8 +404,13 @@ With argument ARG, do this that many times."
 )
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
+
 (dolist (hook '(yaml-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode -1))))
+  (add-hook hook (lambda ()
+                   ;; Disable flyspell
+                   (flyspell-mode -1)
+                   ;; Clean whitespace automatically on save (buffer-local)
+                   (add-hook 'before-save-hook 'delete-trailing-whitespace nil t))))
 
 (use-package company
   :config
