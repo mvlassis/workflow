@@ -423,7 +423,8 @@ With argument ARG, do this that many times."
   :defer t
 )
 (use-package yaml-mode
-  :mode ("\\.yml\\'" . yaml-mode)
+  :mode (("\\.yml\\'" . yaml-mode)
+		 ("\\.yaml\\.j2\\'" . yaml-mode))
 )
 
 (use-package xclip
