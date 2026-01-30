@@ -1,5 +1,6 @@
 juju:
   channel: 3.6/stable
+  agent-version: 3.6.11
 
 providers:
   k8s:
