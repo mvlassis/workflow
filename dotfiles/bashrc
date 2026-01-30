@@ -116,6 +116,7 @@ alias mp='multipass'
 alias mm='micromamba'
 alias weather='curl --max-time 5 "wttr.in/Athens,%20Greece?1Fq&lang=en" 2> /dev/null'
 alias destroy-kubeflow="juju destroy-model kubeflow --no-prompt --release-storage --force"
+alias jsw="juju status --watch 1s"
 alias lxd-networking="sudo iptables -I DOCKER-USER -i lxdbr0 -j ACCEPT;\
 sudo iptables -I DOCKER-USER -o lxdbr0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"
 git-commit() {
