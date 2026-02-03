@@ -265,11 +265,6 @@ install_micromamba() {
 	fi
 }
 
-edit_microk8s_inotify() {
-	echo "fs.inotify.max_user_instances=1280" >> /etc/sysctl.conf
-	echo "fs.inotify.max_user_watches=655360" >> /etc/sysctl.conf
-}
-
 install_vm_profile() {
 	install_prerequisites
 	install_blesh
@@ -316,7 +311,6 @@ case "$PROFILE" in
 	can)
         AUTOMATE=true
         install_vm_profile
-		edit_microk8s_inotify
 		source "canonical/setup.sh"
         ;;
     full)
