@@ -303,7 +303,37 @@ With argument ARG, do this that many times."
 
 (use-package all-the-icons)
 
-(use-package poetry)
+;; Add pipx binary directory to Emacs path
+(let ((pipx-bin (expand-file-name "~/.local/bin")))
+  (add-to-list 'exec-path pipx-bin)
+  (setenv "PATH" (concat pipx-bin ":" (getenv "PATH"))))
+
+(use-package poetry
+  :ensure t
+  :config
+  (setq poetry-tracking-strategy 'project))
+
+(defun my/python-poetry-hook ()
+  "Automatically install and activate poetry projects."
+  (interactive)
+  (when-let ((project-root (locate-dominating-file default-directory "pyproject.toml")))
+    ;; 1. Run 'poetry install' in the background if pyproject exists
+    (let ((default-directory project-root))
+      ;; Check if poetry is actually available first
+      (if (executable-find "poetry")
+          (start-process "poetry-install" "*poetry-log*" "poetry" "install" "--with" "charm" "--with" "integration")
+        (message "Warning: Poetry executable not found.")))
+
+    ;; 2. Activate the venv
+    ;; We use condition-case to "catch" errors if the venv doesn't exist yet
+    (condition-case nil
+        (poetry-venv-workon)
+      (error (message "Poetry venv not ready yet. Try M-x poetry-venv-workon later.")))
+
+    ;; 3. Start Eglot
+    (eglot-ensure)))
+
+(add-hook 'python-mode-hook #'my/python-poetry-hook)
 
 (use-package vertico
   :custom
@@ -371,9 +401,6 @@ With argument ARG, do this that many times."
   :hook
   (python-mode . eglot-ensure)
   (rust-mode . eglot-ensure))
-
-(use-package pyvenv-auto
-  :hook ((python-mode . pyvenv-auto-run)))
 
 (use-package auto-package-update
   :custom
