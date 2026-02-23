@@ -432,6 +432,15 @@ With argument ARG, do this that many times."
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
 
+;; HTML: avoid tags being flagged
+(add-hook 'mhtml-mode-hook
+          (lambda ()
+            (flyspell-mode -1)
+            (flyspell-prog-mode)))
+
+(dolist (hook '(prog-mode-hook))
+  (add-hook hook (lambda () (flyspell-prog-mode))))
+
 (dolist (hook '(yaml-mode-hook))
   (add-hook hook (lambda ()
                    ;; Disable flyspell
