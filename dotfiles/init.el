@@ -429,14 +429,16 @@ With argument ARG, do this that many times."
   (ispell-set-spellchecker-params)
   (ispell-hunspell-add-multi-dic "en_US,el_GR")
 )
-(dolist (hook '(text-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode 1))))
+
+(add-hook 'text-mode-hook
+          (lambda ()
+            (unless (derived-mode-p 'mhtml-mode)
+              (flyspell-mode 1))))
 
 ;; HTML: avoid tags being flagged
 (add-hook 'mhtml-mode-hook
           (lambda ()
-            (flyspell-mode -1)
-            (flyspell-prog-mode)))
+            (flyspell-mode -1)))
 
 (dolist (hook '(prog-mode-hook))
   (add-hook hook (lambda () (flyspell-prog-mode))))
@@ -563,7 +565,7 @@ With argument ARG, do this that many times."
 				   marginalia material-theme math-preview
 				   monokai-theme orderless poetry pyvenv-auto
 				   rainbow-delimiters rainbow-mode restart-emacs
-				   reverse-im rustic terraform-mode vertico vterm
+				   reverse-im terraform-mode vertico vterm
 				   which-key xclip yaml-mode zenburn-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
