@@ -279,14 +279,3 @@ eval "$(zoxide init bash)"
 [[ -f "$HOME/.atuin/bin/env" ]] && . "$HOME/.atuin/bin/env"
 eval "$(atuin init bash --disable-up-arrow)"
 
-# For RACECAR challenge
-# Source RACECAR tool # RACECAR_ALIASES
-RACECAR_PATH="${HOME}/Github/racecar-mvlassis"
-if [ -f ${RACECAR_PATH}/scripts/.config ]; then # RACECAR_ALIASES
-	. ${RACECAR_PATH}/scripts/.config # RACECAR_ALIASES
-fi # RACECAR_ALIASES
-if [ -f ${RACECAR_PATH}/scripts/racecar_tool.sh ]; then # RACECAR_ALIASES
-	. ${RACECAR_PATH}/scripts/racecar_tool.sh # RACECAR_ALIASES
-fi # RACECAR_ALIASES
-
-
