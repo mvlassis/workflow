@@ -321,8 +321,8 @@ With argument ARG, do this that many times."
     (let ((default-directory project-root))
       ;; Check if poetry is actually available first
       (if (executable-find "poetry")
-          (start-process "poetry-install" "*poetry-log*" "poetry" "install" "--with" "charm" "--with" "integration" "--with" "unit")
-        (message "Warning: Poetry executable not found.")))
+          (start-process "poetry-install" "*poetry-log*" "poetry" "install" "--all-groups")
+        (message "Poetry executable not found.")))
 
     ;; 2. Activate the venv
     ;; We use condition-case to "catch" errors if the venv doesn't exist yet
