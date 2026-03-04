@@ -441,7 +441,7 @@ With argument ARG, do this that many times."
             (flyspell-mode -1)))
 
 (dolist (hook '(prog-mode-hook))
-  (add-hook hook (lambda () (flyspell-prog-mode))))
+  (add-hook hook (lambda () (flyspell-mode -1))))
 
 (dolist (hook '(yaml-mode-hook))
   (add-hook hook (lambda ()
