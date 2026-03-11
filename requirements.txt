@@ -6,6 +6,7 @@ gawk
 git
 gh
 jupytext
+just
 ispell
 hunspell
 hunspell-en-us
@@ -15,5 +16,6 @@ kubecolor
 kustomize
 pyright
 ripgrep
+uv
 xclip
 zoxide
