@@ -375,7 +375,13 @@ With argument ARG, do this that many times."
 )
 (use-package rust-mode
   :defer t
-)
+  )
+
+;; Javascript
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . js-mode))
+
+
+
 (use-package math-preview
   :defer t
 )
