@@ -380,6 +380,8 @@ With argument ARG, do this that many times."
 ;; Javascript
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . js-mode))
 
+;; Golang
+(use-package go-mode)
 
 
 (use-package math-preview
@@ -565,14 +567,14 @@ With argument ARG, do this that many times."
    '(all-the-icons anzu arduino-mode auctex auto-package-update
 				   benchmark-init clipetty code-cells company consult
 				   dap-mode dockerfile-mode doom-modeline doom-themes
-				   dracula-theme ein exec-path-from-shell
+				   dracula-theme ein exec-path-from-shell go-mode
 				   gruvbox-theme hyprlang-ts-mode ini-mode just-mode
 				   kaolin-themes leetcode lsp-pyright lsp-ui
 				   marginalia material-theme math-preview
 				   monokai-theme orderless poetry pyvenv-auto
 				   rainbow-delimiters rainbow-mode restart-emacs
-				   reverse-im terraform-mode vertico vterm
-				   which-key xclip yaml-mode zenburn-theme)))
+				   reverse-im terraform-mode vertico vterm which-key
+				   xclip yaml-mode zenburn-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
