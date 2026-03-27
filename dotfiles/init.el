@@ -448,6 +448,9 @@ With argument ARG, do this that many times."
           (lambda ()
             (flyspell-mode -1)))
 
+;; CSS
+(setq css-indent-offset 2)
+
 (dolist (hook '(prog-mode-hook))
   (add-hook hook (lambda () (flyspell-mode -1))))
 
