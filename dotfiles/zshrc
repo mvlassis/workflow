@@ -101,3 +101,5 @@ unset __mamba_setup
 
 # Add zoxide
 eval "$(zoxide init zsh)"
+
+eval "$(atuin init zsh)"
