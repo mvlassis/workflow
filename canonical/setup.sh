@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+pipx install charmcraftcache
+
 sudo snap install terraform --classic
 sudo snap install concierge --classic
 
