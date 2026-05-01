@@ -54,6 +54,9 @@ check_source "/etc/bash_completion"
 # Source git-prompt.sh
 check_source "${HOME}/.bin/git-prompt.sh"
 
+# nvm for Javascript
+check_source "/usr/share/nvm/init-nvm.sh"
+
 # Source Canonistack credentials
 check_source "${HOME}/.canonistack/novarc_bos01"
 
