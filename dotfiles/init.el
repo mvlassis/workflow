@@ -313,27 +313,18 @@ With argument ARG, do this that many times."
   :config
   (setq poetry-tracking-strategy 'project))
 
-;; (defun my/python-poetry-hook ()
-;;   "Automatically install and activate poetry projects."
-;;   (interactive)
-;;   (when-let ((project-root (locate-dominating-file default-directory "pyproject.toml")))
-;;     ;; 1. Run 'poetry install' in the background if pyproject exists
-;;     (let ((default-directory project-root))
-;;       ;; Check if poetry is actually available first
-;;       (if (executable-find "poetry")
-;;           (start-process "poetry-install" "*poetry-log*" "poetry" "install" "--all-groups")
-;;         (message "Poetry executable not found.")))
-
-;;     ;; 2. Activate the venv
-;;     ;; We use condition-case to "catch" errors if the venv doesn't exist yet
-;;     (condition-case nil
-;;         (poetry-venv-workon)
-;;       (error (message "Poetry venv not ready yet. Try M-x poetry-venv-workon later.")))
-
-;;     ;; 3. Start Eglot
-;;     (eglot-ensure)))
-
-;; (add-hook 'python-mode-hook #'my/python-poetry-hook)
+;; Python configuration
+(use-package pet
+  :ensure t)
+(use-package eglot
+  :hook (python-mode . eglot-ensure)
+  :config
+  (add-to-list 'eglot-server-programs
+               '(python-mode . ("pyright-langserver" "--stdio")))
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (setq-local python-shell-interpreter (pet-executable-find "python"))
+              (pet-eglot-setup))))
 
 (use-package vertico
   :custom
@@ -574,7 +565,7 @@ With argument ARG, do this that many times."
 				   gruvbox-theme hyprlang-ts-mode ini-mode just-mode
 				   kaolin-themes leetcode lsp-pyright lsp-ui
 				   marginalia material-theme math-preview
-				   monokai-theme orderless poetry pyvenv-auto
+				   monokai-theme orderless pet poetry pyvenv-auto
 				   rainbow-delimiters rainbow-mode restart-emacs
 				   reverse-im terraform-mode vertico vterm which-key
 				   xclip yaml-mode zenburn-theme)))
