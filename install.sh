@@ -172,6 +172,17 @@ symlink_i3() {
 	fi	
 }
 
+# Symlink OpenCode configuration files
+symlink_opencode() {
+	if send_prompt "Do you want to symlink ${BOLD}OpenCode configuration${RESET}? This may delete your existing configuration files ${PROMPT}"; then
+		[[ -d "${HOME}/.config/opencode" ]] || mkdir "${HOME}/.config/opencode"
+		rm -f "${HOME}/.config/opencode/AGENTS.md"
+		rm -f "${HOME}/.config/opencode/tui.json"
+		ln -sv "${BASEDIR}/dotfiles/opencode/AGENTS.md" "${HOME}/.config/opencode/AGENTS.md"
+		ln -sv "${BASEDIR}/dotfiles/opencode/tui.json" "${HOME}/.config/opencode/tui.json"
+	fi
+}
+
 # Symlink the polybar configuration file
 symlink_polybar() {
 	if send_prompt "Do you want to symlink ${BOLD}Polybar's config.ini${RESET}? This may delete your existing config.ini file ${PROMPT}"; then
@@ -272,6 +283,7 @@ install_vm_profile() {
 	symlink_bash
 	symlink_blesh
 	symlink_emacs
+	symlink_opencode
 	symlink_scripts
 	symlink_systemd
 	enable_emacs_service
@@ -285,6 +297,7 @@ install_full_profile() {
 	symlink_bash
 	symlink_blesh
 	symlink_zsh
+	symlink_opencode
 	symlink_emacs
 	symlink_kitty
 	symlink_hyprland
