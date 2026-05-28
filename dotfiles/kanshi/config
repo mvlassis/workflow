@@ -3,6 +3,16 @@ profile docked {
   output "eDP-1" disable
 }
 
+# profile docked-zurich {
+#   output "Dell Inc. DELL U4025QW FVVMKF4" enable position 0,0 mode 5120x2160@60Hz scale 2
+#   output "eDP-1" disable
+# }
+
+profile docked-zurich {
+  output "Dell Inc. DELL U4025QW FVVMKF4" enable position 0,0 mode 2560x1080@60Hz scale 2
+  output "eDP-1" disable
+}
+
 profile undocked {
   output "eDP-1" enable position 0,0 scale 1.25
 }
