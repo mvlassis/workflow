@@ -2,6 +2,10 @@
 
 pipx install charmcraftcache
 
+sudo snap install --edge jhack
+sudo snap connect jhack:dot-local-share-juju snapd
+sudo snap connect jhack:ssh-read snapd
+
 sudo snap install terraform --classic
 sudo snap install concierge --classic
 
