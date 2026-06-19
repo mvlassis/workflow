@@ -2,6 +2,7 @@
 
 pipx install charmcraftcache
 
+sudo snap install opencode --classic
 sudo snap install --edge jhack
 sudo snap connect jhack:dot-local-share-juju snapd
 sudo snap connect jhack:ssh-read snapd
