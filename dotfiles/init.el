@@ -374,6 +374,8 @@ With argument ARG, do this that many times."
 ;; Golang
 (use-package go-mode)
 
+(use-package evil)
+
 
 (use-package math-preview
   :defer t
@@ -383,7 +385,6 @@ With argument ARG, do this that many times."
 )
 
 ;; LSP client
-
 (setq-default eglot-workspace-configuration
               '(:python (:analysis (:extraPaths ["lib"]))))
 
@@ -561,14 +562,15 @@ With argument ARG, do this that many times."
    '(all-the-icons anzu arduino-mode auctex auto-package-update
 				   benchmark-init clipetty code-cells company consult
 				   dap-mode dockerfile-mode doom-modeline doom-themes
-				   dracula-theme ein exec-path-from-shell go-mode
-				   gruvbox-theme hyprlang-ts-mode ini-mode just-mode
-				   kaolin-themes leetcode lsp-pyright lsp-ui
-				   marginalia material-theme math-preview
-				   monokai-theme orderless pet poetry pyvenv-auto
-				   rainbow-delimiters rainbow-mode restart-emacs
-				   reverse-im terraform-mode vertico vterm which-key
-				   xclip yaml-mode zenburn-theme)))
+				   dracula-theme ein evil evil-mode
+				   exec-path-from-shell go-mode gruvbox-theme
+				   hyprlang-ts-mode ini-mode just-mode kaolin-themes
+				   leetcode lsp-pyright lsp-ui marginalia
+				   material-theme math-preview monokai-theme orderless
+				   pet poetry pyvenv-auto rainbow-delimiters
+				   rainbow-mode restart-emacs reverse-im
+				   terraform-mode vertico vterm which-key xclip
+				   yaml-mode zenburn-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
