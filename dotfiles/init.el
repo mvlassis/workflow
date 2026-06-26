@@ -93,6 +93,7 @@
 (add-to-list 'auto-mode-alist '("config\\'" . sh-mode))
 ;; Stop an annoying message in python
 (setq python-indent-guess-indent-offset-verbose nil)
+(setq-default indent-tabs-model nil)
 ; Don't prompt me when opening symlinks under version control
 (setq vc-follow-symlinks t) 
 (add-to-list 'default-frame-alist '(width  . 90))
@@ -460,6 +461,8 @@ With argument ARG, do this that many times."
 		company-idle-delay 1) ;; Delay to display suggestions
   )
 
+(use-package lua-mode)
+
 (use-package yaml
   :defer t
 )
@@ -565,7 +568,7 @@ With argument ARG, do this that many times."
 				   dracula-theme ein evil evil-mode
 				   exec-path-from-shell go-mode gruvbox-theme
 				   hyprlang-ts-mode ini-mode just-mode kaolin-themes
-				   leetcode lsp-pyright lsp-ui marginalia
+				   leetcode lsp-pyright lsp-ui lua-mode marginalia
 				   material-theme math-preview monokai-theme orderless
 				   pet poetry pyvenv-auto rainbow-delimiters
 				   rainbow-mode restart-emacs reverse-im
