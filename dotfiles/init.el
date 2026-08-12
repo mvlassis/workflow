@@ -369,8 +369,9 @@ With argument ARG, do this that many times."
   :defer t
   )
 
-;; Javascript
+;; JavaScript
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . js-mode))
+(setq js-indent-level 2)
 
 ;; Golang
 (use-package go-mode)
@@ -561,19 +562,7 @@ With argument ARG, do this that many times."
 	 "90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940"
 	 "78e6be576f4a526d212d5f9a8798e5706990216e9be10174e3f3b015b8662e27"
 	 default))
- '(package-selected-packages
-   '(all-the-icons anzu arduino-mode auctex auto-package-update
-				   benchmark-init clipetty code-cells company consult
-				   dap-mode dockerfile-mode doom-modeline doom-themes
-				   dracula-theme ein evil evil-mode
-				   exec-path-from-shell go-mode gruvbox-theme
-				   hyprlang-ts-mode ini-mode just-mode kaolin-themes
-				   leetcode lsp-pyright lsp-ui lua-mode marginalia
-				   material-theme math-preview monokai-theme orderless
-				   pet poetry pyvenv-auto rainbow-delimiters
-				   rainbow-mode restart-emacs reverse-im
-				   terraform-mode vertico vterm which-key xclip
-				   yaml-mode zenburn-theme)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
