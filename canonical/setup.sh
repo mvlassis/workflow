@@ -14,3 +14,10 @@ sudo rm -rf /run/containerd
 
 sudo concierge prepare -c "$(dirname "${BASH_SOURCE[0]}")/concierge.yaml"
 juju add-model kubeflow
+
+# Add ceph
+sudo snap install microceph
+sudo microceph cluster bootstrap
+sudo microceph disk add loop,4G,3
+sudo microceph enable rgw
+sudo radosgw-admin user create --uid=user --display-name=user --access-key=foo --secret-key=bar
