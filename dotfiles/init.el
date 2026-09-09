@@ -1,4 +1,4 @@
-;; init.el
+;; init.el -*- lexical-binding: t; -*-
 
 ;; Use "custom.el" to save internal configuration done by Emacs
 ;; (setq custom-file (concat user-emacs-directory "custom.el"))
