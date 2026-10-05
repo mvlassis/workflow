@@ -130,8 +130,8 @@ symlink_kitty() {
 
 # Symlink the hyprland configuration file
 symlink_hyprland() {
-	if send_prompt "Do you want to symlink ${BOLD}hyprland.conf${RESET}? This may delete your existing hyprland.conf file ${PROMPT}"; then
-		rm -f "${HOME}/.config/hypr/hyprland.conf"
+	if send_prompt "Do you want to symlink ${BOLD}hyprland.lua${RESET}? This may delete your existing hyprland.lua file ${PROMPT}"; then
+		rm -f "${HOME}/.config/hypr/hyprland.lua"
 		ln -sv "${BASEDIR}/dotfiles/hyprland/"* "${HOME}/.config/hypr/"
 	fi
 
@@ -182,6 +182,15 @@ symlink_opencode() {
 		ln -sv "${BASEDIR}/dotfiles/opencode/AGENTS.md" "${HOME}/.config/opencode/AGENTS.md"
 		ln -sv "${BASEDIR}/dotfiles/opencode/opencode.json" "${HOME}/.config/opencode/opencode.json"
 		ln -sv "${BASEDIR}/dotfiles/opencode/tui.json" "${HOME}/.config/opencode/tui.json"
+	fi
+}
+
+# Symlink the pi configuration files
+symlink_pi() {
+	if send_prompt "Do you want to symlink ${BOLD}pi configuration${RESET}? This may delete your existing configuration files ${PROMPT}"; then
+		[[ -d "${HOME}/.pi/agent" ]] || mkdir -p "${HOME}/.pi/agent"
+		rm -f "${HOME}/.pi/agent/keybindings.json"
+		ln -sv "${BASEDIR}/dotfiles/pi/keybindings.json" "${HOME}/.pi/agent/keybindings.json"
 	fi
 }
 
@@ -286,6 +295,7 @@ install_vm_profile() {
 	symlink_blesh
 	symlink_emacs
 	symlink_opencode
+	symlink_pi
 	symlink_scripts
 	symlink_systemd
 	enable_emacs_service
@@ -300,6 +310,7 @@ install_full_profile() {
 	symlink_blesh
 	symlink_zsh
 	symlink_opencode
+	symlink_pi
 	symlink_emacs
 	symlink_kitty
 	symlink_hyprland
@@ -317,7 +328,7 @@ install_full_profile() {
 }
 
 PROFILE="$1"
-AUTOMATE=false
+AUTOMATE="${AUTOMATE:-false}"
 case "$PROFILE" in
     vm)
         AUTOMATE=true
@@ -331,6 +342,19 @@ case "$PROFILE" in
     full)
         AUTOMATE=true
         install_full_profile
+        ;;
+    fn)
+        # Run only the named functions: ./install.sh fn symlink_pi symlink_dunst
+        shift
+        for func in "$@"; do
+            if declare -F "${func}" > /dev/null; then
+                echo "Running ${BOLD}${func}${RESET}..."
+                "${func}"
+            else
+                echo "Function '${func}' not found in install.sh." >&2
+                exit 1
+            fi
+        done
         ;;
     *)
         install_full_profile
