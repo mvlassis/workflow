@@ -1,4 +1,3 @@
-#
 # ~/.bashrc
 #
 
@@ -251,7 +250,6 @@ make_prompt() {
 }
 
 ## Setup Ruby path (if we have Ruby installed)
-
 if command -v "gem" >/dev/null 2>&1
 then
 	if "gem env user_gemhome" >/dev/null 2>&1; then
@@ -259,6 +257,9 @@ then
 		export PATH="$PATH:$GEM_HOME/bin"
 	fi
 fi
+
+# Disable pi "Update Available" notification
+export PI_SKIP_VERSION_CHECK=1
 
 # Add keys to ssh-agent
 eval "$(ssh-agent -s)" >/dev/null
@@ -294,3 +295,4 @@ export PATH=/home/ubuntu/.opencode/bin:$PATH
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
