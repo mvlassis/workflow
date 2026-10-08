@@ -24,7 +24,9 @@ hl.on("hyprland.start", function ()
 		 hl.exec_cmd("hyprpm reload -n")
          hl.exec_cmd("systemctl --user import-environment XDG_SESSION_TYPE")
          hl.exec_cmd('printf "[D-BUS Service]\nName=org.kde.kded6\nExec=/bin/false" > $HOME/.local/share/dbus-1/services/org.kde.kded6.service')
-         -- hl.exec_cmd("/usr/lib/polkit-kde-authentication-agent-1")
+         -- polkit authentication agent: required by pkexec (gparted etc.) to show the password prompt.
+         -- Import session env into systemd --user first so the unit's ConditionEnvironment passes.
+         hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE && systemctl --user start hyprpolkitagent")
          hl.exec_cmd("dunst")
          hl.exec_cmd("nm-applet & blueman-applet")
          hl.exec_cmd("waybar")
