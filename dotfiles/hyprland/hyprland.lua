@@ -45,6 +45,9 @@ hl.env("QT_QPA_PLATFORM", "wayland;xcb")
 hl.env("QT_QPA_PLATFORMTHEME", "hyprqt6engine")
 hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
 hl.env("GDK_BACKEND", "wayland,x11,*")
+-- Electron/Chromium apps (Spotify, Discord, ...) pick native Wayland instead
+-- of getting blurry-upscaled through XWayland under fractional scaling.
+hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 hl.env("LIBVA_DRIVER_NAME", "nvidia")
 hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 
@@ -86,6 +89,20 @@ hl.config({
 hl.config({
     scrolling = {
         fullscreen_on_one_column = true,
+    },
+})
+
+-----------------
+---- XWAYLAND ----
+-----------------
+
+-- Monitor scale is fractional (1.25). Render XWayland apps at the monitor's
+-- native resolution instead of the logical one, so Hyprland doesn't
+-- blurry-upscale them; toolkits size themselves via Xft.dpi=120 (=1.25x96,
+-- set in ~/.Xresources). This was lost when migrating from back.conf.
+hl.config({
+    xwayland = {
+        force_zero_scaling = true,
     },
 })
 
