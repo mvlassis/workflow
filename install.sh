@@ -200,9 +200,9 @@ symlink_polybar() {
 		if [[ ! -d "${HOME}/.config/polybar" ]]; then
 			mkdir "${HOME}/.config/polybar"
 		fi	
-		ln -sv "${BASEDIR}/polybar/config.ini" "${HOME}/.config/polybar/config.ini"
-		cp "${BASEDIR}/polybar/"*.sh "${HOME}/.config/polybar/"
-		cp "${BASEDIR}/polybar/rofi-power-menu" "${HOME}/.config/polybar/"		
+		ln -sv "${BASEDIR}/dotfiles/polybar/config.ini" "${HOME}/.config/polybar/config.ini"
+		cp "${BASEDIR}/dotfiles/polybar/"*.sh "${HOME}/.config/polybar/"
+		cp "${BASEDIR}/dotfiles/polybar/rofi-power-menu" "${HOME}/.config/polybar/"		
 	fi
 }
 
