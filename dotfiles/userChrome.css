@@ -1,0 +1,29 @@
+/* Show the Bookmarks Toolbar in fullscreen */
+:root[inFullscreen] #PersonalToolbar {
+  visibility: visible !important;
+}
+
+/* Reduce left spacer on non-maximized windows */
+.titlebar-spacer[type="pre-tabs"] {
+  display: none !important;
+}
+
+/* Auto-resize the vertical pinned-tabs strip to fit its contents.
+   Firefox pins this container's height with an inline style
+   (SidebarState.updatePinnedTabsHeight) that is only recalculated on
+   sidebar resize/expand/splitter-drop, not when tabs are opened/closed/
+   pinned/unpinned. An !important stylesheet rule overrides inline styles,
+   restoring content-based (auto) sizing, which Firefox natively supports
+   (it clears the inline height itself when no preferred height is stored). */
+#pinned-tabs-container[orient="vertical"] {
+  height: auto !important;
+  max-height: none !important;
+}
+
+/* Optional safety cap: uncomment to stop a large number of pinned tabs
+   from consuming the entire sidebar (the strip scrolls beyond this point). */
+/*
+#pinned-tabs-container[orient="vertical"] {
+  max-height: 50vh !important;
+}
+*/

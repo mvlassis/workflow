@@ -231,6 +231,28 @@ symlink_xresources() {
 	fi
 }
 
+# Symlink the Firefox userChrome.css into all Firefox profiles
+symlink_firefox() {
+	if send_prompt "Do you want to symlink ${BOLD}Firefox's userChrome.css${RESET}? This may delete your existing userChrome.css files ${PROMPT}"; then
+		local profiles_dir="${HOME}/.mozilla/firefox"
+		if [[ ! -f "${profiles_dir}/profiles.ini" ]]; then
+			echo "No Firefox profiles found, skipping..."
+			return 0
+		fi
+		while IFS='=' read -r _ path; do
+			local profile_dir="${profiles_dir}/${path}"
+			[[ -d "${profile_dir}" ]] || continue
+			mkdir -p "${profile_dir}/chrome"
+			rm -f "${profile_dir}/chrome/userChrome.css"
+			ln -sv "${BASEDIR}/dotfiles/userChrome.css" "${profile_dir}/chrome/userChrome.css"
+			# userChrome.css is ignored unless this pref is enabled
+			if ! grep -q "legacyUserProfileCustomizations" "${profile_dir}/user.js" 2>/dev/null; then
+				echo 'user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);' >> "${profile_dir}/user.js"
+			fi
+		done < <(grep "^Path=" "${profiles_dir}/profiles.ini")
+	fi
+}
+
 # Symlink the scripts
 symlink_scripts() {
 	# Scripts
@@ -321,6 +343,7 @@ install_full_profile() {
 	symlink_dunst
 	symlink_xprofile
 	symlink_xresources
+	symlink_firefox
 	symlink_scripts
 	symlink_systemd
 	enable_emacs_service
