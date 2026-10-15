@@ -191,6 +191,11 @@ symlink_pi() {
 		[[ -d "${HOME}/.pi/agent" ]] || mkdir -p "${HOME}/.pi/agent"
 		rm -f "${HOME}/.pi/agent/keybindings.json"
 		ln -sv "${BASEDIR}/dotfiles/pi/keybindings.json" "${HOME}/.pi/agent/keybindings.json"
+		[[ -d "${HOME}/.pi/agent/extensions" ]] || mkdir -p "${HOME}/.pi/agent/extensions"
+		for ext in "${BASEDIR}"/dotfiles/pi/extensions/*; do
+			rm -f "${HOME}/.pi/agent/extensions/$(basename "${ext}")"
+			ln -sv "${ext}" "${HOME}/.pi/agent/extensions/$(basename "${ext}")"
+		done
 	fi
 }
 
