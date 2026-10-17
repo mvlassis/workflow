@@ -42,7 +42,10 @@ end)
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("QT_QPA_PLATFORM", "wayland;xcb")
-hl.env("QT_QPA_PLATFORMTHEME", "hyprqt6engine")
+-- NOTE: hyprqt6engine is currently unusable (AUR build stale vs Qt 6.12,
+--       Qt refuses to load the plugin). "kde" = plasma-integration, which
+--       is in-sync and applies the BreezeDark scheme from kdeglobals.
+hl.env("QT_QPA_PLATFORMTHEME", "kde")
 hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
 hl.env("GDK_BACKEND", "wayland,x11,*")
 -- Electron/Chromium apps (Spotify, Discord, ...) pick native Wayland instead
