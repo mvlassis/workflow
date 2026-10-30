@@ -32,7 +32,15 @@ alias ....="cd ../../.."
 alias clean='pacman -Qtdq | sudo pacman -Rns -'
 alias sedit="SUDO_EDITOR=\"emacsclient\" sudo -e"
 alias duck='ddgr -j'
-alias te='emacsclient -t'
+unalias te 2>/dev/null  # was an alias; remove it so re-sourcing doesn't break the function
+# Open in terminal Emacs; with no arguments, open the current directory
+te() {
+	if [ $# -eq 0 ]; then
+		emacsclient -t .
+	else
+		emacsclient -t "$@"
+	fi
+}
 alias temacs='emacsclient -t'
 alias emacs='emacscliententry'
 alias restart-emacs='systemctl restart --user emacs.service'

@@ -106,7 +106,15 @@ fi
 command -v kubecolor >/dev/null 2>&1 && alias kc="kubecolor"
 
 alias glog="git log --oneline --decorate --graph"
-alias te='emacsclient -t'
+# Open in terminal Emacs
+# With no arguments, open the current directory
+te() {
+	if [ $# -eq 0 ]; then
+		emacsclient -t .
+	else
+		emacsclient -t "$@"
+	fi
+}
 alias restart-emacs='systemctl restart --user emacs.service'
 alias open='xdg-open'
 alias pokecat='pokecat.sh'
