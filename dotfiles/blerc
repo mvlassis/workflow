@@ -5,7 +5,11 @@ bleopt canvas_winch_action=redraw-prev
 bleopt exec_errexit_mark=
 # bleopt complete_auto_delay=300
 
+# Alt+Backspace: delete previous word (ble.sh default only *copies* it)
 ble-bind -m 'emacs' -f 'M-DEL' 'kill-backward-cword'
+ble-bind -m 'emacs' -f 'M-C-?' 'kill-backward-cword'
+ble-bind -m 'emacs' -f 'M-BS'  'kill-backward-cword'
+ble-bind -m 'emacs' -f 'M-C-h' 'kill-backward-cword'
 
 ble-face "argument_error=fg=brown"
 ble-face "argument_option=fg=teal"

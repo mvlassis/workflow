@@ -18,5 +18,6 @@ opencode
 pyright
 ripgrep
 uv
+wl-clipboard
 xclip
 zoxide
