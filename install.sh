@@ -111,12 +111,13 @@ symlink_zsh() {
 
 # Symlink the Emacs configuration file
 symlink_emacs() {
-	if send_prompt "Do you want to symlink ${BOLD}init.el${RESET}? This may delete your existing init.el file ${PROMPT}"; then
-		if [[ ! -d "${HOME}/.emacs.d" ]]; then
-			mkdir "${HOME}/.emacs.d"
-		fi
-		rm -f "${HOME}/.emacs.d/init.el"
-		ln -sv "${BASEDIR}/dotfiles/init.el" "${HOME}/.emacs.d/init.el"
+	if send_prompt "Do you want to symlink ${BOLD}init.el${RESET} and ${BOLD}early-init.el${RESET}? This may delete your existing files ${PROMPT}"; then
+		mkdir -p "${HOME}/.emacs.d"
+		# lisp/ modules are found through init.el's real path, no symlink needed
+		for file in init.el early-init.el; do
+			rm -f "${HOME}/.emacs.d/${file}"
+			ln -sv "${BASEDIR}/dotfiles/emacs/${file}" "${HOME}/.emacs.d/${file}"
+		done
 	fi
 }
 
