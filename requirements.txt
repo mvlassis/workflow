@@ -17,6 +17,7 @@ kustomize
 opencode
 pyright
 ripgrep
+typescript-language-server
 uv
 wl-clipboard
 xclip

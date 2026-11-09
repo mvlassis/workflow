@@ -39,14 +39,16 @@ install_prerequisites() {
 		if dpkg -s "$package" >/dev/null 2>&1; then
             echo "$package is already installed."
         else
-		    if [[ "$package" = "emacs" || "$package" = "pyright" || "$package" = "opencode" ]]; then
+            if [[ "$package" = "emacs" || "$package" = "pyright" || "$package" = "opencode" ]]; then
                 sudo snap install "$package" --classic || true
+            elif [[ "$package" = "typescript-language-server" ]]; then
+                sudo snap install "$package" || true
             elif [[ "$package" = "jupytext" ]]; then
-				pipx install "$package" || true
-			else
+                pipx install "$package" || true
+            else
                 sudo apt install -y "$package" 2>/dev/null || true
             fi
-		fi
+        fi
 	done < "${BASEDIR}/requirements.txt"
 }
 
