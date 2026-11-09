@@ -27,3 +27,8 @@
   max-height: 50vh !important;
 }
 */
+
+/* Never show the menu bar (Alt no longer reveals it) */
+#toolbar-menubar {
+  visibility: collapse !important;
+}
