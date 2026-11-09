@@ -2,6 +2,10 @@
 
 ;;;; ========== Minibuffer and in-buffer completion ==========
 
+(use-package corfu
+  :ensure t
+  :hook ((prog-mode . corfu-mode)))
+
 (use-package vertico
   :custom
   (vertico-cycle t)
@@ -119,8 +123,17 @@
             -10))
 
 ;;; Web
+(use-package js
+  :ensure nil
+  :defer t
+  :custom
+  (js-indent-level 2)
+  :hook ((js-mode . subword-mode)
+         (js-mode . electric-pair-mode)
+         (js-mode . eglot-ensure)
+         (js-mode . completion-preview-mode)))
+
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . js-mode))
-(setq js-indent-level 2)
 (setq css-indent-offset 2)
 
 ;;; Go, Rust, Lua
