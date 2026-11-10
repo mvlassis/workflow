@@ -24,10 +24,17 @@ hl.on("hyprland.start", function ()
 		 hl.exec_cmd("hyprpm reload -n")
          hl.exec_cmd("systemctl --user import-environment XDG_SESSION_TYPE")
          hl.exec_cmd('printf "[D-BUS Service]\nName=org.kde.kded6\nExec=/bin/false" > $HOME/.local/share/dbus-1/services/org.kde.kded6.service')
+         -- dbus-broker resolves duplicate service files alphabetically, so it prefers
+         -- org.kde.plasma.Notifications.service (plasma_waitforname, which blocks forever
+         -- on non-Plasma sessions) over dunst's file. Shadow it so D-Bus activation of
+         -- org.freedesktop.Notifications launches dunst instead.
+         hl.exec_cmd('printf "[D-BUS Service]\nName=org.freedesktop.Notifications\nExec=/usr/bin/dunst" > $HOME/.local/share/dbus-1/services/org.kde.plasma.Notifications.service')
          -- polkit authentication agent: required by pkexec (gparted etc.) to show the password prompt.
          -- Import session env into systemd --user first so the unit's ConditionEnvironment passes.
          hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE && systemctl --user start hyprpolkitagent")
-         hl.exec_cmd("dunst")
+         -- Run dunst under systemd (see ~/.config/systemd/user/dunst.service.d/)
+         -- instead of a bare exec, so crashes are journald-logged and auto-restarted.
+         hl.exec_cmd("systemctl --user start dunst")
          hl.exec_cmd("nm-applet & blueman-applet")
          hl.exec_cmd("waybar")
 end)
