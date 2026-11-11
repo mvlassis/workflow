@@ -336,6 +336,11 @@
     #default_icon = /path/to/icon
 
 # Added by me
+[firefox_timeouts]
+	# Calendar notifications request an infinite timeout (requireInteraction).
+	appname = "Firefox"
+	timeout = 10
+
 [microphone]
 	stack_tag = "mic"
 	alignment = center
