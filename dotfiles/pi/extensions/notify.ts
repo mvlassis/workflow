@@ -1,7 +1,7 @@
 /**
  * Pi Notify Extension
  *
- * Note that this example is taken straight out of the examples in Pi documentation.
+ * This example is taken from the [Pi documentation](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/extensions.md#examples-reference).
  *
  * Sends a native terminal notification when Pi agent is done and waiting for input.
  * Supports multiple terminal protocols:
