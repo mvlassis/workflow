@@ -88,6 +88,7 @@ button:hover {
 #pulseaudio,
 #wireplumber,
 #custom-media,
+#custom-notifications,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -249,11 +250,27 @@ label:focus {
 
 #idle_inhibitor {
     background-color: #2d3436;
+    min-width: 30px;
+    padding: 0;
 }
 
 #idle_inhibitor.activated {
     background-color: #ecf0f1;
     color: #2d3436;
+}
+
+#custom-notifications {
+    background-color: #2d3436;
+    min-width: 30px;
+    padding: 0;
+}
+
+#custom-notifications.disabled {
+    background-color: #ecf0f1;
+}
+
+#custom-notifications.unavailable {
+    background-color: #f53c3c;
 }
 
 #mpd {
