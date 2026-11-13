@@ -67,6 +67,10 @@
 (use-package flycheck :defer t)
 (use-package dap-mode :defer t)
 
+;;; Git
+(use-package magit
+  :ensure t)
+
 ;;; Visual helpers
 ;; Shows colors of hex codes
 (use-package rainbow-mode
