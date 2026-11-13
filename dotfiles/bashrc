@@ -122,6 +122,31 @@ alias update='sudo pacman -Syu'
 alias wiki='ddgr -j \!w'
 alias yay='yay --cleanmenu=false --diffmenu=false'
 alias yeet='sudo pacman -Rns'
+# Let kitty reconnect `multipass shell` windows at the remote working directory.
+# Other multipass commands, and shell invocations with extra options, are unchanged.
+multipass() {
+    # Runs if:
+    # - Terminal is kitty
+    # - Command is multipass, and there's at most one other argument (e.g. multipass shell dev)
+	if [[ "$TERM" == "xterm-kitty" && "${1-}" == "shell" && ( $# -eq 1 || ( $# -eq 2 && "${2-}" != -* ) ) ]]; then
+		local instance address
+        # Get the IPv4 of the multipass instance
+		instance="${2:-$(command multipass get client.primary-name)}"
+		address="$(command multipass info "$instance" --format csv | awk -F, 'NR == 2 { print $5 }')"
+		if [[ -z "$address" ]]; then
+			command multipass start "$instance" || return
+			address="$(command multipass info "$instance" --format csv | awk -F, 'NR == 2 { print $5 }')"
+		fi
+		if [[ -z "$address" ]]; then
+			printf 'Could not find an IPv4 address for multipass instance %s\n' "$instance" >&2
+			return 1
+		fi
+		kitty +kitten ssh "ubuntu@$address"
+	else
+        # All other commands are executed normally
+		command multipass "$@"
+	fi
+}
 alias mp='multipass'
 alias mm='micromamba'
 alias oc='opencode'

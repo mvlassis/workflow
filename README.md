@@ -33,7 +33,7 @@ Application configuration lives in [`dotfiles/`](dotfiles/) and is symlinked int
 | `bashrc`, `blerc`, `blerc2` | `~/.bashrc`, `~/.blerc`, `~/.blerc2` |
 | `zshrc` | `~/.zshrc` |
 | `init.el` | `~/.emacs.d/init.el` |
-| `kitty.conf` | `~/.config/kitty/kitty.conf` |
+| `kitty/` | `~/.config/kitty/kitty.conf`, `~/.config/kitty/ssh.conf` |
 | `hyprland/` | `~/.config/hypr/` |
 | `waybar/` | `~/.config/waybar/` |
 | `kanshi/` | `~/.config/kanshi/` |

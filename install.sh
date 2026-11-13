@@ -123,11 +123,14 @@ symlink_emacs() {
 	fi
 }
 
-# Symlink the kitty configuration file
+# Symlink the kitty configuration files
 symlink_kitty() {
-	if send_prompt "Do you want to symlink ${BOLD}kitty.conf${RESET}? This may delete your existing kitty.conf file ${PROMPT}"; then
-		rm -f "${HOME}/.config/kitty/kitty.conf"
-		ln -sv "${BASEDIR}/dotfiles/kitty.conf" "${HOME}/.config/kitty/kitty.conf"
+	if send_prompt "Do you want to symlink ${BOLD}kitty.conf and ssh.conf${RESET}? This may delete your existing kitty configuration files ${PROMPT}"; then
+		mkdir -p "${HOME}/.config/kitty"
+		for file in kitty.conf ssh.conf; do
+			rm -f "${HOME}/.config/kitty/${file}"
+			ln -sv "${BASEDIR}/dotfiles/kitty/${file}" "${HOME}/.config/kitty/${file}"
+		done
 	fi	
 }
 
