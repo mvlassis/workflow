@@ -65,7 +65,8 @@ export default function (pi: ExtensionAPI) {
 					if (branch) pwd += ` (${branch})`;
 					const name = ctx.sessionManager.getSessionName();
 					if (name) pwd += ` • ${name}`;
-					const right = statusText ?? "";
+					const extensionStatuses = footerData.getExtensionStatuses();
+					const right = statusText ?? extensionStatuses.get("openrouter-usage") ?? "";
 					const rw = visibleWidth(right);
 					const leftW = Math.max(0, width - rw - (rw ? 2 : 0));
 					const left = truncateToWidth(theme.fg("dim", pwd), leftW, theme.fg("dim", "..."));
@@ -90,8 +91,9 @@ export default function (pi: ExtensionAPI) {
 					const line2 = truncateToWidth(theme.fg("dim", l2) + theme.fg("dim", pad + model), width, "");
 
 					const lines = [line1, line2];
-					// Other extensions' statuses (excluding ours, which isn't set via the real setStatus)
-					const others = [...footerData.getExtensionStatuses().entries()]
+					// Other extensions' statuses (excluding provider usage shown at the top-right)
+					const others = [...extensionStatuses.entries()]
+						.filter(([key]) => key !== "openrouter-usage")
 						.sort(([a], [b]) => a.localeCompare(b))
 						.map(([, t]) => t.replace(/[\r\n\t]/g, " ").replace(/ +/g, " ").trim());
 					if (others.length) lines.push(truncateToWidth(others.join(" "), width, theme.fg("dim", "...")));
