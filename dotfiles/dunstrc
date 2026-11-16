@@ -338,8 +338,9 @@
 # Added by me
 [firefox_timeouts]
 	# Calendar notifications request an infinite timeout (requireInteraction).
+	# The client-supplied D-Bus timeout takes precedence over `timeout`.
 	appname = "Firefox"
-	timeout = 10
+	override_dbus_timeout = 10
 
 [microphone]
 	stack_tag = "mic"
