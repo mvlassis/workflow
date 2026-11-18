@@ -69,7 +69,69 @@
 
 ;;; Git
 (use-package magit
-  :ensure t)
+  :ensure t
+  :config
+  ;; `d P' in magit: diff a GitHub PR (needs the gh CLI).
+  (transient-append-suffix 'magit-diff "p"
+    '("P" "Diff pull request" my/magit-diff-pr))
+  ;; `d m' in magit: diff main...HEAD.
+  (transient-append-suffix 'magit-diff "P"
+    '("m" "Diff main...HEAD" my/magit-diff-main)))
+
+(defun my/magit-diff-main ()
+  "Show changes on HEAD since it diverged from main."
+  (interactive)
+  (magit-diff-range "main...HEAD"))
+
+(defvar my/magit-pr-remote "origin"
+  "Remote that GitHub pull requests are fetched from.")
+
+(defun my/magit-diff-pr (number)
+  "Show a magit diff of GitHub PR NUMBER, like its \"Files changed\" tab.
+Fetches the PR head into refs/pr/NUMBER and diffs it against the
+merge-base with its base branch."
+  (interactive
+   (let* ((default-directory (magit-toplevel))
+          (prs (with-temp-buffer
+                 (unless (zerop (call-process
+                                 "gh" nil t nil "pr" "list" "--limit" "100"
+                                 "--json" "number,title,headRefName,author"))
+                   (user-error "gh pr list failed: %s" (buffer-string)))
+                 (goto-char (point-min))
+                 (json-parse-buffer :object-type 'alist)))
+          (cands (mapcar (lambda (pr)
+                           (cons (format "#%-5d %s  [%s, @%s]"
+                                         (alist-get 'number pr)
+                                         (alist-get 'title pr)
+                                         (alist-get 'headRefName pr)
+                                         (alist-get 'login (alist-get 'author pr)))
+                                 (alist-get 'number pr)))
+                         prs))
+          ;; Preselect the PR for the current branch, if any.
+          (current (seq-find (lambda (pr)
+                               (equal (alist-get 'headRefName pr)
+                                      (magit-get-current-branch)))
+                             prs))
+          (choice (completing-read
+                   "Pull request (or number): " cands nil nil nil nil
+                   (and current (car (rassq (alist-get 'number current) cands))))))
+     (list (or (cdr (assoc choice cands))
+               (string-to-number (string-remove-prefix "#" choice))))))
+  (let* ((default-directory (magit-toplevel))
+         (base (string-trim
+                (shell-command-to-string
+                 (format "gh pr view %d --json baseRefName -q .baseRefName" number))))
+         (remote my/magit-pr-remote)
+         (pr-ref (format "refs/pr/%d" number)))
+    (when (string-empty-p base)
+      (user-error "Could not determine base branch of PR #%d" number))
+    (message "Fetching PR #%d and %s/%s..." number remote base)
+    (unless (zerop (magit-call-git
+                    "fetch" remote
+                    (format "+refs/pull/%d/head:%s" number pr-ref)
+                    (format "+refs/heads/%s:refs/remotes/%s/%s" base remote base)))
+      (user-error "git fetch failed, see `magit-process' buffer ($)"))
+    (magit-diff-range (format "%s/%s...%s" remote base pr-ref))))
 
 ;;; Visual helpers
 ;; Shows colors of hex codes

@@ -106,6 +106,8 @@
   (setq doom-modeline-icon (display-graphic-p))
   (setq doom-modeline-major-mode-color-icon t)
   (setq doom-modeline-env-version t)
+  (setq doom-modeline-buffer-encoding nil)
+  (setq doom-modeline-vcs-max-length 30)
   :init (doom-modeline-mode 1))
 
 (use-package all-the-icons)
