@@ -1,0 +1,11 @@
+{
+  "lastChangelogVersion": "1.0.4",
+  "defaultProvider": "github-copilot",
+  "defaultModel": "claude-sonnet-5.5",
+  "markdown": {
+    "codeBlockIndent": ""
+  },
+  "packages": [
+    "npm:pi-plan"
+  ]
+}
