@@ -1,7 +1,7 @@
 {
-  "lastChangelogVersion": "1.0.4",
-  "defaultProvider": "github-copilot",
-  "defaultModel": "claude-sonnet-5.5",
+  "lastChangelogVersion": "1.5.2",
+  "defaultProvider": "openrouter",
+  "defaultModel": "moonshotai/kimi-k3.1-pro",
   "markdown": {
     "codeBlockIndent": ""
   },
