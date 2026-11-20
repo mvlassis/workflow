@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.0.4",
+  "lastChangelogVersion": "1.6.0",
   "defaultProvider": "github-copilot",
   "defaultModel": "claude-sonnet-5.5",
   "markdown": {
@@ -7,5 +7,10 @@
   },
   "packages": [
     "npm:pi-plan"
+  ],
+  "enabledModels": [
+    "github-copilot/claude-sonnet-5.5",
+    "github-copilot/claude-opus-5.5",
+    "openrouter/moonshotai/kimi-k3.1-pro"
   ]
 }
