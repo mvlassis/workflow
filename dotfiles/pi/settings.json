@@ -1,7 +1,4 @@
 {
-  "lastChangelogVersion": "1.6.0",
-  "defaultProvider": "github-copilot",
-  "defaultModel": "claude-sonnet-5.5",
   "markdown": {
     "codeBlockIndent": ""
   },
