@@ -160,6 +160,49 @@ merge-base with its base branch."
 ;; (use-package ein) ; Jupyter notebook in Emacs
 (use-package code-cells)
 
+;;;; ========== Formatting ==========
+
+(defun my/apheleia-python-formatter ()
+  "Choose Black or Ruff using the nearest pyproject.toml.
+Black wins when both are configured; use `.dir-locals.el' to override."
+  (or (when-let* ((root (locate-dominating-file default-directory "pyproject.toml")))
+        (with-temp-buffer
+          (insert-file-contents (expand-file-name "pyproject.toml" root))
+          (cond
+           ((progn
+              (goto-char (point-min))
+              (re-search-forward "^\\s-*\\[tool\\.black\\]" nil t))
+            'black)
+           ((progn
+              (goto-char (point-min))
+              (re-search-forward "^\\s-*\\[tool\\.ruff\\(?:\\..*\\)?\\]" nil t))
+            'ruff))))
+      'ruff))
+
+(defun my/apheleia-python-setup ()
+  "Select the project's Python formatter and format on save."
+  (setq-local apheleia-formatter (my/apheleia-python-formatter))
+  (apheleia-mode))
+
+(use-package apheleia
+  :hook ((js-mode . apheleia-mode)
+         (python-mode . my/apheleia-python-setup)
+         (python-ts-mode . my/apheleia-python-setup))
+  :config
+  ;; Use real npx so Prettier can be downloaded and cached when needed.
+  (setf (alist-get 'prettier-javascript apheleia-formatters)
+        '("npx" "--yes" "prettier" "--stdin-filepath" filepath
+          "--parser=babel-flow"
+          (apheleia-formatters-js-indent "--use-tabs" "--tab-width")))
+
+  ;; Resolve Python formatters from the project environment, then globally.
+  (setf (alist-get 'black apheleia-formatters)
+        `((or (pet-executable-find "black" t) "black")
+          ,@(cdr (alist-get 'black apheleia-formatters)))
+        (alist-get 'ruff apheleia-formatters)
+        `((or (pet-executable-find "ruff" t) "ruff")
+          ,@(cdr (alist-get 'ruff apheleia-formatters)))))
+
 ;;;; ========== Language-specific configuration ==========
 
 ;;; C / CUDA
