@@ -193,7 +193,7 @@ Black wins when both are configured; use `.dir-locals.el' to override."
   (setf (alist-get 'prettier-javascript apheleia-formatters)
         '("npx" "--yes" "prettier" "--stdin-filepath" filepath
           "--parser=babel-flow"
-          (apheleia-formatters-js-indent "--use-tabs" "--tab-width")))
+          "--tab-width=2"))
 
   ;; Resolve Python formatters from the project environment, then globally.
   (setf (alist-get 'black apheleia-formatters)
@@ -237,7 +237,10 @@ Black wins when both are configured; use `.dir-locals.el' to override."
   :defer t
   :custom
   (js-indent-level 2)
-  :hook ((js-mode . subword-mode)
+  (js-switch-indent-offset 2)
+  (sgml-basic-offset 2)
+  :hook ((js-mode . (lambda () (setq-local tab-width 2)))
+         (js-mode . subword-mode)
          (js-mode . electric-pair-mode)
          (js-mode . eglot-ensure)
          (js-mode . completion-preview-mode)))
