@@ -199,6 +199,9 @@ symlink_pi() {
 		ln -sv "${BASEDIR}/dotfiles/pi/keybindings.json" "${HOME}/.pi/agent/keybindings.json"
 		rm -f "${HOME}/.pi/agent/AGENTS.md"
 		ln -sv "${BASEDIR}/dotfiles/pi/AGENTS.md" "${HOME}/.pi/agent/AGENTS.md"
+		# Copied, not linked: pi rewrites mcp.json when servers are added or changed.
+		rm -f "${HOME}/.pi/agent/mcp.json"
+		cp "${BASEDIR}/dotfiles/pi/mcp.json" "${HOME}/.pi/agent/mcp.json" || return
 		rm -f "${HOME}/.pi/agent/settings.json"
 		cp "${BASEDIR}/dotfiles/pi/settings.json" "${HOME}/.pi/agent/settings.json" || return
 		[[ -d "${HOME}/.pi/agent/extensions" ]] || mkdir -p "${HOME}/.pi/agent/extensions"
