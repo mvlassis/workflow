@@ -9,5 +9,6 @@
     "github-copilot/claude-sonnet-5.5",
     "github-copilot/claude-opus-5.5",
     "openrouter/moonshotai/kimi-k3.1-pro"
-  ]
+  ],
+  "lastChangelogVersion": "1.6.0"
 }
