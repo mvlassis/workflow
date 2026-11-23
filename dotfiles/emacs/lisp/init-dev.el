@@ -4,7 +4,15 @@
 
 (use-package corfu
   :ensure t
+  :custom
+  (corfu-auto t)
+  (corfu-auto-delay 0.3)
+  (corfu-auto-prefix 2)
   :hook ((prog-mode . corfu-mode)))
+
+(use-package yasnippet
+  :ensure t
+  :hook (prog-mode . yas-minor-mode))
 
 (use-package vertico
   :custom
@@ -34,12 +42,6 @@
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
-
-(use-package company
-  :config
-  (global-company-mode)
-  (setq company-minimum-prefix-length 5
-        company-idle-delay 1))  ; Delay to display suggestions
 
 ;;;; ========== General programming tools ==========
 
