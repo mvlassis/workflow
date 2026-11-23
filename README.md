@@ -53,8 +53,23 @@ Additional top-level configuration:
 - [`requirements/`](requirements/) – extra requirement files (e.g. Wayland)
 - [`requirements.txt`](requirements.txt) – package prerequisites for apt/snap/pipx installs
 
+### Pi settings
+
+[`dotfiles/pi/settings.json`](dotfiles/pi/settings.json) contains shared `markdown`,
+`packages`, and `enabledModels` preferences. The installer copies it to
+`~/.pi/agent/settings.json` rather than symlinking it, so Pi's updates stay local.
+Keybindings and extensions remain symlinked.
+
+After pulling changes, close Pi and reinstall the configuration:
+
+```bash
+./install.sh fn symlink_pi
+```
+
+This overwrites local settings, including provider/model choices and changelog state.
+
 ## Installation
-The [`install.sh`](install.sh) script symlinks everything into place. Run it with one
+The [`install.sh`](install.sh) script installs configuration into place. Run it with one
 of the following profiles:
 
 ```bash

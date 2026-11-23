@@ -191,14 +191,16 @@ symlink_opencode() {
 	fi
 }
 
-# Symlink the pi configuration files
+# Symlink Pi resources, but keep writable settings local.
 symlink_pi() {
-	if send_prompt "Do you want to symlink ${BOLD}pi configuration${RESET}? This may delete your existing configuration files ${PROMPT}"; then
+	if send_prompt "Do you want to install ${BOLD}pi configuration${RESET}? This will overwrite your existing configuration files. ${PROMPT}"; then
 		[[ -d "${HOME}/.pi/agent" ]] || mkdir -p "${HOME}/.pi/agent"
 		rm -f "${HOME}/.pi/agent/keybindings.json"
 		ln -sv "${BASEDIR}/dotfiles/pi/keybindings.json" "${HOME}/.pi/agent/keybindings.json"
+		rm -f "${HOME}/.pi/agent/AGENTS.md"
+		ln -sv "${BASEDIR}/dotfiles/pi/AGENTS.md" "${HOME}/.pi/agent/AGENTS.md"
 		rm -f "${HOME}/.pi/agent/settings.json"
-		ln -sv "${BASEDIR}/dotfiles/pi/settings.json" "${HOME}/.pi/agent/settings.json"
+		cp "${BASEDIR}/dotfiles/pi/settings.json" "${HOME}/.pi/agent/settings.json" || return
 		[[ -d "${HOME}/.pi/agent/extensions" ]] || mkdir -p "${HOME}/.pi/agent/extensions"
 		for ext in "${BASEDIR}"/dotfiles/pi/extensions/*; do
 			rm -f "${HOME}/.pi/agent/extensions/$(basename "${ext}")"
