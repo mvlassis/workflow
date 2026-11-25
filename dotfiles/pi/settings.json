@@ -2,6 +2,9 @@
   "markdown": {
     "codeBlockIndent": ""
   },
+  "terminal": {
+    "hyperlinks": true
+  },
   "packages": [
     "npm:pi-plan"
   ],

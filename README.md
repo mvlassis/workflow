@@ -56,7 +56,7 @@ Additional top-level configuration:
 ### Pi settings
 
 [`dotfiles/pi/settings.json`](dotfiles/pi/settings.json) contains shared `markdown`,
-`packages`, and `enabledModels` preferences. The installer copies it to
+`terminal`, `packages`, and `enabledModels` preferences. The installer copies it to
 `~/.pi/agent/settings.json` rather than symlinking it, so Pi's updates stay local.
 Keybindings and extensions remain symlinked.
 
