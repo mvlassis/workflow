@@ -168,7 +168,10 @@ merge-base with its base branch."
   (with-eval-after-load 'winum
     (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
   :bind
-  ("<f1>" . treemacs))
+  ("<f1>" . treemacs)
+  :config
+  ;; Single left click toggles directories (and opens files)
+  (define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
 
 ;; Emacs front-end that `projectile-ripgrep' needs (also needs the `rg' binary)
 (use-package ripgrep
