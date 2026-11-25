@@ -135,10 +135,28 @@ merge-base with its base branch."
       (user-error "git fetch failed, see `magit-process' buffer ($)"))
     (magit-diff-range (format "%s/%s...%s" remote base pr-ref))))
 
+;;; Projects
+;; Useful commands (M-x NAME, or key under the `C-c p' prefix):
+;;   projectile-switch-project   C-c p p   pick a project
+;;   projectile-find-file        C-c p f   find file in project
+;;   projectile-ripgrep          C-c p s r search project with rg
+;;   projectile-grep             C-c p s g search project with grep
+;;   projectile-vc               C-c p v   magit-status for project
+;;   projectile-discover-projects-in-search-path  scan search path
+(use-package projectile
+  :init (projectile-mode 1)
+  :bind-keymap ("C-c p" . projectile-command-map)
+  :config
+  ;; After `projectile-switch-project', open magit-status.
+  (setq projectile-switch-project-action #'projectile-vc))
+
 ;;; Visual helpers
 ;; Shows colors of hex codes
 (use-package rainbow-mode
-  :hook (prog-mode . rainbow-mode))
+  ;; Only in modes where color literals are expected; in prog-mode it
+  ;; mistakes things like issue refs (#591) for hex colors.
+  :hook ((css-mode css-ts-mode scss-mode web-mode html-mode mhtml-mode
+          emacs-lisp-mode conf-mode) . rainbow-mode))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -151,6 +169,13 @@ merge-base with its base branch."
     (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
   :bind
   ("<f1>" . treemacs))
+
+;; Emacs front-end that `projectile-ripgrep' needs (also needs the `rg' binary)
+(use-package ripgrep
+  :defer t)
+
+(use-package treemacs-projectile
+  :after (treemacs projectile))
 
 (use-package vterm
   :defer t

@@ -279,5 +279,12 @@ With argument ARG, do this that many times."
 ;;   :config
 ;;   (setq evil-default-state 'emacs))
 
+;;; Dired
+;; Clicking a file opens it in the same window (default is other window).
+(with-eval-after-load 'dired
+  (define-key dired-mode-map [mouse-2] #'dired-mouse-find-file)
+  ;; Mouse back button goes up a directory.
+  (define-key dired-mode-map [mouse-8] #'dired-up-directory))
+
 (provide 'init-base)
 ;;; init-base.el ends here
