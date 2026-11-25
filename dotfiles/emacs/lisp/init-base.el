@@ -286,5 +286,19 @@ With argument ARG, do this that many times."
   ;; Mouse back button goes up a directory.
   (define-key dired-mode-map [mouse-8] #'dired-up-directory))
 
+;; Exit Emacs and make the parent shell cd to the current file's directory.
+;; Requires the `e` wrapper function in bashrc/zshrc.
+(defun my/exit-and-cd ()
+  "Write the current buffer's directory to ~/.emacs_cd and exit Emacs."
+  (interactive)
+  (let ((dir (cond (buffer-file-name (file-name-directory buffer-file-name))
+                   ((derived-mode-p 'dired-mode) (dired-current-directory))
+                   (t default-directory))))
+    (with-temp-file (expand-file-name "~/.emacs_cd")
+      (insert dir)))
+  (save-buffers-kill-terminal))
+
+(global-set-key (kbd "C-x c") #'my/exit-and-cd)
+
 (provide 'init-base)
 ;;; init-base.el ends here

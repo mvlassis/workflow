@@ -35,10 +35,16 @@ alias duck='ddgr -j'
 unalias te 2>/dev/null  # was an alias; remove it so re-sourcing doesn't break the function
 # Open in terminal Emacs; with no arguments, open the current directory
 te() {
+	rm -f ~/.emacs_cd
 	if [ $# -eq 0 ]; then
 		emacsclient -t .
 	else
 		emacsclient -t "$@"
+	fi
+	# `C-x c` in Emacs exits and cds to the current file/dired directory
+	if [ -s ~/.emacs_cd ]; then
+		cd "$(cat ~/.emacs_cd)"
+		rm -f ~/.emacs_cd
 	fi
 }
 alias temacs='emacsclient -t'
