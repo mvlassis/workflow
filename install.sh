@@ -43,7 +43,7 @@ install_prerequisites() {
                 sudo snap install "$package" --classic || true
             elif [[ "$package" = "typescript-language-server" ]]; then
                 sudo snap install "$package" || true
-            elif [[ "$package" = "jupytext" ]]; then
+            elif [[ "$package" = "jupytext" || "$package" = "tox" ]]; then
                 pipx install "$package" || true
             else
                 sudo apt install -y "$package" 2>/dev/null || true
